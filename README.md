@@ -119,9 +119,11 @@ data/
 
 Full step-by-step instructions, including installing Python, Ollama, and the required packages, are on the [Hands-On Exercise](https://jinghanlib.github.io/topic-modeling-slave-narratives/instructions/02_hands_on_exercise.html) page.
 
-The commands below assume you have completed that setup and your terminal is inside the project folder.
+The commands below assume you have completed that setup and your terminal is open inside the project folder.
 
-### Run the 10% sample
+### Command 1 — Run the 10% topic model
+
+This command runs the full topic modeling pipeline on a 10% sample of the collection. It cleans and chunks the texts, converts each chunk into embeddings using the local `nomic-embed-text` model, clusters the chunks into topics using BERTopic, and generates readable topic labels using the local `llama3.1` model. Results are saved to `outputs/my_run/`. The run takes roughly 5–15 minutes on a modern laptop.
 
 **Mac/Linux:**
 ```bash
@@ -147,7 +149,21 @@ python -u scripts/run_bertopic_sample.py ^
   --ollama-model llama3.1:latest
 ```
 
-### Generate the review table
+Each option in the command tells the script how to behave:
+
+| Option | What it does |
+|---|---|
+| `--output-dir outputs/my_run` | Where to save your results — keeps them separate from the reference outputs |
+| `--embedding-backend ollama` | Use the local Ollama server to generate embeddings (no internet or API key needed) |
+| `--ollama-embedding-model nomic-embed-text` | Which local model to use for converting text into numbers |
+| `--representation-backend ctfidf` | How to find the most distinctive words for each topic |
+| `--clustering sensitive` | Use more sensitive clustering settings to find more, smaller topics |
+| `--label-backend ollama` | Use the local Ollama server to generate topic labels |
+| `--ollama-model llama3.1:latest` | Which local language model to use for writing topic labels |
+
+### Command 2 — Generate the review table
+
+Run this after Command 1 finishes. It reads the topic assignments from `outputs/my_run/` and produces `topic_review_table.csv` — the easiest file to start with when reading your results. It also generates the metadata visualizations (charts comparing topics by publication decade and document).
 
 **Mac/Linux:**
 ```bash
@@ -162,6 +178,11 @@ python scripts/visualize_topic_metadata.py ^
   --output-dir outputs/my_run ^
   --top-n 15
 ```
+
+| Option | What it does |
+|---|---|
+| `--output-dir outputs/my_run` | Where to find your topic results and where to save the review table |
+| `--top-n 15` | How many topics to include in the visualizations (the 15 largest by chunk count) |
 
 ---
 
