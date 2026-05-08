@@ -4405,18 +4405,7 @@ overflow-x: hidden;
   <li><a href="#open-and-read-the-results" id="toc-open-and-read-the-results" class="nav-link" data-scroll-target="#open-and-read-the-results">Open and Read the Results</a></li>
   <li><a href="#review-and-improve-topic-labels" id="toc-review-and-improve-topic-labels" class="nav-link" data-scroll-target="#review-and-improve-topic-labels">Review and Improve Topic Labels</a></li>
   <li><a href="#where-human-interpretation-comes-in" id="toc-where-human-interpretation-comes-in" class="nav-link" data-scroll-target="#where-human-interpretation-comes-in">Where Human Interpretation Comes In</a></li>
-  <li><a href="#read-the-charts" id="toc-read-the-charts" class="nav-link" data-scroll-target="#read-the-charts">Read the Charts</a>
-  <ul class="collapse">
-  <li><a href="#topic-shares-by-publication-decade" id="toc-topic-shares-by-publication-decade" class="nav-link" data-scroll-target="#topic-shares-by-publication-decade">Topic Shares by Publication Decade</a></li>
-  <li><a href="#topic-trends-by-decade-faceted" id="toc-topic-trends-by-decade-faceted" class="nav-link" data-scroll-target="#topic-trends-by-decade-faceted">Topic Trends by Decade (Faceted)</a></li>
-  <li><a href="#topic-by-decade-heatmap" id="toc-topic-by-decade-heatmap" class="nav-link" data-scroll-target="#topic-by-decade-heatmap">Topic-by-Decade Heatmap</a></li>
-  <li><a href="#document-by-topic-heatmap" id="toc-document-by-topic-heatmap" class="nav-link" data-scroll-target="#document-by-topic-heatmap">Document-by-Topic Heatmap</a></li>
-  <li><a href="#sample-documents-timeline" id="toc-sample-documents-timeline" class="nav-link" data-scroll-target="#sample-documents-timeline">Sample Documents Timeline</a></li>
-  <li><a href="#topic-prevalence-over-time-area-chart" id="toc-topic-prevalence-over-time-area-chart" class="nav-link" data-scroll-target="#topic-prevalence-over-time-area-chart">Topic Prevalence Over Time (Area Chart)</a></li>
-  <li><a href="#topic-word-bars" id="toc-topic-word-bars" class="nav-link" data-scroll-target="#topic-word-bars">Topic Word Bars</a></li>
-  <li><a href="#topic-hierarchy" id="toc-topic-hierarchy" class="nav-link" data-scroll-target="#topic-hierarchy">Topic Hierarchy</a></li>
-  <li><a href="#topic-cluster-map" id="toc-topic-cluster-map" class="nav-link" data-scroll-target="#topic-cluster-map">Topic Cluster Map</a></li>
-  </ul></li>
+  <li><a href="#read-the-charts" id="toc-read-the-charts" class="nav-link" data-scroll-target="#read-the-charts">Read the Charts</a></li>
   <li><a href="#how-to-read-topic-numbers" id="toc-how-to-read-topic-numbers" class="nav-link" data-scroll-target="#how-to-read-topic-numbers">How To Read Topic Numbers</a></li>
   <li><a href="#exercise-questions" id="toc-exercise-questions" class="nav-link" data-scroll-target="#exercise-questions">Exercise Questions</a></li>
   <li><a href="#optional-run-the-full-collection" id="toc-optional-run-the-full-collection" class="nav-link" data-scroll-target="#optional-run-the-full-collection">Optional: Run the Full Collection</a></li>
@@ -4823,66 +4812,8 @@ neh-williams-williams.xml</code></pre>
 </section>
 <section id="read-the-charts" class="level2">
 <h2 class="anchored" data-anchor-id="read-the-charts">Read the Charts</h2>
-<p>The charts below are from the reference run in <code>outputs/bertopic_sample_nomic_sensitive_lemmatized/</code>. They are provided so you can practice reading the visualizations before or alongside running your own pipeline. After running your own pipeline, compare what you see in your CSV files against these reference charts.</p>
-<p>All charts are interactive — hover over bars and cells to see exact values. Each chart is also available as a standalone HTML file in the <a href="https://github.com/jinghanlib/topic-modeling-slave-narratives">GitHub repository</a> under <code>outputs/bertopic_sample_nomic_sensitive_lemmatized/</code>. Download or clone the repository and open any <code>.html</code> file directly in a browser to explore it offline.</p>
-<section id="topic-shares-by-publication-decade" class="level3">
-<h3 class="anchored" data-anchor-id="topic-shares-by-publication-decade">Topic Shares by Publication Decade</h3>
-<p>This chart shows what share of the top 8 topics appears in each publication decade. Each bar represents one topic’s share of all modeled chunks published in that decade.</p>
-<iframe data-external="1" class="viz-frame" title="Topic shares by publication decade" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/topic_prevalence_grouped_bars.html" loading="lazy"></iframe>
-<p>In this sample:</p>
-<ul>
-<li>1830s publications are strongly shaped by abolitionist testimony, especially physical punishment and treatment by slaveholders.</li>
-<li>1900s and 1910s publications include more topics about Booker T. Washington, Tuskegee, education, churches, and public leadership.</li>
-<li>The ranch-life topic appears mostly in the 1900s because it is strongly connected to Nat Love’s narrative.</li>
-</ul>
-</section>
-<section id="topic-trends-by-decade-faceted" class="level3">
-<h3 class="anchored" data-anchor-id="topic-trends-by-decade-faceted">Topic Trends by Decade (Faceted)</h3>
-<p>This chart shows the same topic-by-decade data as individual line charts, one panel per topic, making it easier to follow the arc of a single topic without other topics in the way.</p>
-<iframe data-external="1" class="viz-frame" title="Topic trends by decade (faceted)" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/topic_prevalence_by_decade.html" loading="lazy"></iframe>
-</section>
-<section id="topic-by-decade-heatmap" class="level3">
-<h3 class="anchored" data-anchor-id="topic-by-decade-heatmap">Topic-by-Decade Heatmap</h3>
-<p>This heatmap shows which topics concentrate in which publication decades. Darker cells mean more chunks from that topic appear in that decade.</p>
-<iframe data-external="1" class="viz-frame" title="Topic-by-decade heatmap" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/topic_decade_heatmap.html" loading="lazy"></iframe>
-</section>
-<section id="document-by-topic-heatmap" class="level3">
-<h3 class="anchored" data-anchor-id="document-by-topic-heatmap">Document-by-Topic Heatmap</h3>
-<p>This heatmap shows which documents contribute most strongly to each topic. Use it to check whether a topic is spread across many documents or dominated by one.</p>
-<iframe data-external="1" class="viz-frame" title="Document-by-topic heatmap" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/document_topic_heatmap.html" loading="lazy"></iframe>
-<p>For example:</p>
-<ul>
-<li>“Whipping and Plantation Punishment” is heavily influenced by <em>American Slavery As It Is</em>.</li>
-<li>“Ranch Life and Conflict with Native Americans” is heavily influenced by Nat Love’s narrative.</li>
-<li>Booker T. Washington and Tuskegee topics are heavily influenced by <em>Booker T. Washington, Builder of a Civilization</em>.</li>
-</ul>
-</section>
-<section id="sample-documents-timeline" class="level3">
-<h3 class="anchored" data-anchor-id="sample-documents-timeline">Sample Documents Timeline</h3>
-<p>This chart shows the publication years of the 29 sampled documents. Use it to see how the sample is distributed across time.</p>
-<iframe data-external="1" class="viz-frame short" title="Sample documents timeline" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/sample_documents_timeline.html" loading="lazy"></iframe>
-</section>
-<section id="topic-prevalence-over-time-area-chart" class="level3">
-<h3 class="anchored" data-anchor-id="topic-prevalence-over-time-area-chart">Topic Prevalence Over Time (Area Chart)</h3>
-<p>This chart shows topic prevalence as a stacked area chart across publication decades, giving an overview of how the overall composition of topics shifts across the sample’s time span.</p>
-<iframe data-external="1" class="viz-frame" title="Topic prevalence over time" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/visualizations/topics_over_time.html" loading="lazy"></iframe>
-</section>
-<section id="topic-word-bars" class="level3">
-<h3 class="anchored" data-anchor-id="topic-word-bars">Topic Word Bars</h3>
-<p>This chart shows the top words for every topic as horizontal bar charts, one panel per topic. The bar length represents how distinctive each word is to that topic compared with the rest of the collection.</p>
-<iframe data-external="1" class="viz-frame" title="Topic word bars" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/visualizations/topic_barchart.html" loading="lazy"></iframe>
-<p>Use this to check whether the top words support a topic’s label, or whether the label needs revision.</p>
-</section>
-<section id="topic-hierarchy" class="level3">
-<h3 class="anchored" data-anchor-id="topic-hierarchy">Topic Hierarchy</h3>
-<p>This chart shows a hierarchical clustering of topics — which topics are most similar to each other and could potentially be merged. Topics that branch close together share more vocabulary and meaning than topics that branch far apart.</p>
-<iframe data-external="1" class="viz-frame" title="Topic hierarchy" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/visualizations/topic_hierarchy.html" loading="lazy"></iframe>
-</section>
-<section id="topic-cluster-map" class="level3">
-<h3 class="anchored" data-anchor-id="topic-cluster-map">Topic Cluster Map</h3>
-<p>This chart shows all 59 topics plotted in a 2D space based on their embedding positions. Topics that appear close together are semantically similar. Each bubble represents one topic, sized by how many chunks were assigned to it.</p>
-<iframe data-external="1" class="viz-frame" title="Topic cluster map" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/visualizations/topics.html" loading="lazy"></iframe>
-</section>
+<p>All nine reference visualizations — with descriptions and interpretation notes — are on the <a href="../instructions/01_simple_explanation.html#reading-the-charts">Simple Explanation</a> page. Refer to that page to read and understand the charts alongside your own results.</p>
+<p>After running your own pipeline, compare what you see in your CSV files against those reference charts.</p>
 </section>
 <section id="how-to-read-topic-numbers" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-read-topic-numbers">How To Read Topic Numbers</h2>
