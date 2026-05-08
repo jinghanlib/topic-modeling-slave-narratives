@@ -41,21 +41,16 @@ git clone https://github.com/jinghanlib/topic-modeling-slave-narratives.git
 
 If you do not have Git, go to the repository page on GitHub, click the green **Code** button, choose **Download ZIP**, then unzip the downloaded file.
 
-### Step 3 — Navigate into the folder
+### Step 3 — Open a terminal inside the project folder
 
-In the terminal, move into the project folder. Replace the path below with wherever you downloaded or unzipped it:
+The easiest way to do this is to right-click the project folder itself:
 
-**Mac/Linux:**
-```bash
-cd "/path/to/topic-modeling-slave-narratives"
-```
+- **Mac:** Right-click the folder in Finder and choose **New Terminal at Folder**. If you do not see that option, go to System Settings → Privacy & Security → Developer Tools and enable Terminal.
+- **Windows:** Hold **Shift** and right-click the folder in File Explorer, then choose **Open PowerShell window here** or **Open Command window here**.
 
-**Windows (Command Prompt):**
-```
-cd "C:\path\to\topic-modeling-slave-narratives"
-```
+This opens a terminal already pointed at the right location. You do not need to type any folder path.
 
-All commands in the Hands-On Exercise must be run from inside this folder. If you close and reopen the terminal, run the `cd` command again before continuing.
+If you close and reopen the terminal later, right-click the folder again to reopen it in the correct place before running any commands.
 
 ---
 
