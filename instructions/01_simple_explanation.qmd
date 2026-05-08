@@ -106,7 +106,7 @@ The topic model grouped these chunks, not whole narratives.
 
 Before the topic model can find important words for each topic, it needs to standardize how words are represented. This happens in two steps.
 
-**Tokenization** is how the computer breaks text into individual units. Tokens are usually words, but not always. A computer may treat `master` and `Master` as different words because of the capital letter, split a hyphenated word like `well-known` into two pieces, or handle contractions and older spellings in unexpected ways. Tokenization happens first — everything else depends on it.
+**Tokenization** is how the computer breaks text into individual units. Tokens are usually words, but not always. A computer may treat `master` and `Master` as different words because of the capital letter, split a hyphenated word like `well-known` into two pieces, or handle contractions and older spellings in unexpected ways.
 
 **Lemmatization** then reduces word variants to a shared base form:
 
