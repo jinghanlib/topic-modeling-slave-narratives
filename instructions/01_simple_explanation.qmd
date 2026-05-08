@@ -276,6 +276,8 @@ Some final topic labels were:
 
 The charts below are interactive — hover over bars and cells to see exact values, and click legend items to show or hide topics.
 
+An additional visualization — topic trends as faceted line charts, one panel per topic — is available in the repository but not embedded here. You can find it at `outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/topic_prevalence_by_decade.html` in the [GitHub repository](https://github.com/jinghanlib/topic-modeling-slave-narratives).
+
 ### Topic Shares by Publication Decade
 
 The topic trend chart shows the largest topics by publication decade.
