@@ -219,6 +219,8 @@ This may take several minutes.
 
 ## Run the 10% Topic Model
 
+This command runs the full topic modeling pipeline on a 10% sample of the collection. It cleans and chunks the texts, converts each chunk into embeddings using the local `nomic-embed-text` model, clusters the chunks into topics using BERTopic, and generates readable topic labels using the local `llama3.1` model. Results are saved to `outputs/my_run/`. No paid API key is needed. The run takes roughly 5–15 minutes on a modern laptop.
+
 **Mac or Linux:**
 
 ```bash
@@ -245,16 +247,17 @@ python -u scripts/run_bertopic_sample.py ^
   --ollama-model llama3.1:latest
 ```
 
-This runs:
+Each option in the command tells the script how to behave:
 
-- cleaning
-- chunking
-- lemmatization
-- local embeddings
-- BERTopic clustering
-- local Llama topic labeling
-
-No paid API key is needed.
+| Option | What it does |
+|---|---|
+| `--output-dir outputs/my_run` | Where to save your results — keeps them separate from the reference outputs |
+| `--embedding-backend ollama` | Use the local Ollama server to generate embeddings (no internet or API key needed) |
+| `--ollama-embedding-model nomic-embed-text` | Which local model to use for converting text into numbers |
+| `--representation-backend ctfidf` | How to find the most distinctive words for each topic |
+| `--clustering sensitive` | Use more sensitive clustering settings to find more, smaller topics |
+| `--label-backend ollama` | Use the local Ollama server to generate topic labels |
+| `--ollama-model llama3.1:latest` | Which local language model to use for writing topic labels |
 
 ## How To Know It Is Working
 
@@ -274,7 +277,7 @@ If they see `Done`, the run worked.
 
 ## Generate the Review Table
 
-After the topic model finishes, run this to generate `topic_review_table.csv` — the easiest file to start with when reading your results.
+Run this after the topic model finishes. It reads the topic assignments from `outputs/my_run/` and produces `topic_review_table.csv` — the easiest file to start with when reading your results. It also generates the metadata visualizations (charts comparing topics by publication decade and document).
 
 **Mac or Linux:**
 
@@ -291,6 +294,11 @@ python scripts/visualize_topic_metadata.py ^
   --output-dir outputs/my_run ^
   --top-n 15
 ```
+
+| Option | What it does |
+|---|---|
+| `--output-dir outputs/my_run` | Where to find your topic results and where to save the review table |
+| `--top-n 15` | How many topics to include in the visualizations (the 15 largest by chunk count) |
 
 ## Which 10% Sample This Uses
 

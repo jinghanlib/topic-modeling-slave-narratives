@@ -368,6 +368,7 @@ full collection: much longer, possibly hours</code></pre>
 </section>
 <section id="run-the-10-topic-model" class="level2">
 <h2 class="anchored" data-anchor-id="run-the-10-topic-model">Run the 10% Topic Model</h2>
+<p>This command runs the full topic modeling pipeline on a 10% sample of the collection. It cleans and chunks the texts, converts each chunk into embeddings using the local <code>nomic-embed-text</code> model, clusters the chunks into topics using BERTopic, and generates readable topic labels using the local <code>llama3.1</code> model. Results are saved to <code>outputs/my_run/</code>. No paid API key is needed. The run takes roughly 5–15 minutes on a modern laptop.</p>
 <p><strong>Mac or Linux:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-u</span> scripts/run_bertopic_sample.py <span class="dt">\</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output-dir</span> outputs/my_run <span class="dt">\</span></span>
@@ -386,16 +387,49 @@ full collection: much longer, possibly hours</code></pre>
   --clustering sensitive ^
   --label-backend ollama ^
   --ollama-model llama3.1:latest</code></pre>
-<p>This runs:</p>
-<ul>
-<li>cleaning</li>
-<li>chunking</li>
-<li>lemmatization</li>
-<li>local embeddings</li>
-<li>BERTopic clustering</li>
-<li>local Llama topic labeling</li>
-</ul>
-<p>No paid API key is needed.</p>
+<p>Each option in the command tells the script how to behave:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>--output-dir outputs/my_run</code></td>
+<td>Where to save your results — keeps them separate from the reference outputs</td>
+</tr>
+<tr class="even">
+<td><code>--embedding-backend ollama</code></td>
+<td>Use the local Ollama server to generate embeddings (no internet or API key needed)</td>
+</tr>
+<tr class="odd">
+<td><code>--ollama-embedding-model nomic-embed-text</code></td>
+<td>Which local model to use for converting text into numbers</td>
+</tr>
+<tr class="even">
+<td><code>--representation-backend ctfidf</code></td>
+<td>How to find the most distinctive words for each topic</td>
+</tr>
+<tr class="odd">
+<td><code>--clustering sensitive</code></td>
+<td>Use more sensitive clustering settings to find more, smaller topics</td>
+</tr>
+<tr class="even">
+<td><code>--label-backend ollama</code></td>
+<td>Use the local Ollama server to generate topic labels</td>
+</tr>
+<tr class="odd">
+<td><code>--ollama-model llama3.1:latest</code></td>
+<td>Which local language model to use for writing topic labels</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="how-to-know-it-is-working" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-know-it-is-working">How To Know It Is Working</h2>
@@ -411,7 +445,7 @@ Done. Results written to outputs/my_run</code></pre>
 </section>
 <section id="generate-the-review-table" class="level2">
 <h2 class="anchored" data-anchor-id="generate-the-review-table">Generate the Review Table</h2>
-<p>After the topic model finishes, run this to generate <code>topic_review_table.csv</code> — the easiest file to start with when reading your results.</p>
+<p>Run this after the topic model finishes. It reads the topic assignments from <code>outputs/my_run/</code> and produces <code>topic_review_table.csv</code> — the easiest file to start with when reading your results. It also generates the metadata visualizations (charts comparing topics by publication decade and document).</p>
 <p><strong>Mac or Linux:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> scripts/visualize_topic_metadata.py <span class="dt">\</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output-dir</span> outputs/my_run <span class="dt">\</span></span>
@@ -420,6 +454,28 @@ Done. Results written to outputs/my_run</code></pre>
 <pre><code>python scripts/visualize_topic_metadata.py ^
   --output-dir outputs/my_run ^
   --top-n 15</code></pre>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>--output-dir outputs/my_run</code></td>
+<td>Where to find your topic results and where to save the review table</td>
+</tr>
+<tr class="even">
+<td><code>--top-n 15</code></td>
+<td>How many topics to include in the visualizations (the 15 largest by chunk count)</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="which-10-sample-this-uses" class="level2">
 <h2 class="anchored" data-anchor-id="which-10-sample-this-uses">Which 10% Sample This Uses</h2>
