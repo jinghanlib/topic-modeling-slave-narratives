@@ -29,9 +29,13 @@ outputs/bertopic_sample_nomic_sensitive/
 outputs/bertopic_sample_nomic_sensitive_lemmatized/embeddings_ollama_nomic-embed-text.npy
 outputs/bertopic_sample_nomic_sensitive_lemmatized/model
 outputs/bertopic_sample_nomic_sensitive_lemmatized/sample_chunks.csv
-outputs/bertopic_sample_nomic_sensitive_lemmatized/visualizations/
-docs/outputs/bertopic_sample_nomic_sensitive_lemmatized/visualizations/
+# documents.html embeds raw embedding data (~11 MB), exclude it
+outputs/bertopic_sample_nomic_sensitive_lemmatized/visualizations/documents.html
+docs/outputs/bertopic_sample_nomic_sensitive_lemmatized/visualizations/documents.html
 
 # Student run outputs
 outputs/my_run/
 outputs/my_run_full/
+
+/.quarto/
+**/*.quarto_ipynb

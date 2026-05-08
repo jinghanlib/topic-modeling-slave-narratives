@@ -433,7 +433,7 @@ def save_visualizations(topic_model, chunks: pd.DataFrame, embeddings: np.ndarra
     }
     for filename, plotter in plotters.items():
         try:
-            plotter().write_html(viz_dir / filename)
+            plotter().write_html(viz_dir / filename, include_plotlyjs="cdn")
         except Exception as exc:
             print(f"Skipped {filename}: {exc}")
 
@@ -454,7 +454,7 @@ def save_visualizations(topic_model, chunks: pd.DataFrame, embeddings: np.ndarra
             labels={"color": "Topic", "chunks": "Chunks", "decade": "Publication decade"},
             title="Topic Prevalence by Publication Decade",
         )
-        fig.write_html(viz_dir / "topics_over_time.html")
+        fig.write_html(viz_dir / "topics_over_time.html", include_plotlyjs="cdn")
 
 
 def summarize_topics_by_document(chunks: pd.DataFrame, topic_info: pd.DataFrame) -> pd.DataFrame:

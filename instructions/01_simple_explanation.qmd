@@ -276,7 +276,13 @@ Some final topic labels were:
 
 The charts below are interactive — hover over bars and cells to see exact values, and click legend items to show or hide topics.
 
-An additional visualization — topic trends as faceted line charts, one panel per topic — is available in the repository but not embedded here. You can find it at `outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/topic_prevalence_by_decade.html` in the [GitHub repository](https://github.com/jinghanlib/topic-modeling-slave-narratives).
+Additional visualizations are available in the [GitHub repository](https://github.com/jinghanlib/topic-modeling-slave-narratives) but not embedded here. In `outputs/bertopic_sample_nomic_sensitive_lemmatized/`:
+
+- `metadata_visualizations/topic_prevalence_by_decade.html` — topic trends as faceted line charts, one panel per topic
+- `visualizations/topics.html` — 2D scatter plot of all chunks positioned by embedding similarity
+- `visualizations/topic_barchart.html` — top words for every topic as bar charts
+- `visualizations/topic_hierarchy.html` — hierarchical clustering showing how topics relate to each other
+- `visualizations/topics_over_time.html` — topic prevalence as a stacked area chart over publication decades
 
 ### Topic Shares by Publication Decade
 

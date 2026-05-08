@@ -4099,8 +4099,6 @@ color: var(--accent-dark);
 background: var(--soft);
 }
 main {
-max-width: 1120px;
-margin: 0 auto;
 padding: 34px 22px 64px;
 }
 section {
@@ -4279,7 +4277,7 @@ padding: 12px 14px;
 height: 520px;
 }
 }
-@media (max-width: 1100px) {
+@media (max-width: 1300px) {
 #quarto-margin-sidebar {
 display: none;
 }
@@ -4651,7 +4649,14 @@ preached, preaching -&gt; preach</code></pre>
 <section id="reading-the-charts" class="level2">
 <h2 class="anchored" data-anchor-id="reading-the-charts">Reading the Charts</h2>
 <p>The charts below are interactive — hover over bars and cells to see exact values, and click legend items to show or hide topics.</p>
-<p>An additional visualization — topic trends as faceted line charts, one panel per topic — is available in the repository but not embedded here. You can find it at <code>outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/topic_prevalence_by_decade.html</code> in the <a href="https://github.com/jinghanlib/topic-modeling-slave-narratives">GitHub repository</a>.</p>
+<p>Additional visualizations are available in the <a href="https://github.com/jinghanlib/topic-modeling-slave-narratives">GitHub repository</a> but not embedded here. In <code>outputs/bertopic_sample_nomic_sensitive_lemmatized/</code>:</p>
+<ul>
+<li><code>metadata_visualizations/topic_prevalence_by_decade.html</code> — topic trends as faceted line charts, one panel per topic</li>
+<li><code>visualizations/topics.html</code> — 2D scatter plot of all chunks positioned by embedding similarity</li>
+<li><code>visualizations/topic_barchart.html</code> — top words for every topic as bar charts</li>
+<li><code>visualizations/topic_hierarchy.html</code> — hierarchical clustering showing how topics relate to each other</li>
+<li><code>visualizations/topics_over_time.html</code> — topic prevalence as a stacked area chart over publication decades</li>
+</ul>
 <section id="topic-shares-by-publication-decade" class="level3">
 <h3 class="anchored" data-anchor-id="topic-shares-by-publication-decade">Topic Shares by Publication Decade</h3>
 <p>The topic trend chart shows the largest topics by publication decade.</p>
