@@ -1,0 +1,577 @@
+---
+title: "Hands-On Exercise"
+subtitle: "Run a free local topic model and interpret the results"
+---
+
+This exercise is for students with no prior coding experience.
+
+Students will download the original dataset, use the provided scripts and reference outputs, and run a 10% BERTopic sample on their own computer.
+
+## What Students Will Make
+
+By the end, students will have:
+
+- a spreadsheet of topic labels
+- a spreadsheet showing which passage belongs to which topic
+- a review table with topic labels, top words, years, and contributing documents
+- a short interpretation of what the topics and charts suggest
+
+## How This Setup Works
+
+There are two pieces:
+
+1. **Original dataset**: downloaded from the original Documenting the American South website.
+2. **Project files**: scripts, instructions, and reference results.
+
+Download the original dataset separately so the source of the texts and citation information are clear.
+
+### Reference outputs vs. your outputs
+
+The repository already contains a complete set of pre-generated results in:
+
+```text
+outputs/bertopic_sample_nomic_sensitive_lemmatized/
+```
+
+**Do not write to that folder.** It contains the reference run used to build the charts and download links on this site. You can use those files to compare against your own results.
+
+When you run the scripts in this exercise, your results will go to a separate folder:
+
+```text
+outputs/my_run/
+```
+
+Keep these two folders separate so you can always compare your results to the reference.
+
+## Download the Original Dataset
+
+Go to the Documenting the American South North American Slave Narratives collection:
+
+```text
+https://docsouth.unc.edu/neh/
+```
+
+Download the North American Slave Narratives data package if available from the collection page or course instructions.
+
+After downloading, unzip the data. The dataset should include:
+
+```text
+data/texts
+data/xml
+data/toc.csv
+data/readme.txt
+```
+
+The scripts expect the dataset's `data` folder to be inside the same main project folder as the scripts.
+
+## Get the GitHub Repository
+
+Download or clone the GitHub repository that contains the scripts.
+
+If using Git, run:
+
+```bash
+git clone REPOSITORY_URL
+cd REPOSITORY_FOLDER_NAME
+```
+
+Replace `REPOSITORY_URL` and `REPOSITORY_FOLDER_NAME` with the actual address and folder name provided by your instructor.
+
+If not using Git, click the green **Code** button on GitHub, choose **Download ZIP**, unzip it, and open the folder.
+
+Then copy or move the downloaded dataset's `data` folder into the repository folder.
+
+Your project should look like this:
+
+```text
+project folder
+  data
+    texts
+    xml
+    toc.csv
+  scripts
+    run_bertopic_sample.py
+    visualize_topic_metadata.py
+  instructions
+  outputs
+  requirements.txt
+```
+
+## Local Compute: What It Means
+
+This exercise runs on the student's own computer.
+
+That means:
+
+- the topic modeling pipeline runs on your computer — the embedding, clustering, and labeling steps all happen locally
+- no paid API is needed
+- enough disk space is needed for Python packages and AI models
+- the first run may take several minutes
+- the computer may become warm or use more battery
+
+Approximate space needed:
+
+```text
+Python environment and packages: several GB
+nomic-embed-text model: about 300 MB
+llama3.1 model: about 5 GB
+project data and outputs: hundreds of MB to a few GB
+```
+
+Approximate time:
+
+```text
+10% sample: about 5 to 15 minutes on a modern laptop
+full collection: much longer, possibly hours
+```
+
+Times vary by computer.
+
+## Open a Terminal
+
+Several steps below require typing commands into a terminal (also called a command line or shell). Here is how to open one:
+
+**Mac:** Press `Command + Space` to open Spotlight, type `Terminal`, and press Enter.
+
+**Windows:** Press `Win + R`, type `cmd`, and press Enter. Or search for **PowerShell** in the Start menu.
+
+Once open, you should see a blinking cursor where you can type commands. You do not need to understand everything about the terminal — just type the commands exactly as shown and press Enter to run them.
+
+## Install the Tools
+
+### Install Python
+
+Download Python from:
+
+```text
+https://www.python.org/downloads/
+```
+
+Use Python 3.11 or newer.
+
+To check Python, open a terminal and run:
+
+```bash
+python3 --version
+```
+
+If it prints a version number, Python is installed.
+
+> **Windows note:** If `python3 --version` gives an error, try `python --version` instead. Windows often uses `python` rather than `python3`.
+
+### Install Ollama and Local Models
+
+Download Ollama from:
+
+```text
+https://ollama.com/
+```
+
+Then open Terminal and run:
+
+```bash
+ollama pull nomic-embed-text
+ollama pull llama3.1
+```
+
+What these models do:
+
+- `nomic-embed-text` turns passages into numerical meaning representations
+- `llama3.1` writes readable topic labels
+
+These models run locally. They are not uploaded to a paid service.
+
+## Set Up the Python Environment
+
+In Terminal, move into the project folder.
+
+Example:
+
+```bash
+cd "/path/to/your/project-folder"
+```
+
+Create a Python environment:
+
+```bash
+python3 -m venv .venv
+```
+
+Activate it:
+
+```bash
+source .venv/bin/activate
+```
+
+> **Windows note:** On Windows, use this command instead:
+> ```
+> .venv\Scripts\activate
+> ```
+
+Install packages:
+
+```bash
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+This may take several minutes.
+
+## Run the 10% Topic Model
+
+**Mac or Linux:**
+
+```bash
+python -u scripts/run_bertopic_sample.py \
+  --output-dir outputs/my_run \
+  --embedding-backend ollama \
+  --ollama-embedding-model nomic-embed-text \
+  --representation-backend ctfidf \
+  --clustering sensitive \
+  --label-backend ollama \
+  --ollama-model llama3.1:latest
+```
+
+**Windows (Command Prompt):**
+
+```
+python -u scripts/run_bertopic_sample.py ^
+  --output-dir outputs/my_run ^
+  --embedding-backend ollama ^
+  --ollama-embedding-model nomic-embed-text ^
+  --representation-backend ctfidf ^
+  --clustering sensitive ^
+  --label-backend ollama ^
+  --ollama-model llama3.1:latest
+```
+
+This runs:
+
+- cleaning
+- chunking
+- lemmatization
+- local embeddings
+- BERTopic clustering
+- local Llama topic labeling
+
+No paid API key is needed.
+
+## How To Know It Is Working
+
+Students should see lines like:
+
+```text
+Sampled 29 documents into 1543 chunks
+Ollama embedded 25/1543 chunks
+Ollama embedded 50/1543 chunks
+...
+Labeled topic 0: Whipping and Plantation Punishment
+...
+Done. Results written to outputs/my_run
+```
+
+If they see `Done`, the run worked.
+
+## Generate the Review Table
+
+After the topic model finishes, run this to generate `topic_review_table.csv` — the easiest file to start with when reading your results.
+
+**Mac or Linux:**
+
+```bash
+python scripts/visualize_topic_metadata.py \
+  --output-dir outputs/my_run \
+  --top-n 15
+```
+
+**Windows (Command Prompt):**
+
+```
+python scripts/visualize_topic_metadata.py ^
+  --output-dir outputs/my_run ^
+  --top-n 15
+```
+
+## Which 10% Sample This Uses
+
+The script uses:
+
+```text
+sample fraction = 10%
+random seed = 42
+```
+
+That produces the same 29-document sample each time.
+
+The sampled files are:
+
+```text
+fpn-bruce-bruce.xml
+fpn-hughes-hughes.xml
+fpn-jackson-jackson.xml
+nc-jones85-jones85.xml
+neh-aaron-aaron.xml
+neh-arter-arter.xml
+neh-boxbrown-boxbrown.xml
+neh-bragg-bragg.xml
+neh-brownj-brownj.xml
+neh-bruner-bruner.xml
+neh-charlton-charlton.xml
+neh-detroit-detroit.xml
+neh-hammon-hammon.xml
+neh-hammond-hammond.xml
+neh-henson58-henson58.xml
+neh-hopper-hopper.xml
+neh-iwilliams-iwilliams.xml
+neh-jeter-jeter.xml
+neh-mars-mars.xml
+neh-natlove-natlove.xml
+neh-nicholson-nicholson.xml
+neh-oneal-oneal.xml
+neh-robinsonn-robinson.xml
+neh-scott-scott.xml
+neh-stedman-stedman.xml
+neh-troy-troy.xml
+neh-webb-webb.xml
+neh-weld-weld.xml
+neh-williams-williams.xml
+```
+
+## Open and Read the Results
+
+Start with:
+
+- `topic_review_table.csv`
+- `topic_labels_llm.csv`
+- `topic_info.csv`
+- `topic_assignments.csv`
+
+The easiest file for students is `topic_review_table.csv`. It shows the topic number, current label, number of chunks, topic words, publication-year range, and the documents that contribute most strongly to the topic.
+
+`topic_assignments.csv` shows which topic each chunk was assigned to. Use it when a topic label needs to be checked against actual passages.
+
+Here is a small preview of the topic review table:
+
+| Topic | Label | Chunks | Top Words |
+|---:|---|---:|---|
+| 0 | Whipping and Plantation Punishment | 76 | whip, flog, overseer, tie, plantation |
+| 1 | Limitations of Liberty in the Post-War Era | 66 | government, constitution, liberty, american, war |
+| 2 | Separation from Family and Emotional Trauma | 55 | dice, aunt dice, aunt, mos, riverside |
+| 3 | Slave-led Christian Services and Meetings | 45 | meeting, preach, prayer, spirit, pray |
+
+Students can download the CSV files from the buttons below. If a CSV opens in the browser instead of downloading, use **File > Save Page As** or right-click the button and choose **Save Link As**.
+
+```{=html}
+<p>
+  <a class="btn btn-primary" href="../outputs/bertopic_sample_nomic_sensitive_lemmatized/topic_review_table.csv" download>Download topic review table</a>
+  <a class="btn btn-outline-primary" href="../outputs/bertopic_sample_nomic_sensitive_lemmatized/topic_labels_llm.csv" download>Download topic labels</a>
+  <a class="btn btn-outline-primary" href="../outputs/bertopic_sample_nomic_sensitive_lemmatized/topic_info.csv" download>Download topic info</a>
+  <a class="btn btn-outline-primary" href="../outputs/bertopic_sample_nomic_sensitive_lemmatized/topic_assignments.csv" download>Download topic assignments</a>
+  <a class="btn btn-outline-primary" href="../outputs/bertopic_sample_nomic_sensitive_lemmatized/sample_documents.csv" download>Download sample documents</a>
+</p>
+```
+
+## Review and Improve Topic Labels
+
+The topic labels are suggestions.
+
+The current workflow uses:
+
+```text
+BERTopic topic words + representative passages + local Llama label
+```
+
+Students can replace or improve those labels after reading the topic words and example passages.
+
+That is human interpretation, and it is expected. Renaming a topic does not change the computer's topic assignments. It only changes the words we use to describe the topic.
+
+If a topic label seems too broad, open `topic_review_table.csv`, inspect the `top_words` column, then open `topic_assignments.csv` and read several chunks from that topic. After that, write a clearer human label.
+
+If a label is manually revised, record that it was revised. A good note might say:
+
+```text
+Label revised after reviewing top words and representative chunks.
+```
+
+## Where Human Interpretation Comes In
+
+Human interpretation shapes the results throughout the pipeline — from choosing the dataset and cleaning rules to inspecting topic words, renaming labels, and deciding what a visualization means in historical context. The computer helps organize the texts, but the researcher decides what the patterns mean.
+
+For a full walkthrough of each decision point, see the [Simple Explanation](01_simple_explanation.qmd#where-human-interpretation-enters) page.
+
+## Read the Charts
+
+The charts below are from the reference run in `outputs/bertopic_sample_nomic_sensitive_lemmatized/`. They are provided so you can practice reading the visualizations before or alongside running your own pipeline. After running your own pipeline, compare what you see in your CSV files against these reference charts.
+
+All charts are interactive — hover over bars and cells to see exact values.
+
+### Topic Shares by Publication Decade
+
+```{=html}
+<iframe class="viz-frame" title="Topic shares by publication decade" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/topic_prevalence_grouped_bars.html" loading="lazy"></iframe>
+```
+
+In this sample:
+
+- 1830s publications are strongly shaped by abolitionist testimony, especially physical punishment and treatment by slaveholders.
+- 1900s and 1910s publications include more topics about Booker T. Washington, Tuskegee, education, churches, and public leadership.
+- The ranch-life topic appears mostly in the 1900s because it is strongly connected to Nat Love's narrative.
+
+### Topic-by-Decade Heatmap
+
+```{=html}
+<iframe class="viz-frame" title="Topic-by-decade heatmap" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/topic_decade_heatmap.html" loading="lazy"></iframe>
+```
+
+The topic-by-decade heatmap shows where topics concentrate by publication decade.
+
+### Document-by-Topic Heatmap
+
+```{=html}
+<iframe class="viz-frame" title="Document-by-topic heatmap" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/document_topic_heatmap.html" loading="lazy"></iframe>
+```
+
+The document-by-topic heatmap shows whether a topic is spread across many documents or dominated by one document.
+
+For example:
+
+- “Whipping and Plantation Punishment” is heavily influenced by *American Slavery As It Is*.
+- “Ranch Life and Conflict with Native Americans” is heavily influenced by Nat Love's narrative.
+- Booker T. Washington and Tuskegee topics are heavily influenced by *Booker T. Washington, Builder of a Civilization*.
+
+### Sample Documents Timeline
+
+```{=html}
+<iframe class="viz-frame short" title="Sample documents timeline" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/sample_documents_timeline.html" loading="lazy"></iframe>
+```
+
+Remember: these charts show publication dates, not necessarily the dates when narrated events happened.
+
+## How To Read Topic Numbers
+
+BERTopic uses topic numbers.
+
+Important:
+
+```text
+Topic -1 = outliers
+Topic 0 = first regular topic
+Topic 1 = second regular topic
+```
+
+Topic `0` is not the outlier. Only topic `-1` is the outlier.
+
+## Exercise Questions
+
+After opening `topic_labels_llm.csv` or `topic_review_table.csv`, answer:
+
+1. Which topic label is easiest to understand?
+2. Which topic label seems too vague?
+3. Which topic words support that label?
+4. Which label would you revise after reading the topic words?
+5. Do any topics look similar but not identical?
+6. Which topic has the most chunks?
+7. Which topics seem connected to religion?
+8. Which topics seem connected to violence or punishment?
+9. Which topics seem connected to education or Booker T. Washington?
+
+After opening the metadata visualizations, answer:
+
+1. Which topics appear mostly in earlier publication decades?
+2. Which topics appear mostly in later publication decades?
+3. Which topics are dominated by one document?
+4. Which topics appear across several documents?
+5. Do the time charts show event dates or publication dates? How can you tell?
+
+## Optional: Run the Full Collection
+
+Only do this after the 10% sample works.
+
+**Mac or Linux:**
+
+```bash
+python -u scripts/run_bertopic_sample.py \
+  --sample-frac 1.0 \
+  --output-dir outputs/my_run_full \
+  --embedding-backend ollama \
+  --ollama-embedding-model nomic-embed-text \
+  --representation-backend ctfidf \
+  --clustering sensitive \
+  --label-backend ollama \
+  --ollama-model llama3.1:latest
+```
+
+**Windows (Command Prompt):**
+
+```
+python -u scripts/run_bertopic_sample.py ^
+  --sample-frac 1.0 ^
+  --output-dir outputs/my_run_full ^
+  --embedding-backend ollama ^
+  --ollama-embedding-model nomic-embed-text ^
+  --representation-backend ctfidf ^
+  --clustering sensitive ^
+  --label-backend ollama ^
+  --ollama-model llama3.1:latest
+```
+
+The full collection may take hours.
+
+## Common Problems
+
+### `ollama` command not found
+
+Ollama is not installed, or Terminal cannot find it. Install Ollama, then close and reopen Terminal.
+
+### Python says packages are missing
+
+Make sure the virtual environment is active.
+
+Mac or Linux:
+
+```bash
+source .venv/bin/activate
+```
+
+Windows (Command Prompt):
+
+```
+.venv\Scripts\activate
+```
+
+Then reinstall packages:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+### Ollama connection error
+
+Open the Ollama app, or run:
+
+```bash
+ollama list
+```
+
+If Ollama is working, it should show installed models.
+
+### The run is slow
+
+That is normal. The first run creates embeddings. Later runs reuse them.
+
+### A topic label looks wrong
+
+That is also normal. Topic labels are suggestions.
+
+Open `topic_review_table.csv`, `topic_info.csv`, and `topic_assignments.csv` to inspect the actual words and passages behind the label.
+
+## What To Submit
+
+Submit the following. Written responses should be 2–4 sentences each unless noted.
+
+1. Three topic labels you think are meaningful, with one sentence for each explaining what the topic seems to be about
+2. One topic label you would rename
+3. Your proposed new label and a short explanation (2–4 sentences) of why — refer to specific topic words or passages
+4. One screenshot from a visualization (any of the four charts)
+5. One sentence explaining what that screenshot shows
+6. One question you would investigate next if you had more time

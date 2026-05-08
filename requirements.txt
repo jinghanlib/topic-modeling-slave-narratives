@@ -1,0 +1,9 @@
+bertopic
+numpy
+openai
+pandas
+plotly
+requests
+scikit-learn
+tiktoken
+umap-learn

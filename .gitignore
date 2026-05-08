@@ -1,0 +1,37 @@
+# Python environment
+.venv/
+__pycache__/
+
+# BagIt archive metadata
+bag-info.txt
+bagit.txt
+manifest-md5.txt
+tagmanifest-md5.txt
+
+# macOS
+.DS_Store
+
+# Quarto cache
+.quarto/
+
+# Numba and matplotlib caches
+.numba_cache/
+.mplconfig/
+
+# Dataset — download from Documenting the American South (https://docsouth.unc.edu/neh/)
+data/
+
+# Earlier output iterations
+outputs/bertopic_sample/
+outputs/bertopic_sample_nomic_sensitive/
+
+# Large binary and model files not needed for the site
+outputs/bertopic_sample_nomic_sensitive_lemmatized/embeddings_ollama_nomic-embed-text.npy
+outputs/bertopic_sample_nomic_sensitive_lemmatized/model
+outputs/bertopic_sample_nomic_sensitive_lemmatized/sample_chunks.csv
+outputs/bertopic_sample_nomic_sensitive_lemmatized/visualizations/
+docs/outputs/bertopic_sample_nomic_sensitive_lemmatized/visualizations/
+
+# Student run outputs
+outputs/my_run/
+outputs/my_run_full/

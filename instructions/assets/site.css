@@ -1,0 +1,361 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: light;
+  --ucr-blue: #003da5;
+  --ucr-gold: #ffb81c;
+  --bg: #f6f8fc;
+  --paper: #ffffff;
+  --ink: #1f2937;
+  --muted: #596579;
+  --line: #d8deea;
+  --accent: var(--ucr-blue);
+  --accent-dark: #002b73;
+  --soft: #eaf1fb;
+  --gold-soft: #fff3d4;
+  --code: #f2f5f9;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.58;
+}
+
+a {
+  color: var(--accent-dark);
+}
+
+.navbar,
+.navbar.navbar-expand-lg {
+  background: var(--ucr-blue) !important;
+  border-bottom: 5px solid var(--ucr-gold);
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.16);
+}
+
+.navbar a,
+.navbar .navbar-brand,
+.navbar .nav-link {
+  color: #fff !important;
+}
+
+.navbar .nav-link.active,
+.navbar .nav-link:hover,
+.navbar .navbar-brand:hover {
+  color: var(--ucr-gold) !important;
+}
+
+#title-block-header {
+  max-width: 1120px;
+  margin: 0 auto 26px;
+  padding: 34px 22px 22px;
+  border-bottom: 1px solid var(--line);
+}
+
+#title-block-header .title {
+  color: var(--ucr-blue);
+  font-weight: 800;
+}
+
+#title-block-header .subtitle {
+  color: var(--muted);
+  font-size: 1.15rem;
+}
+
+.page-columns .content {
+  background: transparent;
+}
+
+.sidebar nav[role="doc-toc"] {
+  border-left: 4px solid var(--ucr-gold);
+  padding-left: 14px;
+}
+
+.sidebar .toc-active {
+  color: var(--ucr-blue) !important;
+  border-left: 2px solid var(--ucr-blue);
+}
+
+.site-header {
+  background: #263231;
+  color: #fffaf0;
+  padding: 36px max(22px, calc((100vw - 1120px) / 2));
+}
+
+.site-header p {
+  max-width: 820px;
+  margin: 10px 0 0;
+  color: #e7ddd0;
+  font-size: 1.08rem;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.site-nav a,
+.button-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 13px;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 6px;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 650;
+}
+
+.button-link {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+  background: var(--soft);
+}
+
+main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 34px 22px 64px;
+}
+
+section {
+  margin: 0 0 38px;
+}
+
+main.content > section,
+main.content > div > section {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 26px;
+  margin: 0 0 26px;
+  box-shadow: 0 1px 4px rgba(0, 38, 89, 0.05);
+}
+
+.paper {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.18;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  letter-spacing: 0;
+}
+
+h2 {
+  margin: 36px 0 16px;
+  padding: 14px 18px;
+  border-left: 8px solid var(--ucr-gold);
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(90deg, var(--soft), rgba(255, 255, 255, 0));
+  color: var(--ucr-blue);
+  font-size: 1.62rem;
+  font-weight: 750;
+}
+
+h3 {
+  margin: 26px 0 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  color: #243f6b;
+  font-size: 1.12rem;
+  font-weight: 700;
+}
+
+p,
+li {
+  max-width: 860px;
+}
+
+.lede {
+  font-size: 1.13rem;
+}
+
+.note {
+  border-left: 4px solid var(--ucr-gold);
+  background: var(--soft);
+  padding: 14px 16px;
+}
+
+code,
+pre {
+  background: var(--code);
+  border-radius: 5px;
+}
+
+code {
+  padding: 2px 5px;
+}
+
+pre {
+  overflow-x: auto;
+  padding: 14px;
+  border: 1px solid var(--line);
+}
+
+.viz-frame {
+  width: 100%;
+  height: 720px;
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 38, 89, 0.08);
+}
+
+.viz-frame.short {
+  height: 560px;
+}
+
+.caption {
+  color: var(--muted);
+  font-size: 0.94rem;
+  margin-top: 8px;
+}
+
+.two-column {
+  columns: 2 260px;
+}
+
+.btn,
+.btn-primary,
+.btn-outline-primary,
+a.btn,
+a.btn-primary,
+a.btn-outline-primary {
+  border-radius: 6px;
+  border: 2px solid var(--ucr-blue);
+  font-weight: 700;
+  margin: 4px 6px 4px 0;
+  background: var(--ucr-blue);
+  color: #fff !important;
+  text-decoration: none;
+}
+
+.btn:hover,
+.btn:focus,
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+a.btn:hover,
+a.btn:focus,
+a.btn-primary:hover,
+a.btn-primary:focus,
+a.btn-outline-primary:hover,
+a.btn-outline-primary:focus {
+  color: #111;
+  background: var(--ucr-gold);
+  border-color: var(--ucr-gold);
+  box-shadow: 0 0 0 3px rgba(255, 184, 28, 0.32);
+}
+
+table {
+  border: 1px solid var(--line);
+  background: #fff;
+}
+
+thead th {
+  background: var(--ucr-blue) !important;
+  color: #fff !important;
+}
+
+tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+.callout {
+  border-radius: 8px;
+}
+
+.callout-note {
+  border-left-color: var(--ucr-gold) !important;
+}
+
+.footer {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 22px 42px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 720px) {
+  .site-header {
+    padding-top: 28px;
+  }
+
+  main {
+    padding-top: 24px;
+  }
+
+  .paper,
+  .card {
+    padding: 18px;
+  }
+
+  h2 {
+    margin-top: 28px;
+    padding: 12px 14px;
+  }
+
+  .viz-frame,
+  .viz-frame.short {
+    height: 520px;
+  }
+}
+
+@media (max-width: 1100px) {
+  #quarto-margin-sidebar {
+    display: none;
+  }
+
+  .page-columns,
+  body.fullcontent:not(.floating):not(.docked) .page-columns,
+  body:not(.floating):not(.docked) .page-columns {
+    display: block;
+  }
+
+  main.content,
+  #title-block-header {
+    width: calc(100% - 32px);
+    max-width: 820px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-wrap: break-word;
+  }
+
+  main.content > section,
+  main.content > div > section {
+    width: 100%;
+    overflow-x: hidden;
+  }
+}

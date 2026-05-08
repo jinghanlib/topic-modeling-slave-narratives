@@ -1,0 +1,388 @@
+---
+title: "Simple Explanation"
+subtitle: "Topic modeling, preprocessing, local models, and interpretation"
+---
+
+## Project Overview
+
+We wanted to look across a group of slave narratives and ask:
+
+- What themes appear across the texts?
+- Which passages seem related to each other?
+- Do themes change across publication dates?
+- Can we make the computer's topic names easier for people to understand?
+
+Instead of reading every document one by one, we used topic modeling. Topic modeling is a way of asking a computer to group passages that seem to discuss similar themes.
+
+This does not replace historical interpretation. It helps us find patterns that we can investigate more carefully.
+
+## Data and Sampling
+
+### The Collection
+
+The full collection has 294 text files.
+
+For testing, we used a reproducible 10% sample:
+
+```text
+29 documents
+sample fraction = 10%
+random seed = 42
+```
+
+The random seed matters because it makes the sample repeatable. If another person uses the same data, same code, and same seed, they should get the same 29 documents.
+
+### Which 10% of the Data We Used
+
+The 29 sampled files were:
+
+```text
+fpn-bruce-bruce.xml
+fpn-hughes-hughes.xml
+fpn-jackson-jackson.xml
+nc-jones85-jones85.xml
+neh-aaron-aaron.xml
+neh-arter-arter.xml
+neh-boxbrown-boxbrown.xml
+neh-bragg-bragg.xml
+neh-brownj-brownj.xml
+neh-bruner-bruner.xml
+neh-charlton-charlton.xml
+neh-detroit-detroit.xml
+neh-hammon-hammon.xml
+neh-hammond-hammond.xml
+neh-henson58-henson58.xml
+neh-hopper-hopper.xml
+neh-iwilliams-iwilliams.xml
+neh-jeter-jeter.xml
+neh-mars-mars.xml
+neh-natlove-natlove.xml
+neh-nicholson-nicholson.xml
+neh-oneal-oneal.xml
+neh-robinsonn-robinson.xml
+neh-scott-scott.xml
+neh-stedman-stedman.xml
+neh-troy-troy.xml
+neh-webb-webb.xml
+neh-weld-weld.xml
+neh-williams-williams.xml
+```
+
+## Data Cleaning and Preprocessing
+
+### Why We Cleaned the Texts
+
+The texts include useful narrative material, but they also include things that can confuse topic modeling, such as image labels, title-page text, chapter headings, and repeated formatting words.
+
+We cleaned the text by:
+
+- removing image markers like `[Cover Image]`
+- removing some frontmatter words like `PREFACE`, `CONTENTS`, and `CHAPTER`
+- removing numbers and extra symbols
+- removing common English stopwords such as `the`, `and`, `of`, and `to`
+- removing collection-specific stopwords such as `page`, `image`, and `chapter`
+
+Cleaning is not neutral. A researcher decides what counts as useful text and what counts as distracting text. Those choices affect the results.
+
+### Chunks
+
+Many of the narratives are long. If we give a whole book to the topic model as one unit, the model may miss smaller themes inside the book.
+
+So we divided each text into smaller pieces called **chunks**.
+
+A chunk is a passage of text. In this project, each chunk was about 750 words, with a small overlap between neighboring chunks.
+
+The overlap helps because an important paragraph might fall near the edge of one chunk. Overlap gives the model a better chance to keep nearby context together.
+
+For the 10% sample, the 29 documents became:
+
+```text
+1,543 chunks
+```
+
+The topic model grouped these chunks, not whole books.
+
+### Tokens and Tokenization
+
+To count words or find important topic words, the computer has to break text into smaller pieces. These pieces are called **tokens**.
+
+Tokens are often similar to words, but not always. A computer may treat `master` and `Master` as different words because of the capital letter. It may split a hyphenated word like `well-known` into two pieces, or handle contractions and older spellings in unexpected ways.
+
+This matters because the topic-word part of BERTopic depends on these text pieces.
+
+For example, without extra cleaning, the model might treat these as separate tokens:
+
+```text
+whip
+whipped
+whipping
+```
+
+That can make a topic label look repetitive.
+
+### Lemmatization
+
+We added lemmatization to reduce related forms to a shared base form:
+
+```text
+whip, whipped, whipping -> whip
+slaves -> slave
+slaveholders -> slaveholder
+preached, preaching -> preach
+```
+
+This made the topic labels easier to read.
+
+## Topic Modeling Compared With Word Counting
+
+Students often ask: why use topic modeling instead of just counting words?
+
+Word counting answers the question: which words appear most often? That is useful, but it does not know whether two passages are discussing the same theme in different language, and it does not group related passages together automatically.
+
+Topic modeling asks a broader question: which passages seem to be about similar themes?
+
+For example, a topic model can group passages about physical punishment even if different passages use different words — `whip`, `flog`, `overseer`, `punishment`, `cruelty`. A word count would list those words separately. Topic modeling tries to discover that they belong to a shared theme.
+
+In our results, that shared theme became **Whipping and Plantation Punishment**.
+
+BERTopic still uses word-like units when it describes topics. After BERTopic groups similar chunks together, it looks for words that are especially important inside each group. The difference is in the order:
+
+- Word counting: count words first, then interpret the list.
+- Topic modeling: group similar passages first, then find important words for each group.
+
+## The BERTopic Pipeline
+
+### Step 1: Turn Text Into Embeddings
+
+An embedding is a list of numbers that represents the meaning of a passage.
+
+The computer cannot directly compare passages the way people do. It needs to turn text into numbers first.
+
+In standard BERTopic, this step is usually done with a sentence-transformer model. In our final local version, we replaced this step with a local embedding model through Ollama:
+
+```text
+nomic-embed-text
+```
+
+Why we replaced it:
+
+- it is free
+- it runs locally
+- it is designed specifically for embeddings
+- it avoids paid API costs
+- it works even though PyTorch GPU support was not available in our environment
+
+### Step 2: Reduce the Dimensions
+
+Each embedding is a list of 768 numbers. That many dimensions are too complex to cluster directly.
+
+BERTopic uses a method called UMAP to compress those numbers into a much smaller set — usually 5 — while trying to keep track of which passages are similar to each other. Think of it as flattening a 3D map into 2D: some detail is lost, but the overall shape is preserved.
+
+### Step 3: Cluster Similar Chunks
+
+After the embeddings are compressed, BERTopic groups similar chunks together using a clustering method called HDBSCAN. It looks for dense regions in the compressed space and treats each region as a topic.
+
+Chunks that do not fit clearly into any region become outliers, assigned to topic `-1`.
+
+### Step 4: Find Important Words for Each Topic
+
+After chunks are grouped into topics, BERTopic looks for words that are especially important in each topic using a scoring method called c-TF-IDF. In short: which words appear much more often in this topic than in the rest of the collection?
+
+We used cleaned and lemmatized text for this step so the topic words would be easier to read.
+
+### Step 5: Give Each Topic a Human-Readable Label
+
+BERTopic can produce topic names from top words, but those names are often mechanical.
+
+For example:
+
+```text
+whip_flog_overseer_tie
+```
+
+So we used a local LLM through Ollama:
+
+```text
+llama3.1
+```
+
+The LLM looked at:
+
+- the topic number
+- the top words for that topic
+- a few representative passages from that topic
+
+Then it wrote a clearer label, such as:
+
+```text
+Whipping and Plantation Punishment
+```
+
+## Topic Words, Labels, and Human Interpretation
+
+Topic words are important evidence. They are shown in:
+
+- `topic_info.csv`
+- `topic_labels_llm.csv`
+- `topic_review_table.csv`
+
+Students should use these words to check whether a topic label makes sense.
+
+Here is a small preview of the topic review table:
+
+| Topic | Label | Chunks | Top Words |
+|---:|---|---:|---|
+| 0 | Whipping and Plantation Punishment | 76 | whip, flog, overseer, tie, plantation |
+| 1 | Limitations of Liberty in the Post-War Era | 66 | government, constitution, liberty, american, war |
+| 2 | Separation from Family and Emotional Trauma | 55 | dice, aunt dice, aunt, mos, riverside |
+| 3 | Slave-led Christian Services and Meetings | 45 | meeting, preach, prayer, spirit, pray |
+
+Students can download the CSV files from the links below. If a file opens in the browser instead of downloading, use **File > Save Page As** or right-click the link and choose **Save Link As**.
+
+```{=html}
+<p>
+  <a class="btn btn-primary" href="../outputs/bertopic_sample_nomic_sensitive_lemmatized/topic_review_table.csv" download>Download topic review table</a>
+  <a class="btn btn-outline-primary" href="../outputs/bertopic_sample_nomic_sensitive_lemmatized/topic_labels_llm.csv" download>Download topic labels</a>
+  <a class="btn btn-outline-primary" href="../outputs/bertopic_sample_nomic_sensitive_lemmatized/topic_info.csv" download>Download topic info</a>
+  <a class="btn btn-outline-primary" href="../outputs/bertopic_sample_nomic_sensitive_lemmatized/topic_assignments.csv" download>Download topic assignments</a>
+</p>
+```
+
+The LLM label is a draft interpretation. It can be replaced or improved by a human reader.
+
+For teaching purposes, some labels were manually revised after reviewing the topic words and representative passages. That manual revision changed only the topic label. It did not move chunks into different topics.
+
+This is a normal part of topic modeling: the computer suggests patterns, and people interpret whether the labels are historically and textually accurate.
+
+## Outliers
+
+Some chunks do not fit clearly into any topic. BERTopic puts those chunks into an outlier group.
+
+In BERTopic, the outlier topic is always:
+
+```text
+topic -1
+```
+
+This is important: topic `0` is not the outlier. Topic `0` is the first regular topic.
+
+In our final sample run, BERTopic found:
+
+```text
+59 non-outlier topics
+277 outlier chunks
+18.0% outliers
+```
+
+An outlier is not necessarily bad. It can mean the passage is unusual, mixed, short on shared vocabulary, or not similar enough to other chunks.
+
+## Example Results
+
+Some final topic labels were:
+
+- Whipping and Plantation Punishment
+- Limitations of Liberty in the Post-War Era
+- Separation from Family and Emotional Trauma
+- Slave-led Christian Services and Meetings
+- Ranch Life and Conflict with Native Americans
+- Treatment by Slaveholders
+- Racial Identity and Prejudice
+- Forced Labor and Overwork in Sugar and Cotton Plantations
+- Traveling by Railroad
+- Booker T. Washington and Tuskegee Institute
+- Slave Markets and Sales
+- Food Rations and Hunger
+
+## Reading the Charts
+
+The charts below are interactive — hover over bars and cells to see exact values, and click legend items to show or hide topics.
+
+### Topic Shares by Publication Decade
+
+The topic trend chart shows the largest topics by publication decade.
+
+```{=html}
+<iframe class="viz-frame" title="Topic shares by publication decade" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/topic_prevalence_grouped_bars.html" loading="lazy"></iframe>
+```
+
+What it suggests in this sample:
+
+- The 1830s are strongly shaped by topics from abolitionist testimony, especially physical punishment and treatment by slaveholders.
+- The 1900s and 1910s show more topics connected to Booker T. Washington, Tuskegee, education, race leadership, churches, and public life.
+- The ranch-life topic appears mainly in the early 1900s because it is strongly connected to Nat Love's narrative.
+
+### Topic-by-Decade Heatmap
+
+The topic-by-decade heatmap shows which topics are concentrated in which publication decades. Darker cells mean more chunks from that topic appear in that decade.
+
+```{=html}
+<iframe class="viz-frame" title="Topic-by-decade heatmap" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/topic_decade_heatmap.html" loading="lazy"></iframe>
+```
+
+What it suggests in this sample:
+
+- Some topics are concentrated in one document or decade, not spread evenly across the whole sample.
+- “Ranch Life and Conflict with Native Americans” is concentrated around the 1900s.
+- “Booker T. Washington and Tuskegee Institute” is concentrated around the 1910s.
+- “Whipping and Plantation Punishment” is concentrated in the 1830s because many chunks come from anti-slavery testimony published in 1839.
+
+### Document-by-Topic Heatmap
+
+The document-by-topic heatmap shows which documents contribute most strongly to each topic.
+
+```{=html}
+<iframe class="viz-frame" title="Document-by-topic heatmap" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/document_topic_heatmap.html" loading="lazy"></iframe>
+```
+
+This matters because a topic can look large because it appears across many documents, or because one long document contributes many chunks.
+
+What it suggests in this sample:
+
+- “Whipping and Plantation Punishment” is heavily influenced by *American Slavery As It Is*.
+- “Ranch Life and Conflict with Native Americans” is heavily influenced by Nat Love's narrative.
+- Booker T. Washington and Tuskegee topics are heavily influenced by *Booker T. Washington, Builder of a Civilization*.
+
+### Sample Documents Timeline
+
+The sample documents timeline shows the publication years of the sampled documents.
+
+```{=html}
+<iframe class="viz-frame short" title="Sample documents timeline" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/sample_documents_timeline.html" loading="lazy"></iframe>
+```
+
+This helps students remember that the time charts are based on publication date, not necessarily the date when narrated events happened.
+
+## How To Interpret the Results
+
+Each topic is a suggested grouping of passages.
+
+A topic label is not a final historical claim. It is a guide.
+
+When interpreting a topic, we should ask:
+
+- What words define this topic?
+- Which passages were assigned to it?
+- Which documents dominate it?
+- Does the label accurately describe the passages?
+- Is this topic meaningful, or is it an artifact of the data?
+- Are two topics really part of the same larger theme?
+
+## Where Human Interpretation Enters
+
+Human interpretation is part of the workflow from the beginning, not only at the end.
+
+People make decisions when they:
+
+- choose which texts belong in the collection
+- decide whether a sample is appropriate
+- decide what to remove during cleaning
+- decide whether words such as names, page labels, or headings are meaningful or distracting
+- choose chunk size and overlap
+- decide whether to use lemmatization
+- choose the embedding model and clustering settings
+- inspect outliers
+- compare topic words with representative passages
+- accept, revise, merge, split, or reject topic labels
+- interpret visualizations in historical context
+
+The model helps organize the material, but it does not remove the need for judgment.

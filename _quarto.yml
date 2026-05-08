@@ -1,0 +1,35 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - index.qmd
+    - instructions/01_simple_explanation.qmd
+    - instructions/02_hands_on_exercise.qmd
+  resources:
+    - outputs/bertopic_sample_nomic_sensitive_lemmatized/topic_review_table.csv
+    - outputs/bertopic_sample_nomic_sensitive_lemmatized/topic_labels_llm.csv
+    - outputs/bertopic_sample_nomic_sensitive_lemmatized/topic_info.csv
+    - outputs/bertopic_sample_nomic_sensitive_lemmatized/topic_assignments.csv
+    - outputs/bertopic_sample_nomic_sensitive_lemmatized/sample_documents.csv
+    - outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/*.html
+    - outputs/bertopic_sample_nomic_sensitive_lemmatized/visualizations/*.html
+
+website:
+  title: "Topic Modeling Slave Narratives"
+  navbar:
+    left:
+      - text: "Overview"
+        href: index.qmd
+      - text: "Simple Explanation"
+        href: instructions/01_simple_explanation.qmd
+      - text: "Hands-On Exercise"
+        href: instructions/02_hands_on_exercise.qmd
+
+format:
+  html:
+    theme: default
+    css: instructions/assets/site.css
+    toc: true
+    toc-depth: 3
+    page-layout: article
+    embed-resources: true
