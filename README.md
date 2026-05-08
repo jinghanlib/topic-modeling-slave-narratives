@@ -20,6 +20,45 @@ The site has two pages: a **Simple Explanation** for reading and understanding t
 
 ---
 
+## For Students: Getting This Repository
+
+### Step 1 — Open a terminal
+
+You will type commands into a terminal window. Here is how to open one:
+
+- **Mac:** Press `Command + Space`, type `Terminal`, and press Enter.
+- **Windows:** Press `Win + R`, type `cmd`, and press Enter. Or search for **PowerShell** in the Start menu.
+
+All commands in this README are typed into that terminal window. Press Enter after each one to run it.
+
+### Step 2 — Download this repository
+
+If you have Git installed, run this in the terminal:
+
+```bash
+git clone https://github.com/jinghanlib/topic-modeling-slave-narratives.git
+```
+
+If you do not have Git, go to the repository page on GitHub, click the green **Code** button, choose **Download ZIP**, then unzip the downloaded file.
+
+### Step 3 — Navigate into the folder
+
+In the terminal, move into the project folder. Replace the path below with wherever you downloaded or unzipped it:
+
+**Mac/Linux:**
+```bash
+cd "/path/to/topic-modeling-slave-narratives"
+```
+
+**Windows (Command Prompt):**
+```
+cd "C:\path\to\topic-modeling-slave-narratives"
+```
+
+All commands in the Hands-On Exercise must be run from inside this folder. If you close and reopen the terminal, run the `cd` command again before continuing.
+
+---
+
 ## Repository Structure
 
 ```
@@ -30,12 +69,12 @@ The site has two pages: a **Simple Explanation** for reading and understanding t
 │   ├── 01_simple_explanation.qmd   # Plain-language guide to the full workflow
 │   ├── 02_hands_on_exercise.qmd    # Step-by-step student exercise
 │   └── assets/
-│       └── site.css                # UC Riverside branded styles
+│       └── site.css                # Site styles
 ├── scripts/
 │   ├── run_bertopic_sample.py      # BERTopic pipeline (cleaning, chunking, embedding, clustering, labeling)
 │   └── visualize_topic_metadata.py # Generates topic_review_table.csv and metadata visualizations
 ├── outputs/
-│   └── bertopic_sample_nomic_sensitive_lemmatized/   # Reference run (do not overwrite)
+│   └── bertopic_sample_nomic_sensitive_lemmatized/   # Reference run — do not overwrite
 │       ├── topic_review_table.csv         # Best starting point: labels, top words, years, documents
 │       ├── topic_labels_llm.csv           # LLM-generated topic labels and descriptions
 │       ├── topic_assignments.csv          # Which chunk was assigned to which topic
@@ -45,30 +84,20 @@ The site has two pages: a **Simple Explanation** for reading and understanding t
 │       ├── metadata_visualizations/       # Publication-year and document-based charts
 │       │   ├── topic_prevalence_grouped_bars.html   # Topic shares by decade (grouped bars)
 │       │   ├── topic_prevalence_by_decade.html      # Topic trends by decade (faceted lines)
-│       │   ├── topic_decade_heatmap.html             # Topics × decades heatmap
-│       │   ├── document_topic_heatmap.html           # Documents × topics heatmap
-│       │   └── sample_documents_timeline.html        # Publication year scatter of sampled documents
+│       │   ├── topic_decade_heatmap.html            # Topics × decades heatmap
+│       │   ├── document_topic_heatmap.html          # Documents × topics heatmap
+│       │   └── sample_documents_timeline.html       # Publication year scatter of sampled documents
 │       └── visualizations/                # BERTopic built-in charts
 │           ├── topics.html               # 2D topic cluster map
 │           ├── topic_barchart.html       # Top words per topic
 │           ├── topic_hierarchy.html      # Hierarchical topic clustering
 │           └── topics_over_time.html     # Topic prevalence as stacked area chart
-├── docs/                            # Rendered Quarto site served by GitHub Pages
+├── docs/                            # Rendered site served by GitHub Pages
 ├── requirements.txt
 └── README.md
 ```
 
-### What is and is not in the repository
-
-**Included:** all source `.qmd` files, scripts, reference CSV outputs, all 9 visualization HTML files, and the rendered `docs/` site.
-
-**Excluded from the repository:**
-- `data/` — the corpus must be downloaded from Documenting the American South (see below)
-- `outputs/.../embeddings_ollama_nomic-embed-text.npy` — embedding cache, regenerated automatically on re-run
-- `outputs/.../model/` — serialized BERTopic model, not needed for the site
-- `outputs/.../sample_chunks.csv` — large intermediate file, generated when the pipeline runs
-- `outputs/.../visualizations/documents.html` — ~11 MB due to embedded raw embedding vectors
-- `outputs/my_run/` — students write their own outputs here; not tracked
+When you run the pipeline yourself, your results will be written to `outputs/my_run/`, keeping them separate from the reference outputs above.
 
 ---
 
@@ -93,28 +122,9 @@ data/
 
 ## Running the Pipeline
 
-Students write their results to `outputs/my_run/` to keep them separate from the reference outputs in `outputs/bertopic_sample_nomic_sensitive_lemmatized/`.
+Full step-by-step instructions, including installing Python, Ollama, and the required packages, are on the [Hands-On Exercise](https://jinghanlib.github.io/topic-modeling-slave-narratives/instructions/02_hands_on_exercise.html) page.
 
-### Requirements
-
-- Python 3.11+
-- [Ollama](https://ollama.com/) with two local models:
-
-```bash
-ollama pull nomic-embed-text
-ollama pull llama3.1
-```
-
-### Setup
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate        # Mac/Linux
-# .venv\Scripts\activate         # Windows (Command Prompt)
-
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
-```
+The commands below assume you have completed that setup and your terminal is inside the project folder.
 
 ### Run the 10% sample
 
