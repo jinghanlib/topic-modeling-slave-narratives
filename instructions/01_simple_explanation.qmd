@@ -281,7 +281,7 @@ All charts are interactive — hover over bars and cells to see exact values, an
 This chart shows what share of the top 8 topics appears in each publication decade. Each bar represents one topic's share of all modeled chunks published in that decade.
 
 ```{=html}
-<iframe class=”viz-frame” title=”Topic shares by publication decade” src=”../outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/topic_prevalence_grouped_bars.html” loading=”lazy”></iframe>
+<iframe data-external="1" class="viz-frame" title="Topic shares by publication decade" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/topic_prevalence_grouped_bars.html" loading="lazy"></iframe>
 ```
 
 What it suggests in this sample:
@@ -295,7 +295,7 @@ What it suggests in this sample:
 This chart shows the same topic-by-decade data as individual line charts, one panel per topic. It makes it easier to see the shape of a single topic's trend across time without other topics in the way.
 
 ```{=html}
-<iframe class=”viz-frame” title=”Topic trends by decade (faceted)” src=”../outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/topic_prevalence_by_decade.html” loading=”lazy”></iframe>
+<iframe data-external="1" class="viz-frame" title="Topic trends by decade (faceted)" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/topic_prevalence_by_decade.html" loading="lazy"></iframe>
 ```
 
 Use this alongside the grouped bar chart to compare how individual topics rise or fall across decades.
@@ -305,7 +305,7 @@ Use this alongside the grouped bar chart to compare how individual topics rise o
 This heatmap shows which topics concentrate in which publication decades. Darker cells mean more chunks from that topic appear in that decade. It shows concentration at a glance across all top topics simultaneously.
 
 ```{=html}
-<iframe class=”viz-frame” title=”Topic-by-decade heatmap” src=”../outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/topic_decade_heatmap.html” loading=”lazy”></iframe>
+<iframe data-external="1" class="viz-frame" title="Topic-by-decade heatmap" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/topic_decade_heatmap.html" loading="lazy"></iframe>
 ```
 
 What it suggests in this sample:
@@ -320,7 +320,7 @@ What it suggests in this sample:
 This heatmap shows which documents contribute most strongly to each topic. A topic can look large because it appears across many documents, or because one long document contributes many chunks. This chart tells you which.
 
 ```{=html}
-<iframe class=”viz-frame” title=”Document-by-topic heatmap” src=”../outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/document_topic_heatmap.html” loading=”lazy”></iframe>
+<iframe data-external="1" class="viz-frame" title="Document-by-topic heatmap" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/document_topic_heatmap.html" loading="lazy"></iframe>
 ```
 
 What it suggests in this sample:
@@ -334,7 +334,7 @@ What it suggests in this sample:
 This chart shows the publication years of the 29 sampled documents. Each point is one document. Use it to see how the sample is distributed across time and whether certain decades are over- or under-represented.
 
 ```{=html}
-<iframe class=”viz-frame short” title=”Sample documents timeline” src=”../outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/sample_documents_timeline.html” loading=”lazy”></iframe>
+<iframe data-external="1" class="viz-frame short" title="Sample documents timeline" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/sample_documents_timeline.html" loading="lazy"></iframe>
 ```
 
 ### Topic Prevalence Over Time (Area Chart)
@@ -342,7 +342,7 @@ This chart shows the publication years of the 29 sampled documents. Each point i
 This chart shows topic prevalence as a stacked area chart across publication decades. Each colored band represents one topic. It gives an overview of how the overall composition of topics shifts across the sample's time span.
 
 ```{=html}
-<iframe class=”viz-frame” title=”Topic prevalence over time” src=”../outputs/bertopic_sample_nomic_sensitive_lemmatized/visualizations/topics_over_time.html” loading=”lazy”></iframe>
+<iframe data-external="1" class="viz-frame" title="Topic prevalence over time" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/visualizations/topics_over_time.html" loading="lazy"></iframe>
 ```
 
 ### Topic Word Bars
@@ -350,7 +350,7 @@ This chart shows topic prevalence as a stacked area chart across publication dec
 This chart shows the top words for every topic as horizontal bar charts, one panel per topic. The bar length represents how distinctive each word is to that topic compared with the rest of the collection.
 
 ```{=html}
-<iframe class=”viz-frame” title=”Topic word bars” src=”../outputs/bertopic_sample_nomic_sensitive_lemmatized/visualizations/topic_barchart.html” loading=”lazy”></iframe>
+<iframe data-external="1" class="viz-frame" title="Topic word bars" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/visualizations/topic_barchart.html" loading="lazy"></iframe>
 ```
 
 Use this to check whether the top words for a topic actually support its label, or whether the label needs revision.
@@ -360,7 +360,7 @@ Use this to check whether the top words for a topic actually support its label, 
 This chart shows a hierarchical clustering of topics — which topics are most similar to each other and could potentially be merged. Topics that branch close together share more vocabulary and meaning than topics that branch far apart.
 
 ```{=html}
-<iframe class=”viz-frame” title=”Topic hierarchy” src=”../outputs/bertopic_sample_nomic_sensitive_lemmatized/visualizations/topic_hierarchy.html” loading=”lazy”></iframe>
+<iframe data-external="1" class="viz-frame" title="Topic hierarchy" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/visualizations/topic_hierarchy.html" loading="lazy"></iframe>
 ```
 
 ### Topic Cluster Map
@@ -368,7 +368,7 @@ This chart shows a hierarchical clustering of topics — which topics are most s
 This chart shows all 59 topics plotted in a 2D space based on their embedding positions. Topics that appear close together are semantically similar. Each bubble represents one topic, and the size reflects how many chunks were assigned to it.
 
 ```{=html}
-<iframe class=”viz-frame” title=”Topic cluster map” src=”../outputs/bertopic_sample_nomic_sensitive_lemmatized/visualizations/topics.html” loading=”lazy”></iframe>
+<iframe data-external="1" class="viz-frame" title="Topic cluster map" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/visualizations/topics.html" loading="lazy"></iframe>
 ```
 
 ## How To Interpret the Results
