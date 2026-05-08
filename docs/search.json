@@ -32,7 +32,7 @@
     "href": "instructions/02_hands_on_exercise.html#get-the-github-repository",
     "title": "Hands-On Exercise",
     "section": "Get the GitHub Repository",
-    "text": "Get the GitHub Repository\nDownload or clone the GitHub repository that contains the scripts.\nIf using Git, run:\ngit clone REPOSITORY_URL\ncd REPOSITORY_FOLDER_NAME\nReplace REPOSITORY_URL and REPOSITORY_FOLDER_NAME with the actual address and folder name provided by your instructor.\nIf not using Git, click the green Code button on GitHub, choose Download ZIP, unzip it, and open the folder.\nThen copy or move the downloaded dataset’s data folder into the repository folder.\nYour project should look like this:\nproject folder\n  data\n    texts\n    xml\n    toc.csv\n  scripts\n    run_bertopic_sample.py\n    visualize_topic_metadata.py\n  instructions\n  outputs\n  requirements.txt"
+    "text": "Get the GitHub Repository\nThe scripts and reference outputs are in this GitHub repository:\nhttps://github.com/jinghanlib/topic-modeling-slave-narratives\nOption A — Download as ZIP (no Git required):\nGo to the repository page, click the green Code button, choose Download ZIP, and unzip the downloaded file somewhere on your computer.\nOption B — Clone with Git:\nIf you have Git installed, open a terminal and run:\ngit clone https://github.com/jinghanlib/topic-modeling-slave-narratives.git\nThen copy or move the downloaded dataset’s data folder into the repository folder.\nYour project folder should look like this:\ntopic-modeling-slave-narratives/\n  data/\n    texts/\n    xml/\n    toc.csv\n  scripts/\n    run_bertopic_sample.py\n    visualize_topic_metadata.py\n  instructions/\n  outputs/\n  requirements.txt"
   },
   {
     "objectID": "instructions/02_hands_on_exercise.html#local-compute-what-it-means",
@@ -46,7 +46,7 @@
     "href": "instructions/02_hands_on_exercise.html#open-a-terminal",
     "title": "Hands-On Exercise",
     "section": "Open a Terminal",
-    "text": "Open a Terminal\nSeveral steps below require typing commands into a terminal (also called a command line or shell). Here is how to open one:\nMac: Press Command + Space to open Spotlight, type Terminal, and press Enter.\nWindows: Press Win + R, type cmd, and press Enter. Or search for PowerShell in the Start menu.\nOnce open, you should see a blinking cursor where you can type commands. You do not need to understand everything about the terminal — just type the commands exactly as shown and press Enter to run them."
+    "text": "Open a Terminal\nSeveral steps below require typing commands into a terminal (also called a command line or shell).\nThe easiest way is to right-click the project folder itself:\n\nMac: Right-click the folder in Finder and choose New Terminal at Folder. If you do not see that option, go to System Settings → Privacy & Security → Developer Tools and enable Terminal.\nWindows: Hold Shift and right-click the folder in File Explorer, then choose Open PowerShell window here or Open Command window here.\n\nThis opens a terminal already pointed at the right location. You do not need to type any folder path. If you close and reopen the terminal later, right-click the folder again before running any commands."
   },
   {
     "objectID": "instructions/02_hands_on_exercise.html#install-the-tools",
@@ -60,7 +60,7 @@
     "href": "instructions/02_hands_on_exercise.html#set-up-the-python-environment",
     "title": "Hands-On Exercise",
     "section": "Set Up the Python Environment",
-    "text": "Set Up the Python Environment\nIn Terminal, move into the project folder.\nExample:\ncd \"/path/to/your/project-folder\"\nCreate a Python environment:\npython3 -m venv .venv\nActivate it:\nsource .venv/bin/activate\n\nWindows note: On Windows, use this command instead:\n.venv\\Scripts\\activate\n\nInstall packages:\npython -m pip install --upgrade pip\npython -m pip install -r requirements.txt\nThis may take several minutes."
+    "text": "Set Up the Python Environment\nCreate a Python environment:\npython3 -m venv .venv\nActivate it:\nsource .venv/bin/activate\n\nWindows note: On Windows, use this command instead:\n.venv\\Scripts\\activate\n\nInstall packages:\npython -m pip install --upgrade pip\npython -m pip install -r requirements.txt\nThis may take several minutes."
   },
   {
     "objectID": "instructions/02_hands_on_exercise.html#run-the-10-topic-model",
@@ -145,13 +145,6 @@
     "title": "Hands-On Exercise",
     "section": "Common Problems",
     "text": "Common Problems\n\nollama command not found\nOllama is not installed, or Terminal cannot find it. Install Ollama, then close and reopen Terminal.\n\n\nPython says packages are missing\nMake sure the virtual environment is active.\nMac or Linux:\nsource .venv/bin/activate\nWindows (Command Prompt):\n.venv\\Scripts\\activate\nThen reinstall packages:\npython -m pip install -r requirements.txt\n\n\nOllama connection error\nOpen the Ollama app, or run:\nollama list\nIf Ollama is working, it should show installed models.\n\n\nThe run is slow\nThat is normal. The first run creates embeddings. Later runs reuse them.\n\n\nA topic label looks wrong\nThat is also normal. Topic labels are suggestions.\nOpen topic_review_table.csv, topic_info.csv, and topic_assignments.csv to inspect the actual words and passages behind the label."
-  },
-  {
-    "objectID": "instructions/02_hands_on_exercise.html#what-to-submit",
-    "href": "instructions/02_hands_on_exercise.html#what-to-submit",
-    "title": "Hands-On Exercise",
-    "section": "What To Submit",
-    "text": "What To Submit\nSubmit the following. Written responses should be 2–4 sentences each unless noted.\n\nThree topic labels you think are meaningful, with one sentence for each explaining what the topic seems to be about\nOne topic label you would rename\nYour proposed new label and a short explanation (2–4 sentences) of why — refer to specific topic words or passages\nOne screenshot from a visualization (any of the four charts)\nOne sentence explaining what that screenshot shows\nOne question you would investigate next if you had more time"
   },
   {
     "objectID": "index.html",

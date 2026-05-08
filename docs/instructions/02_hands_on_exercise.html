@@ -4428,7 +4428,6 @@ overflow-x: hidden;
   <li><a href="#the-run-is-slow" id="toc-the-run-is-slow" class="nav-link" data-scroll-target="#the-run-is-slow">The run is slow</a></li>
   <li><a href="#a-topic-label-looks-wrong" id="toc-a-topic-label-looks-wrong" class="nav-link" data-scroll-target="#a-topic-label-looks-wrong">A topic label looks wrong</a></li>
   </ul></li>
-  <li><a href="#what-to-submit" id="toc-what-to-submit" class="nav-link" data-scroll-target="#what-to-submit">What To Submit</a></li>
   </ul>
 </nav>
     </div>
@@ -4499,24 +4498,25 @@ data/readme.txt</code></pre>
 </section>
 <section id="get-the-github-repository" class="level2">
 <h2 class="anchored" data-anchor-id="get-the-github-repository">Get the GitHub Repository</h2>
-<p>Download or clone the GitHub repository that contains the scripts.</p>
-<p>If using Git, run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone REPOSITORY_URL</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> REPOSITORY_FOLDER_NAME</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Replace <code>REPOSITORY_URL</code> and <code>REPOSITORY_FOLDER_NAME</code> with the actual address and folder name provided by your instructor.</p>
-<p>If not using Git, click the green <strong>Code</strong> button on GitHub, choose <strong>Download ZIP</strong>, unzip it, and open the folder.</p>
+<p>The scripts and reference outputs are in this GitHub repository:</p>
+<pre class="text"><code>https://github.com/jinghanlib/topic-modeling-slave-narratives</code></pre>
+<p><strong>Option A — Download as ZIP (no Git required):</strong></p>
+<p>Go to the repository page, click the green <strong>Code</strong> button, choose <strong>Download ZIP</strong>, and unzip the downloaded file somewhere on your computer.</p>
+<p><strong>Option B — Clone with Git:</strong></p>
+<p>If you have Git installed, open a terminal and run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/jinghanlib/topic-modeling-slave-narratives.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Then copy or move the downloaded dataset’s <code>data</code> folder into the repository folder.</p>
-<p>Your project should look like this:</p>
-<pre class="text"><code>project folder
-  data
-    texts
-    xml
+<p>Your project folder should look like this:</p>
+<pre class="text"><code>topic-modeling-slave-narratives/
+  data/
+    texts/
+    xml/
     toc.csv
-  scripts
+  scripts/
     run_bertopic_sample.py
     visualize_topic_metadata.py
-  instructions
-  outputs
+  instructions/
+  outputs/
   requirements.txt</code></pre>
 </section>
 <section id="local-compute-what-it-means" class="level2">
@@ -4542,10 +4542,13 @@ full collection: much longer, possibly hours</code></pre>
 </section>
 <section id="open-a-terminal" class="level2">
 <h2 class="anchored" data-anchor-id="open-a-terminal">Open a Terminal</h2>
-<p>Several steps below require typing commands into a terminal (also called a command line or shell). Here is how to open one:</p>
-<p><strong>Mac:</strong> Press <code>Command + Space</code> to open Spotlight, type <code>Terminal</code>, and press Enter.</p>
-<p><strong>Windows:</strong> Press <code>Win + R</code>, type <code>cmd</code>, and press Enter. Or search for <strong>PowerShell</strong> in the Start menu.</p>
-<p>Once open, you should see a blinking cursor where you can type commands. You do not need to understand everything about the terminal — just type the commands exactly as shown and press Enter to run them.</p>
+<p>Several steps below require typing commands into a terminal (also called a command line or shell).</p>
+<p>The easiest way is to right-click the project folder itself:</p>
+<ul>
+<li><strong>Mac:</strong> Right-click the folder in Finder and choose <strong>New Terminal at Folder</strong>. If you do not see that option, go to System Settings → Privacy &amp; Security → Developer Tools and enable Terminal.</li>
+<li><strong>Windows:</strong> Hold <strong>Shift</strong> and right-click the folder in File Explorer, then choose <strong>Open PowerShell window here</strong> or <strong>Open Command window here</strong>.</li>
+</ul>
+<p>This opens a terminal already pointed at the right location. You do not need to type any folder path. If you close and reopen the terminal later, right-click the folder again before running any commands.</p>
 </section>
 <section id="install-the-tools" class="level2">
 <h2 class="anchored" data-anchor-id="install-the-tools">Install the Tools</h2>
@@ -4555,7 +4558,7 @@ full collection: much longer, possibly hours</code></pre>
 <pre class="text"><code>https://www.python.org/downloads/</code></pre>
 <p>Use Python 3.11 or newer.</p>
 <p>To check Python, open a terminal and run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If it prints a version number, Python is installed.</p>
 <blockquote class="blockquote">
 <p><strong>Windows note:</strong> If <code>python3 --version</code> gives an error, try <code>python --version</code> instead. Windows often uses <code>python</code> rather than <code>python3</code>.</p>
@@ -4566,8 +4569,8 @@ full collection: much longer, possibly hours</code></pre>
 <p>Download Ollama from:</p>
 <pre class="text"><code>https://ollama.com/</code></pre>
 <p>Then open Terminal and run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ollama</span> pull nomic-embed-text</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ollama</span> pull llama3.1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ollama</span> pull nomic-embed-text</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ollama</span> pull llama3.1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>What these models do:</p>
 <ul>
 <li><code>nomic-embed-text</code> turns passages into numerical meaning representations</li>
@@ -4578,9 +4581,6 @@ full collection: much longer, possibly hours</code></pre>
 </section>
 <section id="set-up-the-python-environment" class="level2">
 <h2 class="anchored" data-anchor-id="set-up-the-python-environment">Set Up the Python Environment</h2>
-<p>In Terminal, move into the project folder.</p>
-<p>Example:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">&quot;/path/to/your/project-folder&quot;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Create a Python environment:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv .venv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Activate it:</p>
@@ -4971,21 +4971,9 @@ Topic 1 = second regular topic</code></pre>
 <h3 class="anchored" data-anchor-id="a-topic-label-looks-wrong">A topic label looks wrong</h3>
 <p>That is also normal. Topic labels are suggestions.</p>
 <p>Open <code>topic_review_table.csv</code>, <code>topic_info.csv</code>, and <code>topic_assignments.csv</code> to inspect the actual words and passages behind the label.</p>
-</section>
-</section>
-<section id="what-to-submit" class="level2">
-<h2 class="anchored" data-anchor-id="what-to-submit">What To Submit</h2>
-<p>Submit the following. Written responses should be 2–4 sentences each unless noted.</p>
-<ol type="1">
-<li>Three topic labels you think are meaningful, with one sentence for each explaining what the topic seems to be about</li>
-<li>One topic label you would rename</li>
-<li>Your proposed new label and a short explanation (2–4 sentences) of why — refer to specific topic words or passages</li>
-<li>One screenshot from a visualization (any of the four charts)</li>
-<li>One sentence explaining what that screenshot shows</li>
-<li>One question you would investigate next if you had more time</li>
-</ol>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

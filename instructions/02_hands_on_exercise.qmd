@@ -66,34 +66,39 @@ The scripts expect the dataset's `data` folder to be inside the same main projec
 
 ## Get the GitHub Repository
 
-Download or clone the GitHub repository that contains the scripts.
+The scripts and reference outputs are in this GitHub repository:
 
-If using Git, run:
-
-```bash
-git clone REPOSITORY_URL
-cd REPOSITORY_FOLDER_NAME
+```text
+https://github.com/jinghanlib/topic-modeling-slave-narratives
 ```
 
-Replace `REPOSITORY_URL` and `REPOSITORY_FOLDER_NAME` with the actual address and folder name provided by your instructor.
+**Option A — Download as ZIP (no Git required):**
 
-If not using Git, click the green **Code** button on GitHub, choose **Download ZIP**, unzip it, and open the folder.
+Go to the repository page, click the green **Code** button, choose **Download ZIP**, and unzip the downloaded file somewhere on your computer.
+
+**Option B — Clone with Git:**
+
+If you have Git installed, open a terminal and run:
+
+```bash
+git clone https://github.com/jinghanlib/topic-modeling-slave-narratives.git
+```
 
 Then copy or move the downloaded dataset's `data` folder into the repository folder.
 
-Your project should look like this:
+Your project folder should look like this:
 
 ```text
-project folder
-  data
-    texts
-    xml
+topic-modeling-slave-narratives/
+  data/
+    texts/
+    xml/
     toc.csv
-  scripts
+  scripts/
     run_bertopic_sample.py
     visualize_topic_metadata.py
-  instructions
-  outputs
+  instructions/
+  outputs/
   requirements.txt
 ```
 
@@ -129,13 +134,14 @@ Times vary by computer.
 
 ## Open a Terminal
 
-Several steps below require typing commands into a terminal (also called a command line or shell). Here is how to open one:
+Several steps below require typing commands into a terminal (also called a command line or shell).
 
-**Mac:** Press `Command + Space` to open Spotlight, type `Terminal`, and press Enter.
+The easiest way is to right-click the project folder itself:
 
-**Windows:** Press `Win + R`, type `cmd`, and press Enter. Or search for **PowerShell** in the Start menu.
+- **Mac:** Right-click the folder in Finder and choose **New Terminal at Folder**. If you do not see that option, go to System Settings → Privacy & Security → Developer Tools and enable Terminal.
+- **Windows:** Hold **Shift** and right-click the folder in File Explorer, then choose **Open PowerShell window here** or **Open Command window here**.
 
-Once open, you should see a blinking cursor where you can type commands. You do not need to understand everything about the terminal — just type the commands exactly as shown and press Enter to run them.
+This opens a terminal already pointed at the right location. You do not need to type any folder path. If you close and reopen the terminal later, right-click the folder again before running any commands.
 
 ## Install the Tools
 
@@ -182,14 +188,6 @@ What these models do:
 These models run locally. They are not uploaded to a paid service.
 
 ## Set Up the Python Environment
-
-In Terminal, move into the project folder.
-
-Example:
-
-```bash
-cd "/path/to/your/project-folder"
-```
 
 Create a Python environment:
 
@@ -617,13 +615,3 @@ That is also normal. Topic labels are suggestions.
 
 Open `topic_review_table.csv`, `topic_info.csv`, and `topic_assignments.csv` to inspect the actual words and passages behind the label.
 
-## What To Submit
-
-Submit the following. Written responses should be 2–4 sentences each unless noted.
-
-1. Three topic labels you think are meaningful, with one sentence for each explaining what the topic seems to be about
-2. One topic label you would rename
-3. Your proposed new label and a short explanation (2–4 sentences) of why — refer to specific topic words or passages
-4. One screenshot from a visualization (any of the four charts)
-5. One sentence explaining what that screenshot shows
-6. One question you would investigate next if you had more time
