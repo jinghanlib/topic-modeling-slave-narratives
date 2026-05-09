@@ -97,7 +97,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-6a09854ecb2bf3fee2650c33be0639f0.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-4b6e157b04ca61d23880eab84f0090d5.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -461,14 +461,15 @@
 <div>
 <p></p><figure class=""><p></p>
 <div>
-<pre class="mermaid mermaid-js">flowchart LR
-    A["Raw texts\n294 narratives"] --&gt; B["Clean &amp; chunk\n1,543 passages"]
-    B --&gt; C["Embed\nnomic-embed-text\n768 numbers"]
-    C --&gt; D["Reduce dims\nUMAP\n768 → 5"]
-    D --&gt; E["Cluster\nHDBSCAN\n59 topics"]
-    E --&gt; F["Topic words\nc-TF-IDF"]
-    F --&gt; G["Label\nllama3.1"]
-    G --&gt; H["Results\nCSVs + charts"]
+<pre class="mermaid mermaid-js">%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '20px', 'fontFamily': 'ui-sans-serif, system-ui, sans-serif', 'primaryColor': '#eaf1fb', 'primaryBorderColor': '#003da5', 'primaryTextColor': '#1f2937', 'lineColor': '#003da5'}}}%%
+flowchart LR
+    A["Raw texts"] --&gt; B["Clean &amp; chunk"]
+    B --&gt; C["Embed"]
+    C --&gt; D["Reduce dims"]
+    D --&gt; E["Cluster"]
+    E --&gt; F["Topic words"]
+    F --&gt; G["Label"]
+    G --&gt; H["Results"]
 </pre>
 </div>
 <p></p></figure><p></p>

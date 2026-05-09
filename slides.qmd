@@ -189,14 +189,15 @@ Without lemmatization, the model might treat "whip" and "whipping" as separate s
 ## Pipeline Overview
 
 ```{mermaid}
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '20px', 'fontFamily': 'ui-sans-serif, system-ui, sans-serif', 'primaryColor': '#eaf1fb', 'primaryBorderColor': '#003da5', 'primaryTextColor': '#1f2937', 'lineColor': '#003da5'}}}%%
 flowchart LR
-    A["Raw texts\n294 narratives"] --> B["Clean & chunk\n1,543 passages"]
-    B --> C["Embed\nnomic-embed-text\n768 numbers"]
-    C --> D["Reduce dims\nUMAP\n768 → 5"]
-    D --> E["Cluster\nHDBSCAN\n59 topics"]
-    E --> F["Topic words\nc-TF-IDF"]
-    F --> G["Label\nllama3.1"]
-    G --> H["Results\nCSVs + charts"]
+    A["Raw texts"] --> B["Clean & chunk"]
+    B --> C["Embed"]
+    C --> D["Reduce dims"]
+    D --> E["Cluster"]
+    E --> F["Topic words"]
+    F --> G["Label"]
+    G --> H["Results"]
 ```
 
 ::: {.notes}

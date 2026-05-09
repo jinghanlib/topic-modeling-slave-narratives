@@ -87,9 +87,18 @@ $selection-bg: #ffb81c !default;
   background: #f0f4f8;
 }
 
-/* Mermaid diagrams */
+/* Mermaid diagrams — force full slide width */
 .reveal .mermaid {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.reveal .mermaid svg {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
 }
 
 /* Code blocks */
