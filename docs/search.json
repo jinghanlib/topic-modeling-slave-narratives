@@ -1,5 +1,292 @@
 [
   {
+    "objectID": "slides.html#what-we-set-out-to-do",
+    "href": "slides.html#what-we-set-out-to-do",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "What We Set Out to Do",
+    "text": "What We Set Out to Do\n\nWhat themes appear across the texts?\nWhich passages seem related to each other?\nDo themes change across publication dates?\nCan we make the computer’s topic names readable?\n\n\nThese are genuine research questions, not just exercises. The goal is to explore a large body of texts that would take years to read in full, and find patterns worth investigating more carefully. Topic modeling does not answer these questions — it surfaces candidates for human interpretation."
+  },
+  {
+    "objectID": "slides.html#north-american-slave-narratives",
+    "href": "slides.html#north-american-slave-narratives",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "North American Slave Narratives",
+    "text": "North American Slave Narratives\n\n294 texts from Documenting the American South, University of North Carolina\nFirst-person accounts, abolitionist testimonies, autobiographies\nPublished across more than a century: 1770s–1940s\nFull texts in plain text and XML\n\n\nFor this exercise: a reproducible 10% sample — 29 documents, same seed each time.\n\nThis is one of the most significant digitized collections of slave narratives. The range of voices, styles, and historical moments is enormous. The 10% sample is designed to run quickly on a student laptop while still producing interpretable results."
+  },
+  {
+    "objectID": "slides.html#why-sample",
+    "href": "slides.html#why-sample",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "Why Sample?",
+    "text": "Why Sample?\n\n\nFull collection\n\n294 documents\nPossibly thousands of chunks\nHours to embed and cluster\nNeeds a powerful machine\n\n\n10% sample\n\n29 documents → 1,543 chunks\n5–15 minutes on a modern laptop\nSame pipeline, same outputs\nReproducible with seed = 42\n\n\n\nThe seed matters because it makes the sample repeatable. If two students use the same code and seed, they get the same 29 documents. This makes it possible to compare results across the class."
+  },
+  {
+    "objectID": "slides.html#two-approaches",
+    "href": "slides.html#two-approaches",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "Two Approaches",
+    "text": "Two Approaches\n\n\nWord counting\n\nCounts how often each word appears\nTreats every passage independently\nLists whip, flog, punishment separately\nAnswers: which words are most frequent?\n\n\nTopic modeling\n\nGroups passages by shared meaning\nRecognizes related passages even with different words\nGroups whip, flog, overseer, punishment as one theme\nAnswers: which passages discuss similar things?\n\n\n\nA concordance or word frequency list is useful, but it treats each word in isolation. Topic modeling captures something richer — which passages belong together thematically, even when they use different vocabulary."
+  },
+  {
+    "objectID": "slides.html#example-the-punishment-theme",
+    "href": "slides.html#example-the-punishment-theme",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "Example — The Punishment Theme",
+    "text": "Example — The Punishment Theme\nA word count would list these words separately:\nwhip · flog · overseer · punishment · cruelty · tie · plantation\n\nTopic modeling groups the passages that use these words together into one topic:\n\nTopic 0: Whipping and Plantation Punishment\n\n\nThis is the key advantage. The model doesn’t just count words — it identifies that passages using these different words are discussing the same theme. A human reader would recognize this immediately; topic modeling lets us do it at scale across hundreds of texts."
+  },
+  {
+    "objectID": "slides.html#cleaning-every-choice-is-a-research-decision",
+    "href": "slides.html#cleaning-every-choice-is-a-research-decision",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "Cleaning — Every Choice Is a Research Decision",
+    "text": "Cleaning — Every Choice Is a Research Decision\n\nRemove image markers like [Cover Image]\nRemove frontmatter words: PREFACE, CONTENTS, CHAPTER\nRemove numbers and symbols\nRemove common English stopwords: the, and, of, to\nRemove collection-specific words: page, image, chapter\n\n\n\nWhat we keep is as important as what we remove.\n\n\nCleaning is not a neutral technical step. Every decision about what to keep or discard reflects a judgment about what counts as meaningful text. If we removed proper names, we would lose information about which slaveholders appear most often. If we kept page headers, they might become their own spurious “topic.”"
+  },
+  {
+    "objectID": "slides.html#chunking",
+    "href": "slides.html#chunking",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "Chunking",
+    "text": "Chunking\nLong narratives contain many different themes. Giving a whole narrative to the model as one unit loses that internal variation.\n\nWe divided each text into chunks:\n\nAbout 750 words per chunk\nSmall overlap between neighboring chunks — so no passage falls between two chunks\n29 documents → 1,543 chunks\n\nThe topic model grouped these chunks, not whole narratives.\n\nThe overlap is important. If a significant passage falls right at the boundary between two chunks, without overlap it might be split in a way that weakens the signal. The overlap gives the model a better chance to keep related context together."
+  },
+  {
+    "objectID": "slides.html#tokenization-and-lemmatization",
+    "href": "slides.html#tokenization-and-lemmatization",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "Tokenization and Lemmatization",
+    "text": "Tokenization and Lemmatization\nThese two steps standardize how words are represented:\n\nTokenization — breaking text into individual units\n\nMaster and master may be treated as different words\nHyphenated or contracted words may split unexpectedly\n\n\n\nLemmatization — reducing variants to a shared base form\nwhip, whipped, whipping  →  whip\nslaves                   →  slave\npreached, preaching      →  preach\nslaveholders             →  slaveholder\n\n\nBoth are choices made by the researcher.\n\nWithout lemmatization, the model might treat “whip” and “whipping” as separate signals, weakening the punishment topic. With lemmatization, variants collapse into a single form, making topic words easier to read and the topics easier to name."
+  },
+  {
+    "objectID": "slides.html#pipeline-overview",
+    "href": "slides.html#pipeline-overview",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "Pipeline Overview",
+    "text": "Pipeline Overview\n\n\n\n\n\nflowchart LR\n    A[\"Raw texts\\n294 narratives\"] --&gt; B[\"Clean & chunk\\n1,543 passages\"]\n    B --&gt; C[\"Embed\\nnomic-embed-text\\n768 numbers\"]\n    C --&gt; D[\"Reduce dims\\nUMAP\\n768 → 5\"]\n    D --&gt; E[\"Cluster\\nHDBSCAN\\n59 topics\"]\n    E --&gt; F[\"Topic words\\nc-TF-IDF\"]\n    F --&gt; G[\"Label\\nllama3.1\"]\n    G --&gt; H[\"Results\\nCSVs + charts\"]\n\n\n\n\n\n\n\nWalk through the diagram left to right. Each step feeds the next. The embedding step is the most computationally intensive — converting 1,543 chunks into 768-dimensional vectors. UMAP and HDBSCAN are fast once embeddings exist. The labeling step calls the local LLM once per topic."
+  },
+  {
+    "objectID": "slides.html#step-1-embeddings",
+    "href": "slides.html#step-1-embeddings",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "Step 1 — Embeddings",
+    "text": "Step 1 — Embeddings\nAn embedding is a list of 768 numbers representing the meaning of a passage.\n\n\nPassages with similar meanings get similar numbers — even when they use different words.\n\n\n\nTwo passages about being sold away from family → similar number lists Two passages about completely different subjects → very different number lists\n\n\nWe used nomic-embed-text — runs locally, no paid API, no internet required.\n\nThe embedding model was trained on enormous amounts of text and learned to place similar passages close together in this 768-dimensional space. The computer doesn’t understand language the way we do, but the embedding translates language into a form where mathematical distance corresponds to semantic similarity."
+  },
+  {
+    "objectID": "slides.html#step-2-reduce-dimensions",
+    "href": "slides.html#step-2-reduce-dimensions",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "Step 2 — Reduce Dimensions",
+    "text": "Step 2 — Reduce Dimensions\n768 numbers per chunk is too complex to cluster directly.\n\nUMAP compresses 768 dimensions → 5 dimensions\nLike flattening a 3D globe onto a 2D map: some detail is lost, but the overall shape is preserved.\n\nUMAP (Uniform Manifold Approximation and Projection) tries to preserve the local neighborhood structure of the data. Points that were close together in 768 dimensions should still be close together in 5 dimensions. The compression makes clustering tractable."
+  },
+  {
+    "objectID": "slides.html#step-3-clustering",
+    "href": "slides.html#step-3-clustering",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "Step 3 — Clustering",
+    "text": "Step 3 — Clustering\nHDBSCAN looks for dense regions in the compressed space.\nEach dense region → one topic.\n\nChunks that don’t fit clearly anywhere → topic −1 (outliers)\nIn our sample: 59 topics, 18% outliers\n\n\n\nTopic 0 is the first regular topic. Only topic −1 is the outlier.\n\n\nHDBSCAN doesn’t require you to specify the number of topics in advance — it finds the number automatically based on the density structure of the data. The “sensitive” clustering settings we use find more, smaller topics. Outliers (topic -1) are not failures; they represent passages that are genuinely unusual or mixed."
+  },
+  {
+    "objectID": "slides.html#step-4-topic-words",
+    "href": "slides.html#step-4-topic-words",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "Step 4 — Topic Words",
+    "text": "Step 4 — Topic Words\nAfter clustering, which words are most distinctive for each group?\n\nc-TF-IDF: which words appear much more often in this topic than in the rest of the collection?\n\n\n\n\n\nTopic\nTop words\n\n\n\n\n0\nwhip, flog, overseer, tie, plantation\n\n\n1\ngovernment, constitution, liberty, american, war\n\n\n2\ndice, aunt, mos, riverside\n\n\n3\nmeeting, preach, prayer, spirit, pray\n\n\n\n\nc-TF-IDF is an extension of the standard TF-IDF weighting used in information retrieval. It treats each topic as a single document and finds words that are relatively more common in that topic than across the collection as a whole. This is what makes the top words interpretable rather than just frequent."
+  },
+  {
+    "objectID": "slides.html#step-5-topic-labels",
+    "href": "slides.html#step-5-topic-labels",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "Step 5 — Topic Labels",
+    "text": "Step 5 — Topic Labels\nTop words alone can be mechanical:\nwhip_flog_overseer_tie\n\nWe used llama3.1 — a local language model — to write clearer labels.\nThe model saw: - The topic number - The top words - A few representative passages from that topic\n\n\nOutput: Whipping and Plantation Punishment\n\nThe LLM label is a draft interpretation, not a final answer. The LLM has no understanding of the historical context — it is pattern-matching on the words and passages it sees. That is why the next step is always human review. Students are expected to check labels against the actual top words and passages and revise when needed."
+  },
+  {
+    "objectID": "slides.html#example-topic-labels",
+    "href": "slides.html#example-topic-labels",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "Example Topic Labels",
+    "text": "Example Topic Labels\n\n\n\nTopic\nLabel\nChunks\n\n\n\n\n0\nWhipping and Plantation Punishment\n76\n\n\n1\nLimitations of Liberty in the Post-War Era\n66\n\n\n2\nSeparation from Family and Emotional Trauma\n55\n\n\n3\nSlave-led Christian Services and Meetings\n45\n\n\n4\nRanch Life and Conflict with Native Americans\n44\n\n\n5\nTreatment by Slaveholders\n43\n\n\n6\nRacial Identity and Prejudice\n41\n\n\n\n\nPoint out the range: violence, religion, post-war politics, identity, domestic life. This is already more than a simple word count would surface. Also note that some labels are cleaner than others — topic 2’s top words include “dice” and “aunt dice” which are character names, not general themes. That’s something a student would need to investigate."
+  },
+  {
+    "objectID": "slides.html#nine-interactive-visualizations",
+    "href": "slides.html#nine-interactive-visualizations",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "Nine Interactive Visualizations",
+    "text": "Nine Interactive Visualizations\n\n\nMetadata charts\n\nTopic shares by publication decade\nTopic trends by decade (faceted)\nTopics × decades heatmap\nDocuments × topics heatmap\nSample documents timeline\n\n\nBERTopic charts\n\nTopic prevalence area chart\nTopic word bars (top words per topic)\nTopic hierarchy\n2D topic cluster map\n\n\n\nAll nine are interactive — students can hover, zoom, click legend items. The metadata charts (left column) are the most useful for historical interpretation because they connect topics to publication dates and source documents. The BERTopic charts (right column) show the internal structure of the model."
+  },
+  {
+    "objectID": "slides.html#what-the-charts-suggest",
+    "href": "slides.html#what-the-charts-suggest",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "What the Charts Suggest",
+    "text": "What the Charts Suggest\n\n1830s: dominated by abolitionist testimony — punishment, treatment, witness accounts\n1900s–1910s: Booker T. Washington, Tuskegee, education, race leadership, public life\nRanch life topic: tied almost entirely to Nat Love’s narrative (one document)\nWhipping topic: concentrated in American Slavery As It Is (1839)\nSome topics span many documents; others are dominated by one long text\n\n\nThese are findings, but they require interpretation. Why does the ranch-life topic appear? Because Nat Love’s narrative describes a very different kind of life than most of the collection. That is historically significant — it shows the diversity of experience within the broad category of “slave narrative.” The model surfaces this; the researcher explains it."
+  },
+  {
+    "objectID": "slides.html#where-judgment-enters",
+    "href": "slides.html#where-judgment-enters",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "Where Judgment Enters",
+    "text": "Where Judgment Enters\nThe computer organizes — people interpret. Decisions happen at every step:\n\nChoosing which texts belong in the collection\nDeciding what to remove during cleaning\nChoosing chunk size and overlap\nDeciding to use lemmatization\nChoosing the embedding model and clustering settings\nInspecting outliers\nAccepting, revising, merging, or rejecting topic labels\nInterpreting visualizations in historical context\n\n\nThis is the most important point in the whole presentation. Topic modeling is not a neutral or objective process. Every parameter, every cleaning rule, every labeling decision is a choice made by a researcher. The results are shaped by those choices from beginning to end."
+  },
+  {
+    "objectID": "slides.html#how-to-revise-a-label",
+    "href": "slides.html#how-to-revise-a-label",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "How to Revise a Label",
+    "text": "How to Revise a Label\nTopic labels are suggestions, not final claims.\n\nTo revise a label:\n\nOpen topic_review_table.csv — inspect the top words\nOpen topic_assignments.csv — read several actual passages from that topic\nDecide whether the label fits the passages\nWrite a clearer human label if needed\n\n\n\n\nRevising a label does not move chunks. It only changes the description.\n\n\nMake sure students understand this distinction. The clustering has already happened. Renaming a topic is purely an interpretive act — you are writing a better caption for a group the computer has already defined. If you think the group itself is wrong, that is a different question (merging or splitting topics)."
+  },
+  {
+    "objectID": "slides.html#what-you-will-do",
+    "href": "slides.html#what-you-will-do",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "What You Will Do",
+    "text": "What You Will Do\nRun the same pipeline on your own computer — free, local, no cloud:\n\nDownload the dataset and the repository\nInstall Python and Ollama\nRun the pipeline on the 10% sample (5–15 minutes)\nGenerate the review table and charts\nOpen and interpret your results\n\n\nThe exercise is designed so that nothing requires a paid service or a high-end computer. Ollama runs the embedding and labeling models locally. The only requirement is enough disk space for the models (about 5–6 GB total) and patience for the first run."
+  },
+  {
+    "objectID": "slides.html#what-you-will-produce",
+    "href": "slides.html#what-you-will-produce",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "What You Will Produce",
+    "text": "What You Will Produce\n\n\nCSV files\n\ntopic_labels_llm.csv — topic labels\ntopic_review_table.csv — labels, top words, years, documents\ntopic_assignments.csv — which passage → which topic\ntopic_info.csv — BERTopic internal statistics\n\n\nHTML visualizations\n\n4 BERTopic charts in visualizations/\n5 metadata charts in metadata_visualizations/\n\nOpen any .html file by double-clicking — no internet needed.\n\n\nThen: compare your results against the reference outputs on the website.\n\nThe comparison step is important. Because of random variation in the clustering, student results will not be identical to the reference outputs — but the major topics should be recognizable. Differences are worth discussing: why did two runs on the same data produce different topics?"
+  },
+  {
+    "objectID": "slides.html#questions-to-think-about",
+    "href": "slides.html#questions-to-think-about",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "Questions to Think About",
+    "text": "Questions to Think About\n\n\nReading the topics\n\nWhich label is easiest to understand?\nWhich label seems too vague?\nWhich label would you revise?\nDo any topics look similar to each other?\n\n\nReading the charts\n\nWhich topics appear in earlier decades?\nWhich topics appear in later decades?\nWhich topics are dominated by one document?\nDo the time charts show event dates or publication dates?\n\n\n\nThese questions are on the Hands-On Exercise page. The last question about event vs. publication dates is subtle and worth discussing in class — the charts show publication dates, not when events happened. A narrative published in 1853 might describe events from the 1820s."
+  },
+  {
+    "objectID": "slides.html#section",
+    "href": "slides.html#section",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "",
+    "text": "Full instructions, visualizations, and CSV downloads:\njinghanlib.github.io/topic-modeling-slave-narratives\nSimple Explanation · Hands-On Exercise\n\n\nDirect students to the website for the full written explanations, all nine interactive charts, and the CSV downloads. The hands-on exercise page has complete step-by-step instructions including how to open a terminal, install Python and Ollama, and run the pipeline."
+  },
+  {
+    "objectID": "instructions/01_simple_explanation.html",
+    "href": "instructions/01_simple_explanation.html",
+    "title": "Simple Explanation",
+    "section": "",
+    "text": "We wanted to look across a group of slave narratives and ask:\n\nWhat themes appear across the texts?\nWhich passages seem related to each other?\nDo themes change across publication dates?\nCan we make the computer’s topic names easier for people to understand?\n\nInstead of reading every document one by one, we used topic modeling. Topic modeling is a way of asking a computer to group passages that seem to discuss similar themes.\nThis does not replace historical interpretation. It helps us find patterns that we can investigate more carefully."
+  },
+  {
+    "objectID": "instructions/01_simple_explanation.html#project-overview",
+    "href": "instructions/01_simple_explanation.html#project-overview",
+    "title": "Simple Explanation",
+    "section": "",
+    "text": "We wanted to look across a group of slave narratives and ask:\n\nWhat themes appear across the texts?\nWhich passages seem related to each other?\nDo themes change across publication dates?\nCan we make the computer’s topic names easier for people to understand?\n\nInstead of reading every document one by one, we used topic modeling. Topic modeling is a way of asking a computer to group passages that seem to discuss similar themes.\nThis does not replace historical interpretation. It helps us find patterns that we can investigate more carefully."
+  },
+  {
+    "objectID": "instructions/01_simple_explanation.html#data-and-sampling",
+    "href": "instructions/01_simple_explanation.html#data-and-sampling",
+    "title": "Simple Explanation",
+    "section": "Data and Sampling",
+    "text": "Data and Sampling\n\nThe Collection\nThe full collection has 294 text files.\nFor testing, we used a reproducible 10% sample:\n29 documents\nsample fraction = 10%\nrandom seed = 42\nThe random seed matters because it makes the sample repeatable. If another person uses the same data, same code, and same seed, they should get the same 29 documents.\n\n\nWhich 10% of the Data We Used\nThe 29 sampled files were:\nfpn-bruce-bruce.xml\nfpn-hughes-hughes.xml\nfpn-jackson-jackson.xml\nnc-jones85-jones85.xml\nneh-aaron-aaron.xml\nneh-arter-arter.xml\nneh-boxbrown-boxbrown.xml\nneh-bragg-bragg.xml\nneh-brownj-brownj.xml\nneh-bruner-bruner.xml\nneh-charlton-charlton.xml\nneh-detroit-detroit.xml\nneh-hammon-hammon.xml\nneh-hammond-hammond.xml\nneh-henson58-henson58.xml\nneh-hopper-hopper.xml\nneh-iwilliams-iwilliams.xml\nneh-jeter-jeter.xml\nneh-mars-mars.xml\nneh-natlove-natlove.xml\nneh-nicholson-nicholson.xml\nneh-oneal-oneal.xml\nneh-robinsonn-robinson.xml\nneh-scott-scott.xml\nneh-stedman-stedman.xml\nneh-troy-troy.xml\nneh-webb-webb.xml\nneh-weld-weld.xml\nneh-williams-williams.xml"
+  },
+  {
+    "objectID": "instructions/01_simple_explanation.html#data-cleaning-and-preprocessing",
+    "href": "instructions/01_simple_explanation.html#data-cleaning-and-preprocessing",
+    "title": "Simple Explanation",
+    "section": "Data Cleaning and Preprocessing",
+    "text": "Data Cleaning and Preprocessing\n\nWhy We Cleaned the Texts\nThe texts include useful narrative material, but they also include things that can confuse topic modeling, such as image labels, title-page text, chapter headings, and repeated formatting words.\nWe cleaned the text by:\n\nremoving image markers like [Cover Image]\nremoving some frontmatter words like PREFACE, CONTENTS, and CHAPTER\nremoving numbers and extra symbols\nremoving common English stopwords such as the, and, of, and to\nremoving collection-specific stopwords such as page, image, and chapter\n\nCleaning is not neutral. A researcher decides what counts as useful text and what counts as distracting text. Those choices affect the results.\n\n\nChunks\nMany of the narratives are long. If we give an entire narrative to the topic model as a single unit, the model may miss smaller themes within it.\nSo we divided each text into smaller pieces called chunks.\nA chunk is a passage of text. In this project, each chunk was about 750 words, with a small overlap between neighboring chunks.\nThe overlap helps because an important passage might fall near the edge of a chunk. Overlap gives the model a better chance to keep nearby context together.\nFor the 10% sample, the 29 documents became:\n1,543 chunks\nThe topic model grouped these chunks, not whole narratives.\n\n\nTokenization and Lemmatization\nBefore the topic model can find important words for each topic, it needs to standardize how words are represented. This happens in two steps.\nTokenization is how the computer breaks text into individual units. Tokens are usually words, but not always. A computer may treat master and Master as different words because of the capital letter, split a hyphenated word like well-known into two pieces, or handle contractions and older spellings in unexpected ways.\nLemmatization then reduces word variants to a shared base form:\nwhip, whipped, whipping -&gt; whip\nslaves -&gt; slave\nslaveholders -&gt; slaveholder\npreached, preaching -&gt; preach\nWithout lemmatization, the model might identify whip, whipped, and whipping as separate signals. Reducing them to whip makes the topic words easier to read and the topics easier to interpret."
+  },
+  {
+    "objectID": "instructions/01_simple_explanation.html#topic-modeling-compared-with-word-counting",
+    "href": "instructions/01_simple_explanation.html#topic-modeling-compared-with-word-counting",
+    "title": "Simple Explanation",
+    "section": "Topic Modeling Compared With Word Counting",
+    "text": "Topic Modeling Compared With Word Counting\nStudents often ask: why use topic modeling instead of just counting words?\nWord counting answers the question: which words appear most often? That is useful, but a word count treats every passage independently. It does not recognize that two passages are discussing the same theme unless they share the exact same words.\nTopic modeling asks a different question: which passages seem to be about similar themes? It groups passages together based on meaning, even when different passages use different vocabulary.\nFor example, a topic model can group passages about physical punishment even if they use different words — whip, flog, overseer, punishment, cruelty. A word count would list those words separately. Topic modeling tries to recognize that they point to a shared theme.\nIn our results, that shared theme became Whipping and Plantation Punishment.\nBERTopic still uses words when describing topics. After grouping similar chunks together, it identifies which words are especially distinctive within each group. But the grouping itself is based on meaning, not word frequency."
+  },
+  {
+    "objectID": "instructions/01_simple_explanation.html#the-bertopic-pipeline",
+    "href": "instructions/01_simple_explanation.html#the-bertopic-pipeline",
+    "title": "Simple Explanation",
+    "section": "The BERTopic Pipeline",
+    "text": "The BERTopic Pipeline\nThe pipeline has five steps. Each step feeds the next.\n\n\n\n\n\nflowchart LR\n    A[\"Raw texts\\n294 narratives\"] --&gt; B[\"Clean & chunk\\n1,543 passages\"]\n    B --&gt; C[\"Embed\\nnomic-embed-text\\n768 numbers\"]\n    C --&gt; D[\"Reduce dims\\nUMAP\\n768 → 5\"]\n    D --&gt; E[\"Cluster\\nHDBSCAN\\n59 topics\"]\n    E --&gt; F[\"Topic words\\nc-TF-IDF\"]\n    F --&gt; G[\"Label\\nllama3.1\"]\n    G --&gt; H[\"Results\\nCSVs + charts\"]\n\n\n\n\n\n\n\nStep 1: Turn Text Into Embeddings\nAn embedding is a list of numbers that represents the meaning of a passage. Every chunk gets converted into its own list — in our case, 768 numbers.\nThe key insight is how those numbers are assigned. The embedding model was trained on enormous amounts of text, and it learned to place passages with similar meanings close together in that 768-dimensional space, and passages with different meanings farther apart. Two passages that both describe being sold away from family will end up with similar number lists, even if they share few of the same words. Two passages about completely different subjects — say, plantation labor and railroad travel — will end up with very different number lists.\nThis is what makes topic modeling possible. The computer does not understand language the way a reader does, but the embedding model translates language into a form where closeness means relatedness. BERTopic then uses that structure to find groups of passages that cluster together.\nIn our project, we used a local embedding model through Ollama:\nnomic-embed-text\nThis model runs entirely on your own computer, requires no paid API, and is designed specifically for producing embeddings from text. It is the same kind of model used in larger commercial systems, but it can run locally without a GPU.\n\n\nStep 2: Reduce the Dimensions\nEach embedding is a list of 768 numbers. That many dimensions are too complex to cluster directly.\nBERTopic uses a method called UMAP to compress those numbers into a much smaller set — usually 5 — while trying to keep track of which passages are similar to each other. Think of it as flattening a 3D map into 2D: some detail is lost, but the overall shape is preserved.\n\n\nStep 3: Cluster Similar Chunks\nAfter the embeddings are compressed, BERTopic groups similar chunks together using a clustering method called HDBSCAN. It looks for dense regions in the compressed space and treats each region as a topic.\nChunks that do not fit clearly into any region become outliers, assigned to topic -1.\n\n\nStep 4: Find Important Words for Each Topic\nAfter chunks are grouped into topics, BERTopic looks for words that are especially important in each topic using a scoring method called c-TF-IDF. In short: which words appear much more often in this topic than in the rest of the collection?\nWe used cleaned and lemmatized text for this step so the topic words would be easier to read.\n\n\nStep 5: Give Each Topic a Human-Readable Label\nBERTopic can produce topic names from top words, but those names are often mechanical.\nFor example:\nwhip_flog_overseer_tie\nSo we used a local LLM through Ollama:\nllama3.1\nThe LLM looked at:\n\nthe topic number\nthe top words for that topic\na few representative passages from that topic\n\nThen it wrote a clearer label, such as:\nWhipping and Plantation Punishment"
+  },
+  {
+    "objectID": "instructions/01_simple_explanation.html#topic-words-labels-and-human-interpretation",
+    "href": "instructions/01_simple_explanation.html#topic-words-labels-and-human-interpretation",
+    "title": "Simple Explanation",
+    "section": "Topic Words, Labels, and Human Interpretation",
+    "text": "Topic Words, Labels, and Human Interpretation\nTopic words are important evidence. They are shown in:\n\ntopic_info.csv\ntopic_labels_llm.csv\ntopic_review_table.csv\n\nStudents should use these words to check whether a topic label makes sense.\nHere is a small preview of the topic review table:\n\n\n\n\n\n\n\n\n\nTopic\nLabel\nChunks\nTop Words\n\n\n\n\n0\nWhipping and Plantation Punishment\n76\nwhip, flog, overseer, tie, plantation\n\n\n1\nLimitations of Liberty in the Post-War Era\n66\ngovernment, constitution, liberty, american, war\n\n\n2\nSeparation from Family and Emotional Trauma\n55\ndice, aunt dice, aunt, mos, riverside\n\n\n3\nSlave-led Christian Services and Meetings\n45\nmeeting, preach, prayer, spirit, pray\n\n\n\nStudents can download the CSV files from the links below. If a file opens in the browser instead of downloading, use File &gt; Save Page As or right-click the link and choose Save Link As.\n\n  Download topic review table\n  Download topic labels\n  Download topic info\n  Download topic assignments\n\nThe LLM label is a draft interpretation. It can be replaced or improved by a human reader.\nFor teaching purposes, some labels were manually revised after reviewing the topic words and representative passages. That manual revision changed only the topic label. It did not move chunks into different topics.\nThis is a normal part of topic modeling: the computer suggests patterns, and people interpret whether the labels are historically and textually accurate."
+  },
+  {
+    "objectID": "instructions/01_simple_explanation.html#outliers",
+    "href": "instructions/01_simple_explanation.html#outliers",
+    "title": "Simple Explanation",
+    "section": "Outliers",
+    "text": "Outliers\nSome chunks do not fit clearly into any topic. BERTopic puts those chunks into an outlier group.\nIn BERTopic, the outlier topic is always:\ntopic -1\nThis is important: topic 0 is not the outlier. Topic 0 is the first regular topic.\nIn our final sample run, BERTopic found:\n59 non-outlier topics\n277 outlier chunks\n18.0% outliers\nAn outlier is not necessarily bad. It can mean the passage is unusual, mixed, short on shared vocabulary, or not similar enough to other chunks."
+  },
+  {
+    "objectID": "instructions/01_simple_explanation.html#example-results",
+    "href": "instructions/01_simple_explanation.html#example-results",
+    "title": "Simple Explanation",
+    "section": "Example Results",
+    "text": "Example Results\nSome final topic labels were:\n\nWhipping and Plantation Punishment\nLimitations of Liberty in the Post-War Era\nSeparation from Family and Emotional Trauma\nSlave-led Christian Services and Meetings\nRanch Life and Conflict with Native Americans\nTreatment by Slaveholders\nRacial Identity and Prejudice\nForced Labor and Overwork in Sugar and Cotton Plantations\nTraveling by Railroad\nBooker T. Washington and Tuskegee Institute\nSlave Markets and Sales\nFood Rations and Hunger"
+  },
+  {
+    "objectID": "instructions/01_simple_explanation.html#reading-the-charts",
+    "href": "instructions/01_simple_explanation.html#reading-the-charts",
+    "title": "Simple Explanation",
+    "section": "Reading the Charts",
+    "text": "Reading the Charts\nAll charts are interactive — hover over bars and cells to see exact values, and click legend items to show or hide topics. Each chart can also be downloaded as a standalone HTML file from the GitHub repository under outputs/bertopic_sample_nomic_sensitive_lemmatized/. Open any .html file directly in a browser to explore it.\n\nTopic Shares by Publication Decade\nThis chart shows what share of the top 8 topics appears in each publication decade. Each bar represents one topic’s share of all modeled chunks published in that decade.\n\nWhat it suggests in this sample:\n\nThe 1830s are strongly shaped by topics from abolitionist testimony, especially physical punishment and treatment by slaveholders.\nThe 1900s and 1910s show more topics connected to Booker T. Washington, Tuskegee, education, race leadership, churches, and public life.\nThe ranch-life topic appears mainly in the early 1900s because it is strongly connected to Nat Love’s narrative.\n\n\n\nTopic Trends by Decade (Faceted)\nThis chart shows the same topic-by-decade data as individual line charts, one panel per topic. It makes it easier to see the shape of a single topic’s trend across time without other topics in the way.\n\nUse this alongside the grouped bar chart to compare how individual topics rise or fall across decades.\n\n\nTopic-by-Decade Heatmap\nThis heatmap shows which topics concentrate in which publication decades. Darker cells mean more chunks from that topic appear in that decade. It shows concentration at a glance across all top topics simultaneously.\n\nWhat it suggests in this sample:\n\nSome topics are concentrated in one document or decade, not spread evenly across the whole sample.\n“Ranch Life and Conflict with Native Americans” is concentrated around the 1900s.\n“Booker T. Washington and Tuskegee Institute” is concentrated around the 1910s.\n“Whipping and Plantation Punishment” is concentrated in the 1830s because many chunks come from anti-slavery testimony published in 1839.\n\n\n\nDocument-by-Topic Heatmap\nThis heatmap shows which documents contribute most strongly to each topic. A topic can look large because it appears across many documents, or because one long document contributes many chunks. This chart tells you which.\n\nWhat it suggests in this sample:\n\n“Whipping and Plantation Punishment” is heavily influenced by American Slavery As It Is.\n“Ranch Life and Conflict with Native Americans” is heavily influenced by Nat Love’s narrative.\nBooker T. Washington and Tuskegee topics are heavily influenced by Booker T. Washington, Builder of a Civilization.\n\n\n\nSample Documents Timeline\nThis chart shows the publication years of the 29 sampled documents. Each point is one document. Use it to see how the sample is distributed across time and whether certain decades are over- or under-represented.\n\n\n\nTopic Prevalence Over Time (Area Chart)\nThis chart shows topic prevalence as a stacked area chart across publication decades. Each colored band represents one topic. It gives an overview of how the overall composition of topics shifts across the sample’s time span.\n\n\n\nTopic Word Bars\nThis chart shows the top words for every topic as horizontal bar charts, one panel per topic. The bar length represents how distinctive each word is to that topic compared with the rest of the collection.\n\nUse this to check whether the top words for a topic actually support its label, or whether the label needs revision.\n\n\nTopic Hierarchy\nThis chart shows a hierarchical clustering of topics — which topics are most similar to each other and could potentially be merged. Topics that branch close together share more vocabulary and meaning than topics that branch far apart.\n\n\n\nTopic Cluster Map\nThis chart shows all 59 topics plotted in a 2D space based on their embedding positions. Topics that appear close together are semantically similar. Each bubble represents one topic, and the size reflects how many chunks were assigned to it."
+  },
+  {
+    "objectID": "instructions/01_simple_explanation.html#how-to-interpret-the-results",
+    "href": "instructions/01_simple_explanation.html#how-to-interpret-the-results",
+    "title": "Simple Explanation",
+    "section": "How To Interpret the Results",
+    "text": "How To Interpret the Results\nEach topic is a suggested grouping of passages.\nA topic label is not a final historical claim. It is a guide.\nWhen interpreting a topic, we should ask:\n\nWhat words define this topic?\nWhich passages were assigned to it?\nWhich documents dominate it?\nDoes the label accurately describe the passages?\nIs this topic meaningful, or is it an artifact of the data?\nAre two topics really part of the same larger theme?"
+  },
+  {
+    "objectID": "instructions/01_simple_explanation.html#where-human-interpretation-enters",
+    "href": "instructions/01_simple_explanation.html#where-human-interpretation-enters",
+    "title": "Simple Explanation",
+    "section": "Where Human Interpretation Enters",
+    "text": "Where Human Interpretation Enters\nHuman interpretation is part of the workflow from the beginning, not only at the end.\nPeople make decisions when they:\n\nchoose which texts belong in the collection\ndecide whether a sample is appropriate\ndecide what to remove during cleaning\ndecide whether words such as names, page labels, or headings are meaningful or distracting\nchoose chunk size and overlap\ndecide whether to use lemmatization\nchoose the embedding model and clustering settings\ninspect outliers\ncompare topic words with representative passages\naccept, revise, merge, split, or reject topic labels\ninterpret visualizations in historical context\n\nThe model helps organize the material, but it does not remove the need for judgment."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "",
+    "text": "The North American Slave Narratives collection, hosted by Documenting the American South at the University of North Carolina, preserves over 290 first-person accounts of enslaved life in the United States. Topic modeling gives us a way to search for recurring themes across the collection without reading every document from start to finish — and then to ask whether those themes shift across the decades in which the narratives were published.\nThis lesson introduces that workflow using a 10% sample of the collection. It is designed for students who may have little or no coding experience.\nUse the pages below to learn the main ideas, run the workflow, download the result tables, and interpret the visualizations."
+  },
+  {
+    "objectID": "index.html#start-here",
+    "href": "index.html#start-here",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "Start Here",
+    "text": "Start Here\n\n\nSimple Explanation\nLearn the project in plain language: data, chunks, tokens, preprocessing, BERTopic, local LLM steps, topic labels, outliers, and human interpretation.\nOpen the simple explanation\n\n\nHands-On Exercise\nDownload the original dataset, install the tools, run the scripts, and interpret the outputs.\nOpen the hands-on exercise"
+  },
+  {
+    "objectID": "index.html#featured-visualization",
+    "href": "index.html#featured-visualization",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "Featured Visualization",
+    "text": "Featured Visualization\nThis chart shows the largest topics across publication decades. The dates are publication dates, not necessarily the dates when narrated events happened.\n\nIn this sample, the 1830s are strongly shaped by abolitionist testimony, especially physical punishment and treatment by slaveholders. The 1900s and 1910s include more topics connected to Booker T. Washington, Tuskegee, education, churches, and public life."
+  },
+  {
+    "objectID": "index.html#result-tables",
+    "href": "index.html#result-tables",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "Result Tables",
+    "text": "Result Tables\nThe result tables are CSV files. CSV means comma-separated values, a common spreadsheet format that can be opened in Excel, Google Sheets, Numbers, or a text editor.\n\ntopic_review_table.csv: best starting point for reviewing topic labels, top words, years, and contributing documents.\ntopic_labels_llm.csv: topic labels and top words.\ntopic_assignments.csv: which chunk was assigned to which topic.\nsample_documents.csv: which 29 documents were used in the 10% sample."
+  },
+  {
+    "objectID": "index.html#download-csv-files",
+    "href": "index.html#download-csv-files",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "Download CSV Files",
+    "text": "Download CSV Files\nClick these links to download the reference CSV files. If a file opens in the browser instead of downloading, use File &gt; Save Page As or right-click the link and choose Save Link As.\n\n  Download topic review table\n  Download topic labels\n  Download topic assignments\n  Download sample documents"
+  },
+  {
+    "objectID": "index.html#reuse-note",
+    "href": "index.html#reuse-note",
+    "title": "Topic Modeling Slave Narratives",
+    "section": "Reuse Note",
+    "text": "Reuse Note\nThe original dataset should be downloaded from the source collection and cited according to that collection’s reuse guidance."
+  },
+  {
     "objectID": "instructions/02_hands_on_exercise.html",
     "href": "instructions/02_hands_on_exercise.html",
     "title": "Hands-On Exercise",
@@ -145,131 +432,5 @@
     "title": "Hands-On Exercise",
     "section": "Common Problems",
     "text": "Common Problems\n\nollama command not found\nOllama is not installed, or Terminal cannot find it. Install Ollama, then close and reopen Terminal.\n\n\nPython says packages are missing\nMake sure the virtual environment is active.\nMac or Linux:\nsource .venv/bin/activate\nWindows (Command Prompt):\n.venv\\Scripts\\activate\nThen reinstall packages:\npython -m pip install -r requirements.txt\n\n\nOllama connection error\nOpen the Ollama app, or run:\nollama list\nIf Ollama is working, it should show installed models.\n\n\nThe run is slow\nThat is normal. The first run creates embeddings. Later runs reuse them.\n\n\nA topic label looks wrong\nThat is also normal. Topic labels are suggestions.\nOpen topic_review_table.csv, topic_info.csv, and topic_assignments.csv to inspect the actual words and passages behind the label."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Topic Modeling Slave Narratives",
-    "section": "",
-    "text": "The North American Slave Narratives collection, hosted by Documenting the American South at the University of North Carolina, preserves over 290 first-person accounts of enslaved life in the United States. Topic modeling gives us a way to search for recurring themes across the collection without reading every document from start to finish — and then to ask whether those themes shift across the decades in which the narratives were published.\nThis lesson introduces that workflow using a 10% sample of the collection. It is designed for students who may have little or no coding experience.\nUse the pages below to learn the main ideas, run the workflow, download the result tables, and interpret the visualizations."
-  },
-  {
-    "objectID": "index.html#start-here",
-    "href": "index.html#start-here",
-    "title": "Topic Modeling Slave Narratives",
-    "section": "Start Here",
-    "text": "Start Here\n\n\nSimple Explanation\nLearn the project in plain language: data, chunks, tokens, preprocessing, BERTopic, local LLM steps, topic labels, outliers, and human interpretation.\nOpen the simple explanation\n\n\nHands-On Exercise\nDownload the original dataset, install the tools, run the scripts, and interpret the outputs.\nOpen the hands-on exercise"
-  },
-  {
-    "objectID": "index.html#featured-visualization",
-    "href": "index.html#featured-visualization",
-    "title": "Topic Modeling Slave Narratives",
-    "section": "Featured Visualization",
-    "text": "Featured Visualization\nThis chart shows the largest topics across publication decades. The dates are publication dates, not necessarily the dates when narrated events happened.\n\nIn this sample, the 1830s are strongly shaped by abolitionist testimony, especially physical punishment and treatment by slaveholders. The 1900s and 1910s include more topics connected to Booker T. Washington, Tuskegee, education, churches, and public life."
-  },
-  {
-    "objectID": "index.html#result-tables",
-    "href": "index.html#result-tables",
-    "title": "Topic Modeling Slave Narratives",
-    "section": "Result Tables",
-    "text": "Result Tables\nThe result tables are CSV files. CSV means comma-separated values, a common spreadsheet format that can be opened in Excel, Google Sheets, Numbers, or a text editor.\n\ntopic_review_table.csv: best starting point for reviewing topic labels, top words, years, and contributing documents.\ntopic_labels_llm.csv: topic labels and top words.\ntopic_assignments.csv: which chunk was assigned to which topic.\nsample_documents.csv: which 29 documents were used in the 10% sample."
-  },
-  {
-    "objectID": "index.html#download-csv-files",
-    "href": "index.html#download-csv-files",
-    "title": "Topic Modeling Slave Narratives",
-    "section": "Download CSV Files",
-    "text": "Download CSV Files\nClick these links to download the reference CSV files. If a file opens in the browser instead of downloading, use File &gt; Save Page As or right-click the link and choose Save Link As.\n\n  Download topic review table\n  Download topic labels\n  Download topic assignments\n  Download sample documents"
-  },
-  {
-    "objectID": "index.html#reuse-note",
-    "href": "index.html#reuse-note",
-    "title": "Topic Modeling Slave Narratives",
-    "section": "Reuse Note",
-    "text": "Reuse Note\nThe original dataset should be downloaded from the source collection and cited according to that collection’s reuse guidance."
-  },
-  {
-    "objectID": "instructions/01_simple_explanation.html",
-    "href": "instructions/01_simple_explanation.html",
-    "title": "Simple Explanation",
-    "section": "",
-    "text": "We wanted to look across a group of slave narratives and ask:\n\nWhat themes appear across the texts?\nWhich passages seem related to each other?\nDo themes change across publication dates?\nCan we make the computer’s topic names easier for people to understand?\n\nInstead of reading every document one by one, we used topic modeling. Topic modeling is a way of asking a computer to group passages that seem to discuss similar themes.\nThis does not replace historical interpretation. It helps us find patterns that we can investigate more carefully."
-  },
-  {
-    "objectID": "instructions/01_simple_explanation.html#project-overview",
-    "href": "instructions/01_simple_explanation.html#project-overview",
-    "title": "Simple Explanation",
-    "section": "",
-    "text": "We wanted to look across a group of slave narratives and ask:\n\nWhat themes appear across the texts?\nWhich passages seem related to each other?\nDo themes change across publication dates?\nCan we make the computer’s topic names easier for people to understand?\n\nInstead of reading every document one by one, we used topic modeling. Topic modeling is a way of asking a computer to group passages that seem to discuss similar themes.\nThis does not replace historical interpretation. It helps us find patterns that we can investigate more carefully."
-  },
-  {
-    "objectID": "instructions/01_simple_explanation.html#data-and-sampling",
-    "href": "instructions/01_simple_explanation.html#data-and-sampling",
-    "title": "Simple Explanation",
-    "section": "Data and Sampling",
-    "text": "Data and Sampling\n\nThe Collection\nThe full collection has 294 text files.\nFor testing, we used a reproducible 10% sample:\n29 documents\nsample fraction = 10%\nrandom seed = 42\nThe random seed matters because it makes the sample repeatable. If another person uses the same data, same code, and same seed, they should get the same 29 documents.\n\n\nWhich 10% of the Data We Used\nThe 29 sampled files were:\nfpn-bruce-bruce.xml\nfpn-hughes-hughes.xml\nfpn-jackson-jackson.xml\nnc-jones85-jones85.xml\nneh-aaron-aaron.xml\nneh-arter-arter.xml\nneh-boxbrown-boxbrown.xml\nneh-bragg-bragg.xml\nneh-brownj-brownj.xml\nneh-bruner-bruner.xml\nneh-charlton-charlton.xml\nneh-detroit-detroit.xml\nneh-hammon-hammon.xml\nneh-hammond-hammond.xml\nneh-henson58-henson58.xml\nneh-hopper-hopper.xml\nneh-iwilliams-iwilliams.xml\nneh-jeter-jeter.xml\nneh-mars-mars.xml\nneh-natlove-natlove.xml\nneh-nicholson-nicholson.xml\nneh-oneal-oneal.xml\nneh-robinsonn-robinson.xml\nneh-scott-scott.xml\nneh-stedman-stedman.xml\nneh-troy-troy.xml\nneh-webb-webb.xml\nneh-weld-weld.xml\nneh-williams-williams.xml"
-  },
-  {
-    "objectID": "instructions/01_simple_explanation.html#data-cleaning-and-preprocessing",
-    "href": "instructions/01_simple_explanation.html#data-cleaning-and-preprocessing",
-    "title": "Simple Explanation",
-    "section": "Data Cleaning and Preprocessing",
-    "text": "Data Cleaning and Preprocessing\n\nWhy We Cleaned the Texts\nThe texts include useful narrative material, but they also include things that can confuse topic modeling, such as image labels, title-page text, chapter headings, and repeated formatting words.\nWe cleaned the text by:\n\nremoving image markers like [Cover Image]\nremoving some frontmatter words like PREFACE, CONTENTS, and CHAPTER\nremoving numbers and extra symbols\nremoving common English stopwords such as the, and, of, and to\nremoving collection-specific stopwords such as page, image, and chapter\n\nCleaning is not neutral. A researcher decides what counts as useful text and what counts as distracting text. Those choices affect the results.\n\n\nChunks\nMany of the narratives are long. If we give an entire narrative to the topic model as a single unit, the model may miss smaller themes within it.\nSo we divided each text into smaller pieces called chunks.\nA chunk is a passage of text. In this project, each chunk was about 750 words, with a small overlap between neighboring chunks.\nThe overlap helps because an important passage might fall near the edge of a chunk. Overlap gives the model a better chance to keep nearby context together.\nFor the 10% sample, the 29 documents became:\n1,543 chunks\nThe topic model grouped these chunks, not whole narratives.\n\n\nTokenization and Lemmatization\nBefore the topic model can find important words for each topic, it needs to standardize how words are represented. This happens in two steps.\nTokenization is how the computer breaks text into individual units. Tokens are usually words, but not always. A computer may treat master and Master as different words because of the capital letter, split a hyphenated word like well-known into two pieces, or handle contractions and older spellings in unexpected ways.\nLemmatization then reduces word variants to a shared base form:\nwhip, whipped, whipping -&gt; whip\nslaves -&gt; slave\nslaveholders -&gt; slaveholder\npreached, preaching -&gt; preach\nWithout lemmatization, the model might identify whip, whipped, and whipping as separate signals. Reducing them to whip makes the topic words easier to read and the topics easier to interpret."
-  },
-  {
-    "objectID": "instructions/01_simple_explanation.html#topic-modeling-compared-with-word-counting",
-    "href": "instructions/01_simple_explanation.html#topic-modeling-compared-with-word-counting",
-    "title": "Simple Explanation",
-    "section": "Topic Modeling Compared With Word Counting",
-    "text": "Topic Modeling Compared With Word Counting\nStudents often ask: why use topic modeling instead of just counting words?\nWord counting answers the question: which words appear most often? That is useful, but a word count treats every passage independently. It does not recognize that two passages are discussing the same theme unless they share the exact same words.\nTopic modeling asks a different question: which passages seem to be about similar themes? It groups passages together based on meaning, even when different passages use different vocabulary.\nFor example, a topic model can group passages about physical punishment even if they use different words — whip, flog, overseer, punishment, cruelty. A word count would list those words separately. Topic modeling tries to recognize that they point to a shared theme.\nIn our results, that shared theme became Whipping and Plantation Punishment.\nBERTopic still uses words when describing topics. After grouping similar chunks together, it identifies which words are especially distinctive within each group. But the grouping itself is based on meaning, not word frequency."
-  },
-  {
-    "objectID": "instructions/01_simple_explanation.html#the-bertopic-pipeline",
-    "href": "instructions/01_simple_explanation.html#the-bertopic-pipeline",
-    "title": "Simple Explanation",
-    "section": "The BERTopic Pipeline",
-    "text": "The BERTopic Pipeline\n\nStep 1: Turn Text Into Embeddings\nAn embedding is a list of numbers that represents the meaning of a passage. Every chunk gets converted into its own list — in our case, 768 numbers.\nThe key insight is how those numbers are assigned. The embedding model was trained on enormous amounts of text, and it learned to place passages with similar meanings close together in that 768-dimensional space, and passages with different meanings farther apart. Two passages that both describe being sold away from family will end up with similar number lists, even if they share few of the same words. Two passages about completely different subjects — say, plantation labor and railroad travel — will end up with very different number lists.\nThis is what makes topic modeling possible. The computer does not understand language the way a reader does, but the embedding model translates language into a form where closeness means relatedness. BERTopic then uses that structure to find groups of passages that cluster together.\nIn our project, we used a local embedding model through Ollama:\nnomic-embed-text\nThis model runs entirely on your own computer, requires no paid API, and is designed specifically for producing embeddings from text. It is the same kind of model used in larger commercial systems, but it can run locally without a GPU.\n\n\nStep 2: Reduce the Dimensions\nEach embedding is a list of 768 numbers. That many dimensions are too complex to cluster directly.\nBERTopic uses a method called UMAP to compress those numbers into a much smaller set — usually 5 — while trying to keep track of which passages are similar to each other. Think of it as flattening a 3D map into 2D: some detail is lost, but the overall shape is preserved.\n\n\nStep 3: Cluster Similar Chunks\nAfter the embeddings are compressed, BERTopic groups similar chunks together using a clustering method called HDBSCAN. It looks for dense regions in the compressed space and treats each region as a topic.\nChunks that do not fit clearly into any region become outliers, assigned to topic -1.\n\n\nStep 4: Find Important Words for Each Topic\nAfter chunks are grouped into topics, BERTopic looks for words that are especially important in each topic using a scoring method called c-TF-IDF. In short: which words appear much more often in this topic than in the rest of the collection?\nWe used cleaned and lemmatized text for this step so the topic words would be easier to read.\n\n\nStep 5: Give Each Topic a Human-Readable Label\nBERTopic can produce topic names from top words, but those names are often mechanical.\nFor example:\nwhip_flog_overseer_tie\nSo we used a local LLM through Ollama:\nllama3.1\nThe LLM looked at:\n\nthe topic number\nthe top words for that topic\na few representative passages from that topic\n\nThen it wrote a clearer label, such as:\nWhipping and Plantation Punishment"
-  },
-  {
-    "objectID": "instructions/01_simple_explanation.html#topic-words-labels-and-human-interpretation",
-    "href": "instructions/01_simple_explanation.html#topic-words-labels-and-human-interpretation",
-    "title": "Simple Explanation",
-    "section": "Topic Words, Labels, and Human Interpretation",
-    "text": "Topic Words, Labels, and Human Interpretation\nTopic words are important evidence. They are shown in:\n\ntopic_info.csv\ntopic_labels_llm.csv\ntopic_review_table.csv\n\nStudents should use these words to check whether a topic label makes sense.\nHere is a small preview of the topic review table:\n\n\n\n\n\n\n\n\n\nTopic\nLabel\nChunks\nTop Words\n\n\n\n\n0\nWhipping and Plantation Punishment\n76\nwhip, flog, overseer, tie, plantation\n\n\n1\nLimitations of Liberty in the Post-War Era\n66\ngovernment, constitution, liberty, american, war\n\n\n2\nSeparation from Family and Emotional Trauma\n55\ndice, aunt dice, aunt, mos, riverside\n\n\n3\nSlave-led Christian Services and Meetings\n45\nmeeting, preach, prayer, spirit, pray\n\n\n\nStudents can download the CSV files from the links below. If a file opens in the browser instead of downloading, use File &gt; Save Page As or right-click the link and choose Save Link As.\n\n  Download topic review table\n  Download topic labels\n  Download topic info\n  Download topic assignments\n\nThe LLM label is a draft interpretation. It can be replaced or improved by a human reader.\nFor teaching purposes, some labels were manually revised after reviewing the topic words and representative passages. That manual revision changed only the topic label. It did not move chunks into different topics.\nThis is a normal part of topic modeling: the computer suggests patterns, and people interpret whether the labels are historically and textually accurate."
-  },
-  {
-    "objectID": "instructions/01_simple_explanation.html#outliers",
-    "href": "instructions/01_simple_explanation.html#outliers",
-    "title": "Simple Explanation",
-    "section": "Outliers",
-    "text": "Outliers\nSome chunks do not fit clearly into any topic. BERTopic puts those chunks into an outlier group.\nIn BERTopic, the outlier topic is always:\ntopic -1\nThis is important: topic 0 is not the outlier. Topic 0 is the first regular topic.\nIn our final sample run, BERTopic found:\n59 non-outlier topics\n277 outlier chunks\n18.0% outliers\nAn outlier is not necessarily bad. It can mean the passage is unusual, mixed, short on shared vocabulary, or not similar enough to other chunks."
-  },
-  {
-    "objectID": "instructions/01_simple_explanation.html#example-results",
-    "href": "instructions/01_simple_explanation.html#example-results",
-    "title": "Simple Explanation",
-    "section": "Example Results",
-    "text": "Example Results\nSome final topic labels were:\n\nWhipping and Plantation Punishment\nLimitations of Liberty in the Post-War Era\nSeparation from Family and Emotional Trauma\nSlave-led Christian Services and Meetings\nRanch Life and Conflict with Native Americans\nTreatment by Slaveholders\nRacial Identity and Prejudice\nForced Labor and Overwork in Sugar and Cotton Plantations\nTraveling by Railroad\nBooker T. Washington and Tuskegee Institute\nSlave Markets and Sales\nFood Rations and Hunger"
-  },
-  {
-    "objectID": "instructions/01_simple_explanation.html#reading-the-charts",
-    "href": "instructions/01_simple_explanation.html#reading-the-charts",
-    "title": "Simple Explanation",
-    "section": "Reading the Charts",
-    "text": "Reading the Charts\nAll charts are interactive — hover over bars and cells to see exact values, and click legend items to show or hide topics. Each chart can also be downloaded as a standalone HTML file from the GitHub repository under outputs/bertopic_sample_nomic_sensitive_lemmatized/. Open any .html file directly in a browser to explore it.\n\nTopic Shares by Publication Decade\nThis chart shows what share of the top 8 topics appears in each publication decade. Each bar represents one topic’s share of all modeled chunks published in that decade.\n\nWhat it suggests in this sample:\n\nThe 1830s are strongly shaped by topics from abolitionist testimony, especially physical punishment and treatment by slaveholders.\nThe 1900s and 1910s show more topics connected to Booker T. Washington, Tuskegee, education, race leadership, churches, and public life.\nThe ranch-life topic appears mainly in the early 1900s because it is strongly connected to Nat Love’s narrative.\n\n\n\nTopic Trends by Decade (Faceted)\nThis chart shows the same topic-by-decade data as individual line charts, one panel per topic. It makes it easier to see the shape of a single topic’s trend across time without other topics in the way.\n\nUse this alongside the grouped bar chart to compare how individual topics rise or fall across decades.\n\n\nTopic-by-Decade Heatmap\nThis heatmap shows which topics concentrate in which publication decades. Darker cells mean more chunks from that topic appear in that decade. It shows concentration at a glance across all top topics simultaneously.\n\nWhat it suggests in this sample:\n\nSome topics are concentrated in one document or decade, not spread evenly across the whole sample.\n“Ranch Life and Conflict with Native Americans” is concentrated around the 1900s.\n“Booker T. Washington and Tuskegee Institute” is concentrated around the 1910s.\n“Whipping and Plantation Punishment” is concentrated in the 1830s because many chunks come from anti-slavery testimony published in 1839.\n\n\n\nDocument-by-Topic Heatmap\nThis heatmap shows which documents contribute most strongly to each topic. A topic can look large because it appears across many documents, or because one long document contributes many chunks. This chart tells you which.\n\nWhat it suggests in this sample:\n\n“Whipping and Plantation Punishment” is heavily influenced by American Slavery As It Is.\n“Ranch Life and Conflict with Native Americans” is heavily influenced by Nat Love’s narrative.\nBooker T. Washington and Tuskegee topics are heavily influenced by Booker T. Washington, Builder of a Civilization.\n\n\n\nSample Documents Timeline\nThis chart shows the publication years of the 29 sampled documents. Each point is one document. Use it to see how the sample is distributed across time and whether certain decades are over- or under-represented.\n\n\n\nTopic Prevalence Over Time (Area Chart)\nThis chart shows topic prevalence as a stacked area chart across publication decades. Each colored band represents one topic. It gives an overview of how the overall composition of topics shifts across the sample’s time span.\n\n\n\nTopic Word Bars\nThis chart shows the top words for every topic as horizontal bar charts, one panel per topic. The bar length represents how distinctive each word is to that topic compared with the rest of the collection.\n\nUse this to check whether the top words for a topic actually support its label, or whether the label needs revision.\n\n\nTopic Hierarchy\nThis chart shows a hierarchical clustering of topics — which topics are most similar to each other and could potentially be merged. Topics that branch close together share more vocabulary and meaning than topics that branch far apart.\n\n\n\nTopic Cluster Map\nThis chart shows all 59 topics plotted in a 2D space based on their embedding positions. Topics that appear close together are semantically similar. Each bubble represents one topic, and the size reflects how many chunks were assigned to it."
-  },
-  {
-    "objectID": "instructions/01_simple_explanation.html#how-to-interpret-the-results",
-    "href": "instructions/01_simple_explanation.html#how-to-interpret-the-results",
-    "title": "Simple Explanation",
-    "section": "How To Interpret the Results",
-    "text": "How To Interpret the Results\nEach topic is a suggested grouping of passages.\nA topic label is not a final historical claim. It is a guide.\nWhen interpreting a topic, we should ask:\n\nWhat words define this topic?\nWhich passages were assigned to it?\nWhich documents dominate it?\nDoes the label accurately describe the passages?\nIs this topic meaningful, or is it an artifact of the data?\nAre two topics really part of the same larger theme?"
-  },
-  {
-    "objectID": "instructions/01_simple_explanation.html#where-human-interpretation-enters",
-    "href": "instructions/01_simple_explanation.html#where-human-interpretation-enters",
-    "title": "Simple Explanation",
-    "section": "Where Human Interpretation Enters",
-    "text": "Where Human Interpretation Enters\nHuman interpretation is part of the workflow from the beginning, not only at the end.\nPeople make decisions when they:\n\nchoose which texts belong in the collection\ndecide whether a sample is appropriate\ndecide what to remove during cleaning\ndecide whether words such as names, page labels, or headings are meaningful or distracting\nchoose chunk size and overlap\ndecide whether to use lemmatization\nchoose the embedding model and clustering settings\ninspect outliers\ncompare topic words with representative passages\naccept, revise, merge, split, or reject topic labels\ninterpret visualizations in historical context\n\nThe model helps organize the material, but it does not remove the need for judgment."
   }
 ]

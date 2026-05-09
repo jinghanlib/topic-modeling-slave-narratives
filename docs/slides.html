@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.36">
+
+  <title>Topic Modeling Slave Narratives</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-6a09854ecb2bf3fee2650c33be0639f0.css">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Topic Modeling Slave Narratives</h1>
+  <p class="subtitle">A computational approach to historical texts</p>
+
+<div class="quarto-title-authors">
+</div>
+
+</section>
+<section id="what-we-set-out-to-do" class="slide level2">
+<h2>What We Set Out to Do</h2>
+<ul>
+<li class="fragment">What <strong>themes</strong> appear across the texts?</li>
+<li class="fragment">Which <strong>passages</strong> seem related to each other?</li>
+<li class="fragment">Do themes <strong>change</strong> across publication dates?</li>
+<li class="fragment">Can we make the computer’s topic names <strong>readable</strong>?</li>
+</ul>
+<aside class="notes">
+<p>These are genuine research questions, not just exercises. The goal is to explore a large body of texts that would take years to read in full, and find patterns worth investigating more carefully. Topic modeling does not answer these questions — it surfaces candidates for human interpretation.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section>
+<section id="the-collection" class="title-slide slide level1 center" data-background-color="#003da5">
+<h1>The Collection</h1>
+
+</section>
+<section id="north-american-slave-narratives" class="slide level2">
+<h2>North American Slave Narratives</h2>
+<ul>
+<li><strong>294 texts</strong> from Documenting the American South, University of North Carolina</li>
+<li>First-person accounts, abolitionist testimonies, autobiographies</li>
+<li>Published across more than a century: <strong>1770s–1940s</strong></li>
+<li>Full texts in plain text and XML</li>
+</ul>
+<div class="fragment">
+<p>For this exercise: a reproducible <strong>10% sample</strong> — 29 documents, same seed each time.</p>
+<aside class="notes">
+<p>This is one of the most significant digitized collections of slave narratives. The range of voices, styles, and historical moments is enormous. The 10% sample is designed to run quickly on a student laptop while still producing interpretable results.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="why-sample" class="slide level2">
+<h2>Why Sample?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Full collection</strong></p>
+<ul>
+<li>294 documents</li>
+<li>Possibly thousands of chunks</li>
+<li>Hours to embed and cluster</li>
+<li>Needs a powerful machine</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>10% sample</strong></p>
+<ul>
+<li>29 documents → <strong>1,543 chunks</strong></li>
+<li>5–15 minutes on a modern laptop</li>
+<li>Same pipeline, same outputs</li>
+<li>Reproducible with <code>seed = 42</code></li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>The seed matters because it makes the sample repeatable. If two students use the same code and seed, they get the same 29 documents. This makes it possible to compare results across the class.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="why-topic-modeling" class="title-slide slide level1 center" data-background-color="#003da5">
+<h1>Why Topic Modeling?</h1>
+
+</section>
+<section id="two-approaches" class="slide level2">
+<h2>Two Approaches</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Word counting</strong></p>
+<ul>
+<li>Counts how often each word appears</li>
+<li>Treats every passage independently</li>
+<li>Lists <code>whip</code>, <code>flog</code>, <code>punishment</code> separately</li>
+<li>Answers: <em>which words are most frequent?</em></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Topic modeling</strong></p>
+<ul>
+<li>Groups passages by shared <strong>meaning</strong></li>
+<li>Recognizes related passages even with different words</li>
+<li>Groups <code>whip</code>, <code>flog</code>, <code>overseer</code>, <code>punishment</code> as one theme</li>
+<li>Answers: <em>which passages discuss similar things?</em></li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>A concordance or word frequency list is useful, but it treats each word in isolation. Topic modeling captures something richer — which passages belong together thematically, even when they use different vocabulary.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-the-punishment-theme" class="slide level2">
+<h2>Example — The Punishment Theme</h2>
+<p>A word count would list these words separately:</p>
+<p><code>whip</code> · <code>flog</code> · <code>overseer</code> · <code>punishment</code> · <code>cruelty</code> · <code>tie</code> · <code>plantation</code></p>
+<div class="fragment">
+<p>Topic modeling groups the passages that use these words together into one topic:</p>
+<div class="callout-box">
+<p><strong>Topic 0: Whipping and Plantation Punishment</strong></p>
+</div>
+<aside class="notes">
+<p>This is the key advantage. The model doesn’t just count words — it identifies that passages using these different words are discussing the same theme. A human reader would recognize this immediately; topic modeling lets us do it at scale across hundreds of texts.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section></section>
+<section>
+<section id="preparing-the-texts" class="title-slide slide level1 center" data-background-color="#003da5">
+<h1>Preparing the Texts</h1>
+
+</section>
+<section id="cleaning-every-choice-is-a-research-decision" class="slide level2">
+<h2>Cleaning — Every Choice Is a Research Decision</h2>
+<ul>
+<li class="fragment">Remove image markers like <code>[Cover Image]</code></li>
+<li class="fragment">Remove frontmatter words: <code>PREFACE</code>, <code>CONTENTS</code>, <code>CHAPTER</code></li>
+<li class="fragment">Remove numbers and symbols</li>
+<li class="fragment">Remove common English stopwords: <code>the</code>, <code>and</code>, <code>of</code>, <code>to</code></li>
+<li class="fragment">Remove collection-specific words: <code>page</code>, <code>image</code>, <code>chapter</code></li>
+</ul>
+<div class="fragment">
+<div class="gold-box">
+<p>What we <strong>keep</strong> is as important as what we remove.</p>
+</div>
+<aside class="notes">
+<p>Cleaning is not a neutral technical step. Every decision about what to keep or discard reflects a judgment about what counts as meaningful text. If we removed proper names, we would lose information about which slaveholders appear most often. If we kept page headers, they might become their own spurious “topic.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="chunking" class="slide level2">
+<h2>Chunking</h2>
+<p>Long narratives contain many different themes. Giving a whole narrative to the model as one unit loses that internal variation.</p>
+<div class="fragment">
+<p>We divided each text into <strong>chunks</strong>:</p>
+<ul>
+<li>About <strong>750 words</strong> per chunk</li>
+<li>Small <strong>overlap</strong> between neighboring chunks — so no passage falls between two chunks</li>
+<li>29 documents → <strong>1,543 chunks</strong></li>
+</ul>
+<p>The topic model grouped these <strong>chunks</strong>, not whole narratives.</p>
+<aside class="notes">
+<p>The overlap is important. If a significant passage falls right at the boundary between two chunks, without overlap it might be split in a way that weakens the signal. The overlap gives the model a better chance to keep related context together.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="tokenization-and-lemmatization" class="slide level2">
+<h2>Tokenization and Lemmatization</h2>
+<p>These two steps standardize how words are represented:</p>
+<div class="fragment">
+<p><strong>Tokenization</strong> — breaking text into individual units</p>
+<ul>
+<li><code>Master</code> and <code>master</code> may be treated as different words</li>
+<li>Hyphenated or contracted words may split unexpectedly</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Lemmatization</strong> — reducing variants to a shared base form</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a></a>whip, whipped, whipping  →  whip</span>
+<span id="cb1-2"><a></a>slaves                   →  slave</span>
+<span id="cb1-3"><a></a>preached, preaching      →  preach</span>
+<span id="cb1-4"><a></a>slaveholders             →  slaveholder</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p>Both are choices made by the researcher.</p>
+<aside class="notes">
+<p>Without lemmatization, the model might treat “whip” and “whipping” as separate signals, weakening the punishment topic. With lemmatization, variants collapse into a single form, making topic words easier to read and the topics easier to name.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section></section>
+<section>
+<section id="the-pipeline" class="title-slide slide level1 center" data-background-color="#003da5">
+<h1>The Pipeline</h1>
+
+</section>
+<section id="pipeline-overview" class="slide level2">
+<h2>Pipeline Overview</h2>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A["Raw texts\n294 narratives"] --&gt; B["Clean &amp; chunk\n1,543 passages"]
+    B --&gt; C["Embed\nnomic-embed-text\n768 numbers"]
+    C --&gt; D["Reduce dims\nUMAP\n768 → 5"]
+    D --&gt; E["Cluster\nHDBSCAN\n59 topics"]
+    E --&gt; F["Topic words\nc-TF-IDF"]
+    F --&gt; G["Label\nllama3.1"]
+    G --&gt; H["Results\nCSVs + charts"]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Walk through the diagram left to right. Each step feeds the next. The embedding step is the most computationally intensive — converting 1,543 chunks into 768-dimensional vectors. UMAP and HDBSCAN are fast once embeddings exist. The labeling step calls the local LLM once per topic.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="step-1-embeddings" class="slide level2">
+<h2>Step 1 — Embeddings</h2>
+<p>An embedding is a list of <strong>768 numbers</strong> representing the meaning of a passage.</p>
+<div class="fragment">
+<div class="callout-box">
+<p>Passages with <strong>similar meanings</strong> get <strong>similar numbers</strong> — even when they use different words.</p>
+</div>
+</div>
+<div class="fragment">
+<p>Two passages about being sold away from family → similar number lists Two passages about completely different subjects → very different number lists</p>
+</div>
+<div class="fragment">
+<p>We used <code>nomic-embed-text</code> — runs locally, no paid API, no internet required.</p>
+<aside class="notes">
+<p>The embedding model was trained on enormous amounts of text and learned to place similar passages close together in this 768-dimensional space. The computer doesn’t understand language the way we do, but the embedding translates language into a form where mathematical distance corresponds to semantic similarity.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="step-2-reduce-dimensions" class="slide level2">
+<h2>Step 2 — Reduce Dimensions</h2>
+<p>768 numbers per chunk is too complex to cluster directly.</p>
+<div class="fragment">
+<p><strong>UMAP</strong> compresses 768 dimensions → <strong>5 dimensions</strong></p>
+<p>Like flattening a 3D globe onto a 2D map: some detail is lost, but the overall shape is preserved.</p>
+<aside class="notes">
+<p>UMAP (Uniform Manifold Approximation and Projection) tries to preserve the local neighborhood structure of the data. Points that were close together in 768 dimensions should still be close together in 5 dimensions. The compression makes clustering tractable.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="step-3-clustering" class="slide level2">
+<h2>Step 3 — Clustering</h2>
+<p><strong>HDBSCAN</strong> looks for dense regions in the compressed space.</p>
+<p>Each dense region → one topic.</p>
+<div class="fragment">
+<p>Chunks that don’t fit clearly anywhere → <strong>topic −1</strong> (outliers)</p>
+<p>In our sample: <strong>59 topics</strong>, <strong>18% outliers</strong></p>
+</div>
+<div class="fragment">
+<div class="gold-box">
+<p>Topic <code>0</code> is the <strong>first regular topic</strong>. Only topic <code>−1</code> is the outlier.</p>
+</div>
+<aside class="notes">
+<p>HDBSCAN doesn’t require you to specify the number of topics in advance — it finds the number automatically based on the density structure of the data. The “sensitive” clustering settings we use find more, smaller topics. Outliers (topic -1) are not failures; they represent passages that are genuinely unusual or mixed.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="step-4-topic-words" class="slide level2">
+<h2>Step 4 — Topic Words</h2>
+<p>After clustering, which words are most <strong>distinctive</strong> for each group?</p>
+<div class="fragment">
+<p><strong>c-TF-IDF</strong>: which words appear much more often <em>in this topic</em> than in the rest of the collection?</p>
+</div>
+<div class="fragment">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Topic</th>
+<th>Top words</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>whip, flog, overseer, tie, plantation</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>government, constitution, liberty, american, war</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>dice, aunt, mos, riverside</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>meeting, preach, prayer, spirit, pray</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>c-TF-IDF is an extension of the standard TF-IDF weighting used in information retrieval. It treats each topic as a single document and finds words that are relatively more common in that topic than across the collection as a whole. This is what makes the top words interpretable rather than just frequent.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="step-5-topic-labels" class="slide level2">
+<h2>Step 5 — Topic Labels</h2>
+<p>Top words alone can be mechanical:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a></a>whip_flog_overseer_tie</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p>We used <strong><code>llama3.1</code></strong> — a local language model — to write clearer labels.</p>
+<p>The model saw: - The topic number - The top words - A few representative passages from that topic</p>
+</div>
+<div class="fragment">
+<p>Output: <strong>Whipping and Plantation Punishment</strong></p>
+<aside class="notes">
+<p>The LLM label is a draft interpretation, not a final answer. The LLM has no understanding of the historical context — it is pattern-matching on the words and passages it sees. That is why the next step is always human review. Students are expected to check labels against the actual top words and passages and revise when needed.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section></section>
+<section>
+<section id="results" class="title-slide slide level1 center" data-background-color="#003da5">
+<h1>Results</h1>
+
+</section>
+<section id="example-topic-labels" class="slide level2">
+<h2>Example Topic Labels</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Topic</th>
+<th>Label</th>
+<th style="text-align: right;">Chunks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>Whipping and Plantation Punishment</td>
+<td style="text-align: right;">76</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>Limitations of Liberty in the Post-War Era</td>
+<td style="text-align: right;">66</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>Separation from Family and Emotional Trauma</td>
+<td style="text-align: right;">55</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>Slave-led Christian Services and Meetings</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>Ranch Life and Conflict with Native Americans</td>
+<td style="text-align: right;">44</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>Treatment by Slaveholders</td>
+<td style="text-align: right;">43</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>Racial Identity and Prejudice</td>
+<td style="text-align: right;">41</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>Point out the range: violence, religion, post-war politics, identity, domestic life. This is already more than a simple word count would surface. Also note that some labels are cleaner than others — topic 2’s top words include “dice” and “aunt dice” which are character names, not general themes. That’s something a student would need to investigate.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="nine-interactive-visualizations" class="slide level2">
+<h2>Nine Interactive Visualizations</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Metadata charts</strong></p>
+<ul>
+<li>Topic shares by publication decade</li>
+<li>Topic trends by decade (faceted)</li>
+<li>Topics × decades heatmap</li>
+<li>Documents × topics heatmap</li>
+<li>Sample documents timeline</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>BERTopic charts</strong></p>
+<ul>
+<li>Topic prevalence area chart</li>
+<li>Topic word bars (top words per topic)</li>
+<li>Topic hierarchy</li>
+<li>2D topic cluster map</li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>All nine are interactive — students can hover, zoom, click legend items. The metadata charts (left column) are the most useful for historical interpretation because they connect topics to publication dates and source documents. The BERTopic charts (right column) show the internal structure of the model.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-the-charts-suggest" class="slide level2">
+<h2>What the Charts Suggest</h2>
+<ul>
+<li class="fragment"><strong>1830s</strong>: dominated by abolitionist testimony — punishment, treatment, witness accounts</li>
+<li class="fragment"><strong>1900s–1910s</strong>: Booker T. Washington, Tuskegee, education, race leadership, public life</li>
+<li class="fragment"><strong>Ranch life topic</strong>: tied almost entirely to Nat Love’s narrative (one document)</li>
+<li class="fragment"><strong>Whipping topic</strong>: concentrated in <em>American Slavery As It Is</em> (1839)</li>
+<li class="fragment">Some topics span many documents; others are dominated by one long text</li>
+</ul>
+<aside class="notes">
+<p>These are findings, but they require interpretation. Why does the ranch-life topic appear? Because Nat Love’s narrative describes a very different kind of life than most of the collection. That is historically significant — it shows the diversity of experience within the broad category of “slave narrative.” The model surfaces this; the researcher explains it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="human-interpretation" class="title-slide slide level1 center" data-background-color="#003da5">
+<h1>Human Interpretation</h1>
+
+</section>
+<section id="where-judgment-enters" class="slide level2">
+<h2>Where Judgment Enters</h2>
+<p>The computer organizes — people interpret. Decisions happen at <strong>every step</strong>:</p>
+<ul>
+<li class="fragment">Choosing which texts belong in the collection</li>
+<li class="fragment">Deciding what to remove during cleaning</li>
+<li class="fragment">Choosing chunk size and overlap</li>
+<li class="fragment">Deciding to use lemmatization</li>
+<li class="fragment">Choosing the embedding model and clustering settings</li>
+<li class="fragment">Inspecting outliers</li>
+<li class="fragment">Accepting, revising, merging, or rejecting topic labels</li>
+<li class="fragment">Interpreting visualizations in historical context</li>
+</ul>
+<aside class="notes">
+<p>This is the most important point in the whole presentation. Topic modeling is not a neutral or objective process. Every parameter, every cleaning rule, every labeling decision is a choice made by a researcher. The results are shaped by those choices from beginning to end.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="how-to-revise-a-label" class="slide level2">
+<h2>How to Revise a Label</h2>
+<p>Topic labels are <strong>suggestions</strong>, not final claims.</p>
+<div class="fragment">
+<p>To revise a label:</p>
+<ol type="1">
+<li>Open <code>topic_review_table.csv</code> — inspect the top words</li>
+<li>Open <code>topic_assignments.csv</code> — read several actual passages from that topic</li>
+<li>Decide whether the label fits the passages</li>
+<li>Write a clearer human label if needed</li>
+</ol>
+</div>
+<div class="fragment">
+<div class="gold-box">
+<p>Revising a label does <strong>not</strong> move chunks. It only changes the description.</p>
+</div>
+<aside class="notes">
+<p>Make sure students understand this distinction. The clustering has already happened. Renaming a topic is purely an interpretive act — you are writing a better caption for a group the computer has already defined. If you think the group itself is wrong, that is a different question (merging or splitting topics).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section></section>
+<section>
+<section id="the-exercise" class="title-slide slide level1 center" data-background-color="#003da5">
+<h1>The Exercise</h1>
+
+</section>
+<section id="what-you-will-do" class="slide level2">
+<h2>What You Will Do</h2>
+<p>Run the same pipeline on your own computer — <strong>free, local, no cloud</strong>:</p>
+<ol type="1">
+<li class="fragment">Download the dataset and the repository</li>
+<li class="fragment">Install Python and Ollama</li>
+<li class="fragment">Run the pipeline on the 10% sample (5–15 minutes)</li>
+<li class="fragment">Generate the review table and charts</li>
+<li class="fragment">Open and interpret your results</li>
+</ol>
+<aside class="notes">
+<p>The exercise is designed so that nothing requires a paid service or a high-end computer. Ollama runs the embedding and labeling models locally. The only requirement is enough disk space for the models (about 5–6 GB total) and patience for the first run.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-you-will-produce" class="slide level2">
+<h2>What You Will Produce</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><strong>CSV files</strong></p>
+<ul>
+<li><code>topic_labels_llm.csv</code> — topic labels</li>
+<li><code>topic_review_table.csv</code> — labels, top words, years, documents</li>
+<li><code>topic_assignments.csv</code> — which passage → which topic</li>
+<li><code>topic_info.csv</code> — BERTopic internal statistics</li>
+</ul>
+</div><div class="column" style="width:45%;">
+<p><strong>HTML visualizations</strong></p>
+<ul>
+<li>4 BERTopic charts in <code>visualizations/</code></li>
+<li>5 metadata charts in <code>metadata_visualizations/</code></li>
+</ul>
+<p>Open any <code>.html</code> file by double-clicking — no internet needed.</p>
+</div></div>
+<div class="fragment">
+<p>Then: compare your results against the reference outputs on the website.</p>
+<aside class="notes">
+<p>The comparison step is important. Because of random variation in the clustering, student results will not be identical to the reference outputs — but the major topics should be recognizable. Differences are worth discussing: why did two runs on the same data produce different topics?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="questions-to-think-about" class="slide level2">
+<h2>Questions to Think About</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Reading the topics</strong></p>
+<ul>
+<li>Which label is easiest to understand?</li>
+<li>Which label seems too vague?</li>
+<li>Which label would you revise?</li>
+<li>Do any topics look similar to each other?</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Reading the charts</strong></p>
+<ul>
+<li>Which topics appear in earlier decades?</li>
+<li>Which topics appear in later decades?</li>
+<li>Which topics are dominated by one document?</li>
+<li>Do the time charts show event dates or publication dates?</li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>These questions are on the Hands-On Exercise page. The last question about event vs.&nbsp;publication dates is subtle and worth discussing in class — the charts show publication dates, not when events happened. A narrative published in 1853 might describe events from the 1820s.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="section" class="slide level2" data-background-color="#003da5">
+<h2></h2>
+<div style="text-align: center; padding-top: 2em;">
+<p><strong>Full instructions, visualizations, and CSV downloads:</strong></p>
+<p><a href="https://jinghanlib.github.io/topic-modeling-slave-narratives/">jinghanlib.github.io/topic-modeling-slave-narratives</a></p>
+<p>Simple Explanation · Hands-On Exercise</p>
+</div>
+<aside class="notes">
+<p>Direct students to the website for the full written explanations, all nine interactive charts, and the CSV downloads. The hands-on exercise page has complete step-by-step instructions including how to open a terminal, install Python and Ollama, and run the pipeline.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p>Topic Modeling Slave Narratives — University of California, Riverside</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

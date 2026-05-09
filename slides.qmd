@@ -1,0 +1,498 @@
+---
+title: "Topic Modeling Slave Narratives"
+subtitle: "A computational approach to historical texts"
+format:
+  revealjs:
+    theme: [default, instructions/assets/slides.scss]
+    slide-number: true
+    chalkboard: true
+    transition: slide
+    background-transition: fade
+    footer: "Topic Modeling Slave Narratives — University of California, Riverside"
+    width: 1280
+    height: 720
+    toc: false
+---
+
+## What We Set Out to Do
+
+::: {.incremental}
+- What **themes** appear across the texts?
+- Which **passages** seem related to each other?
+- Do themes **change** across publication dates?
+- Can we make the computer's topic names **readable**?
+:::
+
+::: {.notes}
+These are genuine research questions, not just exercises. The goal is to explore a large body of texts that would take years to read in full, and find patterns worth investigating more carefully. Topic modeling does not answer these questions — it surfaces candidates for human interpretation.
+:::
+
+# The Collection {background-color="#003da5"}
+
+## North American Slave Narratives
+
+- **294 texts** from Documenting the American South, University of North Carolina
+- First-person accounts, abolitionist testimonies, autobiographies
+- Published across more than a century: **1770s–1940s**
+- Full texts in plain text and XML
+
+. . .
+
+For this exercise: a reproducible **10% sample** — 29 documents, same seed each time.
+
+::: {.notes}
+This is one of the most significant digitized collections of slave narratives. The range of voices, styles, and historical moments is enormous. The 10% sample is designed to run quickly on a student laptop while still producing interpretable results.
+:::
+
+## Why Sample?
+
+::: {.columns}
+::: {.column width="50%"}
+**Full collection**
+
+- 294 documents
+- Possibly thousands of chunks
+- Hours to embed and cluster
+- Needs a powerful machine
+:::
+::: {.column width="50%"}
+**10% sample**
+
+- 29 documents → **1,543 chunks**
+- 5–15 minutes on a modern laptop
+- Same pipeline, same outputs
+- Reproducible with `seed = 42`
+:::
+:::
+
+::: {.notes}
+The seed matters because it makes the sample repeatable. If two students use the same code and seed, they get the same 29 documents. This makes it possible to compare results across the class.
+:::
+
+# Why Topic Modeling? {background-color="#003da5"}
+
+## Two Approaches
+
+::: {.columns}
+::: {.column width="50%"}
+**Word counting**
+
+- Counts how often each word appears
+- Treats every passage independently
+- Lists `whip`, `flog`, `punishment` separately
+- Answers: *which words are most frequent?*
+:::
+::: {.column width="50%"}
+**Topic modeling**
+
+- Groups passages by shared **meaning**
+- Recognizes related passages even with different words
+- Groups `whip`, `flog`, `overseer`, `punishment` as one theme
+- Answers: *which passages discuss similar things?*
+:::
+:::
+
+::: {.notes}
+A concordance or word frequency list is useful, but it treats each word in isolation. Topic modeling captures something richer — which passages belong together thematically, even when they use different vocabulary.
+:::
+
+## Example — The Punishment Theme
+
+A word count would list these words separately:
+
+`whip` · `flog` · `overseer` · `punishment` · `cruelty` · `tie` · `plantation`
+
+. . .
+
+Topic modeling groups the passages that use these words together into one topic:
+
+::: {.callout-box}
+**Topic 0: Whipping and Plantation Punishment**
+:::
+
+::: {.notes}
+This is the key advantage. The model doesn't just count words — it identifies that passages using these different words are discussing the same theme. A human reader would recognize this immediately; topic modeling lets us do it at scale across hundreds of texts.
+:::
+
+# Preparing the Texts {background-color="#003da5"}
+
+## Cleaning — Every Choice Is a Research Decision
+
+::: {.incremental}
+- Remove image markers like `[Cover Image]`
+- Remove frontmatter words: `PREFACE`, `CONTENTS`, `CHAPTER`
+- Remove numbers and symbols
+- Remove common English stopwords: `the`, `and`, `of`, `to`
+- Remove collection-specific words: `page`, `image`, `chapter`
+:::
+
+. . .
+
+::: {.gold-box}
+What we **keep** is as important as what we remove.
+:::
+
+::: {.notes}
+Cleaning is not a neutral technical step. Every decision about what to keep or discard reflects a judgment about what counts as meaningful text. If we removed proper names, we would lose information about which slaveholders appear most often. If we kept page headers, they might become their own spurious "topic."
+:::
+
+## Chunking
+
+Long narratives contain many different themes. Giving a whole narrative to the model as one unit loses that internal variation.
+
+. . .
+
+We divided each text into **chunks**:
+
+- About **750 words** per chunk
+- Small **overlap** between neighboring chunks — so no passage falls between two chunks
+- 29 documents → **1,543 chunks**
+
+The topic model grouped these **chunks**, not whole narratives.
+
+::: {.notes}
+The overlap is important. If a significant passage falls right at the boundary between two chunks, without overlap it might be split in a way that weakens the signal. The overlap gives the model a better chance to keep related context together.
+:::
+
+## Tokenization and Lemmatization
+
+These two steps standardize how words are represented:
+
+. . .
+
+**Tokenization** — breaking text into individual units
+
+- `Master` and `master` may be treated as different words
+- Hyphenated or contracted words may split unexpectedly
+
+. . .
+
+**Lemmatization** — reducing variants to a shared base form
+
+```text
+whip, whipped, whipping  →  whip
+slaves                   →  slave
+preached, preaching      →  preach
+slaveholders             →  slaveholder
+```
+
+. . .
+
+Both are choices made by the researcher.
+
+::: {.notes}
+Without lemmatization, the model might treat "whip" and "whipping" as separate signals, weakening the punishment topic. With lemmatization, variants collapse into a single form, making topic words easier to read and the topics easier to name.
+:::
+
+# The Pipeline {background-color="#003da5"}
+
+## Pipeline Overview
+
+```{mermaid}
+flowchart LR
+    A["Raw texts\n294 narratives"] --> B["Clean & chunk\n1,543 passages"]
+    B --> C["Embed\nnomic-embed-text\n768 numbers"]
+    C --> D["Reduce dims\nUMAP\n768 → 5"]
+    D --> E["Cluster\nHDBSCAN\n59 topics"]
+    E --> F["Topic words\nc-TF-IDF"]
+    F --> G["Label\nllama3.1"]
+    G --> H["Results\nCSVs + charts"]
+```
+
+::: {.notes}
+Walk through the diagram left to right. Each step feeds the next. The embedding step is the most computationally intensive — converting 1,543 chunks into 768-dimensional vectors. UMAP and HDBSCAN are fast once embeddings exist. The labeling step calls the local LLM once per topic.
+:::
+
+## Step 1 — Embeddings
+
+An embedding is a list of **768 numbers** representing the meaning of a passage.
+
+. . .
+
+::: {.callout-box}
+Passages with **similar meanings** get **similar numbers** — even when they use different words.
+:::
+
+. . .
+
+Two passages about being sold away from family → similar number lists
+Two passages about completely different subjects → very different number lists
+
+. . .
+
+We used `nomic-embed-text` — runs locally, no paid API, no internet required.
+
+::: {.notes}
+The embedding model was trained on enormous amounts of text and learned to place similar passages close together in this 768-dimensional space. The computer doesn't understand language the way we do, but the embedding translates language into a form where mathematical distance corresponds to semantic similarity.
+:::
+
+## Step 2 — Reduce Dimensions
+
+768 numbers per chunk is too complex to cluster directly.
+
+. . .
+
+**UMAP** compresses 768 dimensions → **5 dimensions**
+
+Like flattening a 3D globe onto a 2D map: some detail is lost, but the overall shape is preserved.
+
+::: {.notes}
+UMAP (Uniform Manifold Approximation and Projection) tries to preserve the local neighborhood structure of the data. Points that were close together in 768 dimensions should still be close together in 5 dimensions. The compression makes clustering tractable.
+:::
+
+## Step 3 — Clustering
+
+**HDBSCAN** looks for dense regions in the compressed space.
+
+Each dense region → one topic.
+
+. . .
+
+Chunks that don't fit clearly anywhere → **topic −1** (outliers)
+
+In our sample: **59 topics**, **18% outliers**
+
+. . .
+
+::: {.gold-box}
+Topic `0` is the **first regular topic**.
+Only topic `−1` is the outlier.
+:::
+
+::: {.notes}
+HDBSCAN doesn't require you to specify the number of topics in advance — it finds the number automatically based on the density structure of the data. The "sensitive" clustering settings we use find more, smaller topics. Outliers (topic -1) are not failures; they represent passages that are genuinely unusual or mixed.
+:::
+
+## Step 4 — Topic Words
+
+After clustering, which words are most **distinctive** for each group?
+
+. . .
+
+**c-TF-IDF**: which words appear much more often *in this topic* than in the rest of the collection?
+
+. . .
+
+| Topic | Top words |
+|---|---|
+| 0 | whip, flog, overseer, tie, plantation |
+| 1 | government, constitution, liberty, american, war |
+| 2 | dice, aunt, mos, riverside |
+| 3 | meeting, preach, prayer, spirit, pray |
+
+::: {.notes}
+c-TF-IDF is an extension of the standard TF-IDF weighting used in information retrieval. It treats each topic as a single document and finds words that are relatively more common in that topic than across the collection as a whole. This is what makes the top words interpretable rather than just frequent.
+:::
+
+## Step 5 — Topic Labels
+
+Top words alone can be mechanical:
+
+```text
+whip_flog_overseer_tie
+```
+
+. . .
+
+We used **`llama3.1`** — a local language model — to write clearer labels.
+
+The model saw:
+- The topic number
+- The top words
+- A few representative passages from that topic
+
+. . .
+
+Output: **Whipping and Plantation Punishment**
+
+::: {.notes}
+The LLM label is a draft interpretation, not a final answer. The LLM has no understanding of the historical context — it is pattern-matching on the words and passages it sees. That is why the next step is always human review. Students are expected to check labels against the actual top words and passages and revise when needed.
+:::
+
+# Results {background-color="#003da5"}
+
+## Example Topic Labels
+
+| Topic | Label | Chunks |
+|---|---|---:|
+| 0 | Whipping and Plantation Punishment | 76 |
+| 1 | Limitations of Liberty in the Post-War Era | 66 |
+| 2 | Separation from Family and Emotional Trauma | 55 |
+| 3 | Slave-led Christian Services and Meetings | 45 |
+| 4 | Ranch Life and Conflict with Native Americans | 44 |
+| 5 | Treatment by Slaveholders | 43 |
+| 6 | Racial Identity and Prejudice | 41 |
+
+::: {.notes}
+Point out the range: violence, religion, post-war politics, identity, domestic life. This is already more than a simple word count would surface. Also note that some labels are cleaner than others — topic 2's top words include "dice" and "aunt dice" which are character names, not general themes. That's something a student would need to investigate.
+:::
+
+## Nine Interactive Visualizations
+
+::: {.columns}
+::: {.column width="50%"}
+**Metadata charts**
+
+- Topic shares by publication decade
+- Topic trends by decade (faceted)
+- Topics × decades heatmap
+- Documents × topics heatmap
+- Sample documents timeline
+:::
+::: {.column width="50%"}
+**BERTopic charts**
+
+- Topic prevalence area chart
+- Topic word bars (top words per topic)
+- Topic hierarchy
+- 2D topic cluster map
+:::
+:::
+
+::: {.notes}
+All nine are interactive — students can hover, zoom, click legend items. The metadata charts (left column) are the most useful for historical interpretation because they connect topics to publication dates and source documents. The BERTopic charts (right column) show the internal structure of the model.
+:::
+
+## What the Charts Suggest
+
+::: {.incremental}
+- **1830s**: dominated by abolitionist testimony — punishment, treatment, witness accounts
+- **1900s–1910s**: Booker T. Washington, Tuskegee, education, race leadership, public life
+- **Ranch life topic**: tied almost entirely to Nat Love's narrative (one document)
+- **Whipping topic**: concentrated in *American Slavery As It Is* (1839)
+- Some topics span many documents; others are dominated by one long text
+:::
+
+::: {.notes}
+These are findings, but they require interpretation. Why does the ranch-life topic appear? Because Nat Love's narrative describes a very different kind of life than most of the collection. That is historically significant — it shows the diversity of experience within the broad category of "slave narrative." The model surfaces this; the researcher explains it.
+:::
+
+# Human Interpretation {background-color="#003da5"}
+
+## Where Judgment Enters
+
+The computer organizes — people interpret. Decisions happen at **every step**:
+
+::: {.incremental}
+- Choosing which texts belong in the collection
+- Deciding what to remove during cleaning
+- Choosing chunk size and overlap
+- Deciding to use lemmatization
+- Choosing the embedding model and clustering settings
+- Inspecting outliers
+- Accepting, revising, merging, or rejecting topic labels
+- Interpreting visualizations in historical context
+:::
+
+::: {.notes}
+This is the most important point in the whole presentation. Topic modeling is not a neutral or objective process. Every parameter, every cleaning rule, every labeling decision is a choice made by a researcher. The results are shaped by those choices from beginning to end.
+:::
+
+## How to Revise a Label
+
+Topic labels are **suggestions**, not final claims.
+
+. . .
+
+To revise a label:
+
+1. Open `topic_review_table.csv` — inspect the top words
+2. Open `topic_assignments.csv` — read several actual passages from that topic
+3. Decide whether the label fits the passages
+4. Write a clearer human label if needed
+
+. . .
+
+::: {.gold-box}
+Revising a label does **not** move chunks. It only changes the description.
+:::
+
+::: {.notes}
+Make sure students understand this distinction. The clustering has already happened. Renaming a topic is purely an interpretive act — you are writing a better caption for a group the computer has already defined. If you think the group itself is wrong, that is a different question (merging or splitting topics).
+:::
+
+# The Exercise {background-color="#003da5"}
+
+## What You Will Do
+
+Run the same pipeline on your own computer — **free, local, no cloud**:
+
+::: {.incremental}
+1. Download the dataset and the repository
+2. Install Python and Ollama
+3. Run the pipeline on the 10% sample (5–15 minutes)
+4. Generate the review table and charts
+5. Open and interpret your results
+:::
+
+::: {.notes}
+The exercise is designed so that nothing requires a paid service or a high-end computer. Ollama runs the embedding and labeling models locally. The only requirement is enough disk space for the models (about 5–6 GB total) and patience for the first run.
+:::
+
+## What You Will Produce
+
+::: {.columns}
+::: {.column width="55%"}
+**CSV files**
+
+- `topic_labels_llm.csv` — topic labels
+- `topic_review_table.csv` — labels, top words, years, documents
+- `topic_assignments.csv` — which passage → which topic
+- `topic_info.csv` — BERTopic internal statistics
+:::
+::: {.column width="45%"}
+**HTML visualizations**
+
+- 4 BERTopic charts in `visualizations/`
+- 5 metadata charts in `metadata_visualizations/`
+
+Open any `.html` file by double-clicking — no internet needed.
+:::
+:::
+
+. . .
+
+Then: compare your results against the reference outputs on the website.
+
+::: {.notes}
+The comparison step is important. Because of random variation in the clustering, student results will not be identical to the reference outputs — but the major topics should be recognizable. Differences are worth discussing: why did two runs on the same data produce different topics?
+:::
+
+## Questions to Think About
+
+::: {.columns}
+::: {.column width="50%"}
+**Reading the topics**
+
+- Which label is easiest to understand?
+- Which label seems too vague?
+- Which label would you revise?
+- Do any topics look similar to each other?
+:::
+::: {.column width="50%"}
+**Reading the charts**
+
+- Which topics appear in earlier decades?
+- Which topics appear in later decades?
+- Which topics are dominated by one document?
+- Do the time charts show event dates or publication dates?
+:::
+:::
+
+::: {.notes}
+These questions are on the Hands-On Exercise page. The last question about event vs. publication dates is subtle and worth discussing in class — the charts show publication dates, not when events happened. A narrative published in 1853 might describe events from the 1820s.
+:::
+
+## {background-color="#003da5"}
+
+::: {style="text-align: center; padding-top: 2em;"}
+**Full instructions, visualizations, and CSV downloads:**
+
+[jinghanlib.github.io/topic-modeling-slave-narratives](https://jinghanlib.github.io/topic-modeling-slave-narratives/)
+
+Simple Explanation · Hands-On Exercise
+:::
+
+::: {.notes}
+Direct students to the website for the full written explanations, all nine interactive charts, and the CSV downloads. The hands-on exercise page has complete step-by-step instructions including how to open a terminal, install Python and Ollama, and run the pipeline.
+:::

@@ -1,0 +1,119 @@
+/*-- scss:defaults --*/
+
+$font-family-sans-serif: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !default;
+$presentation-heading-color: #003da5 !default;
+$presentation-heading-font-weight: 750 !default;
+$body-color: #1f2937 !default;
+$body-bg: #f6f8fc !default;
+$link-color: #002b73 !default;
+$selection-bg: #ffb81c !default;
+
+/*-- scss:rules --*/
+
+.reveal .slide-number {
+  color: #ffb81c;
+  background: transparent;
+}
+
+.reveal .progress {
+  color: #ffb81c;
+}
+
+.reveal .controls {
+  color: #003da5;
+}
+
+.reveal h1 {
+  color: #ffb81c;
+  font-weight: 800;
+}
+
+.reveal h2 {
+  color: #003da5;
+  border-bottom: 4px solid #ffb81c;
+  padding-bottom: 0.2em;
+  font-weight: 750;
+}
+
+.reveal h3 {
+  color: #243f6b;
+}
+
+.reveal .footer {
+  color: #8898aa;
+  font-size: 0.42em;
+}
+
+/* Section title slides */
+.reveal section[data-background-color="#003da5"] h2 {
+  color: #ffb81c !important;
+  border-bottom: 3px solid rgba(255, 184, 28, 0.35) !important;
+}
+
+.reveal section[data-background-color="#003da5"] p,
+.reveal section[data-background-color="#003da5"] li {
+  color: #e8f0ff;
+}
+
+/* Callout-style boxes */
+.callout-box {
+  background: #eaf1fb;
+  border-left: 6px solid #003da5;
+  padding: 0.55em 1em;
+  border-radius: 4px;
+  margin: 0.5em 0;
+}
+
+.gold-box {
+  background: #fff3d4;
+  border-left: 6px solid #ffb81c;
+  padding: 0.55em 1em;
+  border-radius: 4px;
+  margin: 0.5em 0;
+}
+
+/* Tables */
+.reveal table {
+  font-size: 0.8em;
+  width: 100%;
+}
+
+.reveal table thead th {
+  background: #003da5 !important;
+  color: #fff !important;
+}
+
+.reveal table tbody tr:nth-child(even) {
+  background: #f0f4f8;
+}
+
+/* Mermaid diagrams */
+.reveal .mermaid {
+  text-align: center;
+}
+
+/* Code blocks */
+.reveal pre {
+  font-size: 0.7em;
+  box-shadow: none;
+  border: 1px solid #d8deea;
+}
+
+/* Column gaps */
+.reveal .columns {
+  gap: 2em;
+}
+
+/* Larger bullets */
+.reveal ul, .reveal ol {
+  font-size: 0.92em;
+  line-height: 1.6;
+}
+
+/* Fragment highlight */
+.reveal .fragment.highlight-gold.visible {
+  color: #7a5800;
+  background: #fff3d4;
+  padding: 0 4px;
+  border-radius: 3px;
+}

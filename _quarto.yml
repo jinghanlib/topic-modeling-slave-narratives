@@ -5,6 +5,7 @@ project:
     - index.qmd
     - instructions/01_simple_explanation.qmd
     - instructions/02_hands_on_exercise.qmd
+    - slides.qmd
   resources:
     - outputs/bertopic_sample_nomic_sensitive_lemmatized/topic_review_table.csv
     - outputs/bertopic_sample_nomic_sensitive_lemmatized/topic_labels_llm.csv
@@ -24,6 +25,8 @@ website:
         href: instructions/01_simple_explanation.qmd
       - text: "Hands-On Exercise"
         href: instructions/02_hands_on_exercise.qmd
+      - text: "Slides"
+        href: slides.qmd
 
 format:
   html:

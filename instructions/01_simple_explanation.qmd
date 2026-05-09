@@ -135,6 +135,19 @@ BERTopic still uses words when describing topics. After grouping similar chunks 
 
 ## The BERTopic Pipeline
 
+The pipeline has five steps. Each step feeds the next.
+
+```{mermaid}
+flowchart LR
+    A["Raw texts\n294 narratives"] --> B["Clean & chunk\n1,543 passages"]
+    B --> C["Embed\nnomic-embed-text\n768 numbers"]
+    C --> D["Reduce dims\nUMAP\n768 → 5"]
+    D --> E["Cluster\nHDBSCAN\n59 topics"]
+    E --> F["Topic words\nc-TF-IDF"]
+    F --> G["Label\nllama3.1"]
+    G --> H["Results\nCSVs + charts"]
+```
+
 ### Step 1: Turn Text Into Embeddings
 
 An embedding is a list of numbers that represents the meaning of a passage. Every chunk gets converted into its own list — in our case, 768 numbers.
