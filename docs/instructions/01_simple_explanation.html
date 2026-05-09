@@ -4183,6 +4183,14 @@ overflow-x: auto;
 padding: 14px;
 border: 1px solid var(--line);
 }
+.pipeline-table table {
+font-size: 0.9rem;
+width: auto;
+}
+.pipeline-table td,
+.pipeline-table th {
+padding: 5px 10px;
+}
 .mermaid {
 width: 100%;
 overflow-x: auto;
@@ -4532,11 +4540,12 @@ preached, preaching -&gt; preach</code></pre>
 <section id="the-bertopic-pipeline" class="level2">
 <h2 class="anchored" data-anchor-id="the-bertopic-pipeline">The BERTopic Pipeline</h2>
 <p>The pipeline has five steps. Each step feeds the next.</p>
+<div class="pipeline-table" data-tbl-colwidths="[6,74,20]">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 40%">
-<col style="width: 30%">
-<col style="width: 30%">
+<col style="width: 6%">
+<col style="width: 74%">
+<col style="width: 20%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -4548,46 +4557,32 @@ preached, preaching -&gt; preach</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">1</td>
-<td><strong>Raw texts</strong> — 294 narratives from the collection</td>
-<td>—</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">2</td>
-<td><strong>Clean and chunk</strong> — remove noise, split into 750-word passages (1,543 total)</td>
-<td>—</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">3</td>
 <td><strong>Embed</strong> — convert each passage into 768 numbers representing its meaning</td>
 <td>nomic-embed-text</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">4</td>
+<td style="text-align: right;">2</td>
 <td><strong>Reduce dimensions</strong> — compress 768 numbers down to 5</td>
 <td>UMAP</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">5</td>
+<td style="text-align: right;">3</td>
 <td><strong>Cluster</strong> — group similar passages into topics</td>
 <td>HDBSCAN</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">6</td>
+<td style="text-align: right;">4</td>
 <td><strong>Find topic words</strong> — identify the most distinctive words per topic</td>
 <td>c-TF-IDF</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">7</td>
+<td style="text-align: right;">5</td>
 <td><strong>Generate labels</strong> — write a human-readable name for each topic</td>
 <td>llama3.1</td>
 </tr>
-<tr class="even">
-<td style="text-align: right;">8</td>
-<td><strong>Results</strong> — CSV files and interactive charts</td>
-<td>—</td>
-</tr>
 </tbody>
 </table>
+</div>
 <section id="step-1-turn-text-into-embeddings" class="level3">
 <h3 class="anchored" data-anchor-id="step-1-turn-text-into-embeddings">Step 1: Turn Text Into Embeddings</h3>
 <p>An embedding is a list of numbers that represents the meaning of a passage. Every chunk gets converted into its own list — in our case, 768 numbers.</p>

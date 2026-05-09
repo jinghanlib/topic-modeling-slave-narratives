@@ -137,16 +137,15 @@ BERTopic still uses words when describing topics. After grouping similar chunks 
 
 The pipeline has five steps. Each step feeds the next.
 
+::: {.pipeline-table tbl-colwidths="[6,74,20]"}
 | Step | What happens | Tool |
 |---:|---|---|
-| 1 | **Raw texts** — 294 narratives from the collection | — |
-| 2 | **Clean and chunk** — remove noise, split into 750-word passages (1,543 total) | — |
-| 3 | **Embed** — convert each passage into 768 numbers representing its meaning | nomic-embed-text |
-| 4 | **Reduce dimensions** — compress 768 numbers down to 5 | UMAP |
-| 5 | **Cluster** — group similar passages into topics | HDBSCAN |
-| 6 | **Find topic words** — identify the most distinctive words per topic | c-TF-IDF |
-| 7 | **Generate labels** — write a human-readable name for each topic | llama3.1 |
-| 8 | **Results** — CSV files and interactive charts | — |
+| 1 | **Embed** — convert each passage into 768 numbers representing its meaning | nomic-embed-text |
+| 2 | **Reduce dimensions** — compress 768 numbers down to 5 | UMAP |
+| 3 | **Cluster** — group similar passages into topics | HDBSCAN |
+| 4 | **Find topic words** — identify the most distinctive words per topic | c-TF-IDF |
+| 5 | **Generate labels** — write a human-readable name for each topic | llama3.1 |
+:::
 
 ### Step 1: Turn Text Into Embeddings
 
