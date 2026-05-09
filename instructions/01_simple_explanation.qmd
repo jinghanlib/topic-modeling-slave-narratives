@@ -138,7 +138,7 @@ BERTopic still uses words when describing topics. After grouping similar chunks 
 The pipeline has five steps. Each step feeds the next.
 
 ```{mermaid}
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '18px', 'fontFamily': 'ui-sans-serif, system-ui, sans-serif', 'primaryColor': '#eaf1fb', 'primaryBorderColor': '#003da5', 'primaryTextColor': '#1f2937', 'lineColor': '#003da5'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '24px', 'fontFamily': 'ui-sans-serif, system-ui, sans-serif', 'primaryColor': '#eaf1fb', 'primaryBorderColor': '#003da5', 'primaryTextColor': '#1f2937', 'lineColor': '#003da5'}}}%%
 flowchart LR
     subgraph top[" "]
         direction LR
