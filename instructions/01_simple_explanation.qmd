@@ -138,15 +138,19 @@ BERTopic still uses words when describing topics. After grouping similar chunks 
 The pipeline has five steps. Each step feeds the next.
 
 ```{mermaid}
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '15px', 'fontFamily': 'ui-sans-serif, system-ui, sans-serif', 'primaryColor': '#eaf1fb', 'primaryBorderColor': '#003da5', 'primaryTextColor': '#1f2937', 'lineColor': '#003da5'}}}%%
-flowchart TD
-    A["Raw texts\n294 narratives"] --> B["Clean and chunk\n750-word passages · 1,543 total"]
-    B --> C["Embed with nomic-embed-text\n768 numbers per chunk"]
-    C --> D["Reduce dimensions with UMAP\n768 dimensions → 5 dimensions"]
-    D --> E["Cluster with HDBSCAN\n59 topics found in the sample"]
-    E --> F["Find topic words with c-TF-IDF\nmost distinctive words per topic"]
-    F --> G["Generate labels with llama3.1\nhuman-readable topic names"]
-    G --> H["Results\nCSV files and interactive charts"]
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '18px', 'fontFamily': 'ui-sans-serif, system-ui, sans-serif', 'primaryColor': '#eaf1fb', 'primaryBorderColor': '#003da5', 'primaryTextColor': '#1f2937', 'lineColor': '#003da5'}}}%%
+flowchart LR
+    subgraph top[" "]
+        direction LR
+        A["Raw texts"] --> B["Clean and chunk"] --> C["Embed"] --> D["Reduce dimensions"]
+    end
+    subgraph bottom[" "]
+        direction LR
+        E["Cluster"] --> F["Find topic words"] --> G["Generate labels"] --> H["Results"]
+    end
+    D --> E
+    style top fill:none,stroke:none
+    style bottom fill:none,stroke:none
 ```
 
 ### Step 1: Turn Text Into Embeddings

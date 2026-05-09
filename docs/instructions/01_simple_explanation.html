@@ -7629,15 +7629,19 @@ preached, preaching -&gt; preach</code></pre>
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
-<pre class="mermaid mermaid-js">%%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: {&#39;fontSize&#39;: &#39;15px&#39;, &#39;fontFamily&#39;: &#39;ui-sans-serif, system-ui, sans-serif&#39;, &#39;primaryColor&#39;: &#39;#eaf1fb&#39;, &#39;primaryBorderColor&#39;: &#39;#003da5&#39;, &#39;primaryTextColor&#39;: &#39;#1f2937&#39;, &#39;lineColor&#39;: &#39;#003da5&#39;}}}%%
-flowchart TD
-    A[&quot;Raw texts\n294 narratives&quot;] --&gt; B[&quot;Clean and chunk\n750-word passages · 1,543 total&quot;]
-    B --&gt; C[&quot;Embed with nomic-embed-text\n768 numbers per chunk&quot;]
-    C --&gt; D[&quot;Reduce dimensions with UMAP\n768 dimensions → 5 dimensions&quot;]
-    D --&gt; E[&quot;Cluster with HDBSCAN\n59 topics found in the sample&quot;]
-    E --&gt; F[&quot;Find topic words with c-TF-IDF\nmost distinctive words per topic&quot;]
-    F --&gt; G[&quot;Generate labels with llama3.1\nhuman-readable topic names&quot;]
-    G --&gt; H[&quot;Results\nCSV files and interactive charts&quot;]
+<pre class="mermaid mermaid-js">%%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: {&#39;fontSize&#39;: &#39;18px&#39;, &#39;fontFamily&#39;: &#39;ui-sans-serif, system-ui, sans-serif&#39;, &#39;primaryColor&#39;: &#39;#eaf1fb&#39;, &#39;primaryBorderColor&#39;: &#39;#003da5&#39;, &#39;primaryTextColor&#39;: &#39;#1f2937&#39;, &#39;lineColor&#39;: &#39;#003da5&#39;}}}%%
+flowchart LR
+    subgraph top[&quot; &quot;]
+        direction LR
+        A[&quot;Raw texts&quot;] --&gt; B[&quot;Clean and chunk&quot;] --&gt; C[&quot;Embed&quot;] --&gt; D[&quot;Reduce dimensions&quot;]
+    end
+    subgraph bottom[&quot; &quot;]
+        direction LR
+        E[&quot;Cluster&quot;] --&gt; F[&quot;Find topic words&quot;] --&gt; G[&quot;Generate labels&quot;] --&gt; H[&quot;Results&quot;]
+    end
+    D --&gt; E
+    style top fill:none,stroke:none
+    style bottom fill:none,stroke:none
 </pre>
 </div>
 <p></p></figure><p></p>
