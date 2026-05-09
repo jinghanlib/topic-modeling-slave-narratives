@@ -138,14 +138,19 @@ BERTopic still uses words when describing topics. After grouping similar chunks 
 The pipeline has five steps. Each step feeds the next.
 
 ```{mermaid}
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '15px', 'fontFamily': 'ui-sans-serif, system-ui, sans-serif', 'primaryColor': '#eaf1fb', 'primaryBorderColor': '#003da5', 'primaryTextColor': '#1f2937', 'lineColor': '#003da5'}}}%%
 flowchart LR
-    A["Raw texts\n294 narratives"] --> B["Clean & chunk\n1,543 passages"]
-    B --> C["Embed\nnomic-embed-text\n768 numbers"]
-    C --> D["Reduce dims\nUMAP\n768 → 5"]
-    D --> E["Cluster\nHDBSCAN\n59 topics"]
-    E --> F["Topic words\nc-TF-IDF"]
-    F --> G["Label\nllama3.1"]
-    G --> H["Results\nCSVs + charts"]
+    subgraph top[" "]
+        direction LR
+        A["Raw texts\n294 narratives"] --> B["Clean & chunk\n1,543 passages"] --> C["Embed\nnomic-embed-text"] --> D["Reduce dims\nUMAP · 768→5"]
+    end
+    subgraph bottom[" "]
+        direction LR
+        E["Cluster\nHDBSCAN"] --> F["Topic words\nc-TF-IDF"] --> G["Label\nllama3.1"] --> H["Results\nCSVs + charts"]
+    end
+    D --> E
+    style top fill:none,stroke:none
+    style bottom fill:none,stroke:none
 ```
 
 ### Step 1: Turn Text Into Embeddings
@@ -154,7 +159,7 @@ An embedding is a list of numbers that represents the meaning of a passage. Ever
 
 The key insight is how those numbers are assigned. The embedding model was trained on enormous amounts of text, and it learned to place passages with similar meanings close together in that 768-dimensional space, and passages with different meanings farther apart. Two passages that both describe being sold away from family will end up with similar number lists, even if they share few of the same words. Two passages about completely different subjects — say, plantation labor and railroad travel — will end up with very different number lists.
 
-This is what makes topic modeling possible. The computer does not understand language the way a reader does, but the embedding model translates language into a form where closeness means relatedness. BERTopic then uses that structure to find groups of passages that cluster together.
+The computer does not understand language the way a reader does, but the embedding model translates language into a form where closeness means relatedness. BERTopic uses that structure to find groups of passages that cluster together.
 
 In our project, we used a local embedding model through Ollama:
 

@@ -189,15 +189,19 @@ Without lemmatization, the model might treat "whip" and "whipping" as separate s
 ## Pipeline Overview
 
 ```{mermaid}
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '20px', 'fontFamily': 'ui-sans-serif, system-ui, sans-serif', 'primaryColor': '#eaf1fb', 'primaryBorderColor': '#003da5', 'primaryTextColor': '#1f2937', 'lineColor': '#003da5'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '22px', 'fontFamily': 'ui-sans-serif, system-ui, sans-serif', 'primaryColor': '#eaf1fb', 'primaryBorderColor': '#003da5', 'primaryTextColor': '#1f2937', 'lineColor': '#003da5'}}}%%
 flowchart LR
-    A["Raw texts"] --> B["Clean & chunk"]
-    B --> C["Embed"]
-    C --> D["Reduce dims"]
-    D --> E["Cluster"]
-    E --> F["Topic words"]
-    F --> G["Label"]
-    G --> H["Results"]
+    subgraph top[" "]
+        direction LR
+        A["Raw texts"] --> B["Clean & chunk"] --> C["Embed"] --> D["Reduce dims"]
+    end
+    subgraph bottom[" "]
+        direction LR
+        E["Cluster"] --> F["Topic words"] --> G["Label"] --> H["Results"]
+    end
+    D --> E
+    style top fill:none,stroke:none
+    style bottom fill:none,stroke:none
 ```
 
 ::: {.notes}
@@ -210,14 +214,14 @@ An embedding is a list of **768 numbers** representing the meaning of a passage.
 
 . . .
 
-::: {.callout-box}
 Passages with **similar meanings** get **similar numbers** — even when they use different words.
-:::
+
+Two passages about being sold away from family → similar number lists
+Two passages about plantation labor and railroad travel → very different number lists
 
 . . .
 
-Two passages about being sold away from family → similar number lists
-Two passages about completely different subjects → very different number lists
+BERTopic uses that structure to find groups of passages that cluster together.
 
 . . .
 

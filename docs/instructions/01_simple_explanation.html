@@ -7629,14 +7629,19 @@ preached, preaching -&gt; preach</code></pre>
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
-<pre class="mermaid mermaid-js">flowchart LR
-    A[&quot;Raw texts\n294 narratives&quot;] --&gt; B[&quot;Clean &amp; chunk\n1,543 passages&quot;]
-    B --&gt; C[&quot;Embed\nnomic-embed-text\n768 numbers&quot;]
-    C --&gt; D[&quot;Reduce dims\nUMAP\n768 → 5&quot;]
-    D --&gt; E[&quot;Cluster\nHDBSCAN\n59 topics&quot;]
-    E --&gt; F[&quot;Topic words\nc-TF-IDF&quot;]
-    F --&gt; G[&quot;Label\nllama3.1&quot;]
-    G --&gt; H[&quot;Results\nCSVs + charts&quot;]
+<pre class="mermaid mermaid-js">%%{init: {&#39;theme&#39;: &#39;base&#39;, &#39;themeVariables&#39;: {&#39;fontSize&#39;: &#39;15px&#39;, &#39;fontFamily&#39;: &#39;ui-sans-serif, system-ui, sans-serif&#39;, &#39;primaryColor&#39;: &#39;#eaf1fb&#39;, &#39;primaryBorderColor&#39;: &#39;#003da5&#39;, &#39;primaryTextColor&#39;: &#39;#1f2937&#39;, &#39;lineColor&#39;: &#39;#003da5&#39;}}}%%
+flowchart LR
+    subgraph top[&quot; &quot;]
+        direction LR
+        A[&quot;Raw texts\n294 narratives&quot;] --&gt; B[&quot;Clean &amp; chunk\n1,543 passages&quot;] --&gt; C[&quot;Embed\nnomic-embed-text&quot;] --&gt; D[&quot;Reduce dims\nUMAP · 768→5&quot;]
+    end
+    subgraph bottom[&quot; &quot;]
+        direction LR
+        E[&quot;Cluster\nHDBSCAN&quot;] --&gt; F[&quot;Topic words\nc-TF-IDF&quot;] --&gt; G[&quot;Label\nllama3.1&quot;] --&gt; H[&quot;Results\nCSVs + charts&quot;]
+    end
+    D --&gt; E
+    style top fill:none,stroke:none
+    style bottom fill:none,stroke:none
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -7647,7 +7652,7 @@ preached, preaching -&gt; preach</code></pre>
 <h3 class="anchored" data-anchor-id="step-1-turn-text-into-embeddings">Step 1: Turn Text Into Embeddings</h3>
 <p>An embedding is a list of numbers that represents the meaning of a passage. Every chunk gets converted into its own list — in our case, 768 numbers.</p>
 <p>The key insight is how those numbers are assigned. The embedding model was trained on enormous amounts of text, and it learned to place passages with similar meanings close together in that 768-dimensional space, and passages with different meanings farther apart. Two passages that both describe being sold away from family will end up with similar number lists, even if they share few of the same words. Two passages about completely different subjects — say, plantation labor and railroad travel — will end up with very different number lists.</p>
-<p>This is what makes topic modeling possible. The computer does not understand language the way a reader does, but the embedding model translates language into a form where closeness means relatedness. BERTopic then uses that structure to find groups of passages that cluster together.</p>
+<p>The computer does not understand language the way a reader does, but the embedding model translates language into a form where closeness means relatedness. BERTopic uses that structure to find groups of passages that cluster together.</p>
 <p>In our project, we used a local embedding model through Ollama:</p>
 <pre class="text"><code>nomic-embed-text</code></pre>
 <p>This model runs entirely on your own computer, requires no paid API, and is designed specifically for producing embeddings from text. It is the same kind of model used in larger commercial systems, but it can run locally without a GPU.</p>
