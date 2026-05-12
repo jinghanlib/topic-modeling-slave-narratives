@@ -8,7 +8,8 @@ format:
     chalkboard: true
     transition: slide
     background-transition: fade
-    footer: "Topic Modeling Slave Narratives — University of California, Riverside"
+    footer: "Topic Modeling Slave Narratives — UCR Library"
+    logo: logo.png
     width: 1280
     height: 720
     toc: false

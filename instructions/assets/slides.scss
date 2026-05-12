@@ -119,6 +119,18 @@ $selection-bg: #ffb81c !default;
   line-height: 1.6;
 }
 
+/* Logo — bottom right */
+.reveal .slide-logo {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  top: auto !important;
+  left: auto !important;
+  max-height: 48px;
+  width: auto;
+  opacity: 0.9;
+}
+
 /* Fragment highlight */
 .reveal .fragment.highlight-gold.visible {
   color: #7a5800;
