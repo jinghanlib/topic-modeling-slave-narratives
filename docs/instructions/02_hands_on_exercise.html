@@ -4460,6 +4460,7 @@ overflow-x: hidden;
   <li><a href="#read-the-charts" id="toc-read-the-charts" class="nav-link" data-scroll-target="#read-the-charts">Read the Charts</a></li>
   <li><a href="#how-to-read-topic-numbers" id="toc-how-to-read-topic-numbers" class="nav-link" data-scroll-target="#how-to-read-topic-numbers">How To Read Topic Numbers</a></li>
   <li><a href="#exercise-questions" id="toc-exercise-questions" class="nav-link" data-scroll-target="#exercise-questions">Exercise Questions</a></li>
+  <li><a href="#optional-try-a-different-sample" id="toc-optional-try-a-different-sample" class="nav-link" data-scroll-target="#optional-try-a-different-sample">Optional: Try a Different Sample</a></li>
   <li><a href="#optional-run-the-full-collection" id="toc-optional-run-the-full-collection" class="nav-link" data-scroll-target="#optional-run-the-full-collection">Optional: Run the Full Collection</a></li>
   <li><a href="#common-problems" id="toc-common-problems" class="nav-link" data-scroll-target="#common-problems">Common Problems</a>
   <ul class="collapse">
@@ -4937,19 +4938,44 @@ Topic 1 = second regular topic</code></pre>
 <li>Do the time charts show event dates or publication dates? How can you tell?</li>
 </ol>
 </section>
-<section id="optional-run-the-full-collection" class="level2">
-<h2 class="anchored" data-anchor-id="optional-run-the-full-collection">Optional: Run the Full Collection</h2>
-<p>Only do this after the 10% sample works.</p>
+<section id="optional-try-a-different-sample" class="level2">
+<h2 class="anchored" data-anchor-id="optional-try-a-different-sample">Optional: Try a Different Sample</h2>
+<p>Once your first run works, you can draw a different 10% sample by changing the seed number. Use a new output folder so your original results are not overwritten. The <strong>More Analyses → Second 10% Sample</strong> tab on this site shows a reference run using seed 9 — you can compare your results against it.</p>
 <p><strong>Mac or Linux:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-u</span> scripts/run_bertopic_sample.py <span class="dt">\</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--sample-frac</span> 1.0 <span class="dt">\</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output-dir</span> outputs/my_run_full <span class="dt">\</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--seed</span> 9 <span class="dt">\</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output-dir</span> outputs/my_run_seed9 <span class="dt">\</span></span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--embedding-backend</span> ollama <span class="dt">\</span></span>
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--ollama-embedding-model</span> nomic-embed-text <span class="dt">\</span></span>
 <span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--representation-backend</span> ctfidf <span class="dt">\</span></span>
 <span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">--clustering</span> sensitive <span class="dt">\</span></span>
 <span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">--label-backend</span> ollama <span class="dt">\</span></span>
 <span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">--ollama-model</span> llama3.1:latest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Windows (Command Prompt):</strong></p>
+<pre><code>python -u scripts/run_bertopic_sample.py ^
+  --seed 9 ^
+  --output-dir outputs/my_run_seed9 ^
+  --embedding-backend ollama ^
+  --ollama-embedding-model nomic-embed-text ^
+  --representation-backend ctfidf ^
+  --clustering sensitive ^
+  --label-backend ollama ^
+  --ollama-model llama3.1:latest</code></pre>
+<p>Check <code>outputs/my_run_seed9/sample_documents.csv</code> to see which 29 documents were selected, then compare your topic labels against the reference on the <a href="../instructions/03_sample2_results.html">Second 10% Sample</a> page.</p>
+</section>
+<section id="optional-run-the-full-collection" class="level2">
+<h2 class="anchored" data-anchor-id="optional-run-the-full-collection">Optional: Run the Full Collection</h2>
+<p>Only do this after the 10% sample works. The full run processes all 294 documents and may take several hours. The <strong>More Analyses → Full Collection</strong> tab on this site shows a reference run — you can compare your results against it.</p>
+<p><strong>Mac or Linux:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-u</span> scripts/run_bertopic_sample.py <span class="dt">\</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--sample-frac</span> 1.0 <span class="dt">\</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output-dir</span> outputs/my_run_full <span class="dt">\</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--embedding-backend</span> ollama <span class="dt">\</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--ollama-embedding-model</span> nomic-embed-text <span class="dt">\</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--representation-backend</span> ctfidf <span class="dt">\</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">--clustering</span> sensitive <span class="dt">\</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">--label-backend</span> ollama <span class="dt">\</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">--ollama-model</span> llama3.1:latest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Windows (Command Prompt):</strong></p>
 <pre><code>python -u scripts/run_bertopic_sample.py ^
   --sample-frac 1.0 ^
@@ -4960,7 +4986,7 @@ Topic 1 = second regular topic</code></pre>
   --clustering sensitive ^
   --label-backend ollama ^
   --ollama-model llama3.1:latest</code></pre>
-<p>The full collection may take hours.</p>
+<p>The full collection may take hours. Compare your results against the <a href="../instructions/04_full_results.html">Full Collection</a> page when it finishes.</p>
 </section>
 <section id="common-problems" class="level2">
 <h2 class="anchored" data-anchor-id="common-problems">Common Problems</h2>
@@ -4972,16 +4998,16 @@ Topic 1 = second regular topic</code></pre>
 <h3 class="anchored" data-anchor-id="python-says-packages-are-missing">Python says packages are missing</h3>
 <p>Make sure the virtual environment is active.</p>
 <p>Mac or Linux:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Windows (Command Prompt):</p>
 <pre><code>.venv\Scripts\activate</code></pre>
 <p>Then reinstall packages:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">-r</span> requirements.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">-r</span> requirements.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="ollama-connection-error" class="level3">
 <h3 class="anchored" data-anchor-id="ollama-connection-error">Ollama connection error</h3>
 <p>Open the Ollama app, or run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ollama</span> list</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ollama</span> list</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If Ollama is working, it should show installed models.</p>
 </section>
 <section id="the-run-is-slow" class="level3">

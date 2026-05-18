@@ -492,9 +492,43 @@ After opening the metadata visualizations, answer:
 4. Which topics appear across several documents?
 5. Do the time charts show event dates or publication dates? How can you tell?
 
+## Optional: Try a Different Sample
+
+Once your first run works, you can draw a different 10% sample by changing the seed number. Use a new output folder so your original results are not overwritten. The **More Analyses → Second 10% Sample** tab on this site shows a reference run using seed 9 — you can compare your results against it.
+
+**Mac or Linux:**
+
+```bash
+python -u scripts/run_bertopic_sample.py \
+  --seed 9 \
+  --output-dir outputs/my_run_seed9 \
+  --embedding-backend ollama \
+  --ollama-embedding-model nomic-embed-text \
+  --representation-backend ctfidf \
+  --clustering sensitive \
+  --label-backend ollama \
+  --ollama-model llama3.1:latest
+```
+
+**Windows (Command Prompt):**
+
+```
+python -u scripts/run_bertopic_sample.py ^
+  --seed 9 ^
+  --output-dir outputs/my_run_seed9 ^
+  --embedding-backend ollama ^
+  --ollama-embedding-model nomic-embed-text ^
+  --representation-backend ctfidf ^
+  --clustering sensitive ^
+  --label-backend ollama ^
+  --ollama-model llama3.1:latest
+```
+
+Check `outputs/my_run_seed9/sample_documents.csv` to see which 29 documents were selected, then compare your topic labels against the reference on the [Second 10% Sample](03_sample2_results.qmd) page.
+
 ## Optional: Run the Full Collection
 
-Only do this after the 10% sample works.
+Only do this after the 10% sample works. The full run processes all 294 documents and may take several hours. The **More Analyses → Full Collection** tab on this site shows a reference run — you can compare your results against it.
 
 **Mac or Linux:**
 
@@ -524,7 +558,7 @@ python -u scripts/run_bertopic_sample.py ^
   --ollama-model llama3.1:latest
 ```
 
-The full collection may take hours.
+The full collection may take hours. Compare your results against the [Full Collection](04_full_results.qmd) page when it finishes.
 
 ## Common Problems
 

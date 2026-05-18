@@ -99,9 +99,9 @@ The table below shows the 15 largest topics by chunk count. Download the full CS
 | 13 | Effective Classroom Management | 26 |
 | 14 | Faith in Salvation and Heaven | 26 |
 
-## Topic Labels in This Sample
+## Top Topics in This Sample
 
-These are the topics found in this sample. Compare them against the [first sample](01_simple_explanation.qmd#example-results) and consider: which topics appear in both? Which appear only here?
+Some topic labels from this sample — compare against the [first sample](01_simple_explanation.qmd#example-results) and consider: which topics appear in both? Which appear only here? Download the full CSV for all 60 topics.
 
 - Farm, Bond, Scott, Cotton
 - Longing for Family and Freedom
@@ -118,51 +118,6 @@ These are the topics found in this sample. Compare them against the [first sampl
 - Traveling to Work or Deliveries
 - Effective Classroom Management
 - Faith in Salvation and Heaven
-- Theft of Money from Stores
-- Faith, Redemption, and the Afterlife
-- Reuniting with Family Members
-- The Haitian Revolution and its Impact on Slavery
-- Church Support and Division
-- Education and Self-Improvement
-- The Formation and Organization of the Colored Methodist Episcopal Church
-- Education and Self-Improvement
-- Surviving in the Wild and Hunting for Food
-- Observations on European Culture
-- Methodist Episcopal Church's Role in Education
-- Finding Freedom and Community
-- Spiritual Resistance and Resilience
-- Leadership and Governance in Haiti
-- The Influence of Genius and Inspiration
-- Traveling for Work or Leisure
-- Life on Plantations During the Civil War
-- Whipping and Plantation Punishment
-- Escape from Slavery
-- Plantation Labor Management
-- Geography and Travel
-- Leaving Home and Family Separation
-- Experiences in the American Civil War
-- International Peace Conferences and Diplomacy
-- The Moral and Human Cost of Slavery
-- Fear of Master's Death and Burial
-- Relationships with Mistress/Owner
-- Debt-Related Threats and Sales
-- Whipping and Plantation Punishment
-- Citizenship and Voting Rights
-- Education and Training for African Americans
-- Religious Life and Slavery
-- Refutation of Pro-Slavery Arguments
-- Separation from Family and Punishment
-- Agriculture and Natural Resources
-- Traveling and Isolation
-- Christian Missionary Work in Africa
-- Astronomical Achievements and Calculations
-- Life Stories of Former Slaves
-- The Slave Mother's Emotional Struggle and Separation from Children
-- Murder Investigation and Trial
-- Abandoned or Ruined Buildings
-- The Richmond Theatre Fire
-- Escape from Slavery
-- Family Separation and Financial Transactions
 
 Note that similar labels — such as multiple "Whipping and Plantation Punishment" topics — can appear in the same run. These are distinct clusters the model kept separate because the passages within them differ in vocabulary or context, even though they share a broad theme. This is expected behavior, not an error. Inspecting the top words and representative passages in `topic_assignments.csv` will show what distinguishes them.
 
