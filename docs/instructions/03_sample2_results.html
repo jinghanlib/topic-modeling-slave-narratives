@@ -4457,7 +4457,7 @@ overflow-x: hidden;
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Second 10% Sample Results</h1>
-<p class="subtitle lead">A different random sample — seed 99, 29 documents, 1,795 chunks</p>
+<p class="subtitle lead">A different random sample — seed 9, 29 documents, 1,752 chunks</p>
 </div>
 
 
@@ -4476,11 +4476,11 @@ overflow-x: hidden;
 
 <section id="about-this-sample" class="level2">
 <h2 class="anchored" data-anchor-id="about-this-sample">About This Sample</h2>
-<p>This page presents results from a second independent 10% sample of the collection, drawn with a different random seed. Comparing it against the <a href="../instructions/01_simple_explanation.html">first sample</a> shows how topic modeling results can differ across runs — and which themes are stable enough to appear in both.</p>
-<p>To reproduce this run yourself, use the same script and the same command from the <a href="../instructions/02_hands_on_exercise.html">Hands-On Exercise</a>, but add <code>--seed 99</code> to the command. No changes to the script code are needed — <code>--seed</code> is a command-line flag. For example:</p>
+<p>This page presents results from a second 10% sample of the collection, drawn with a different random seed. Seed 9 was chosen because it produces a sample with zero overlap with the first sample (seed 42) — all 29 documents are different. This is not guaranteed for every seed: because the script draws 29 documents at random from 294, some overlap between independently drawn samples is possible. Seed 9 happens to avoid it entirely. Comparing the two runs shows how topic modeling results can differ across samples and which themes are stable enough to appear in both.</p>
+<p>To reproduce this run yourself, use the same script and the same command from the <a href="../instructions/02_hands_on_exercise.html">Hands-On Exercise</a>, but add <code>--seed 9</code> to the command. No changes to the script code are needed — <code>--seed</code> is a command-line flag. For example:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-u</span> scripts/run_bertopic_sample.py <span class="dt">\</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--seed</span> 99 <span class="dt">\</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output-dir</span> outputs/my_run_seed99 <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--seed</span> 9 <span class="dt">\</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output-dir</span> outputs/my_run_seed9 <span class="dt">\</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--embedding-backend</span> ollama <span class="dt">\</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--ollama-embedding-model</span> nomic-embed-text <span class="dt">\</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--representation-backend</span> ctfidf <span class="dt">\</span></span>
@@ -4488,11 +4488,11 @@ overflow-x: hidden;
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">--label-backend</span> ollama <span class="dt">\</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">--ollama-model</span> llama3.1:latest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre class="text"><code>Sample fraction: 10%
-Random seed:     99
+Random seed:     9
 Documents:       29
-Chunks:          1,795
-Topics found:    58
-Outliers:        ~18%</code></pre>
+Chunks:          1,752
+Topics found:    60
+Outliers:        ~25%</code></pre>
 <p>All CSV files and HTML visualizations for this run are in the repository under:</p>
 <pre class="text"><code>outputs/bertopic_sample2_nomic_sensitive_lemmatized/
   topic_review_table.csv
@@ -4502,40 +4502,40 @@ Outliers:        ~18%</code></pre>
   sample_documents.csv
   visualizations/         ← 4 BERTopic charts (open in browser)
   metadata_visualizations/ ← 5 metadata charts (open in browser)</code></pre>
-<p>The 29 sampled documents are completely different from the first sample:</p>
+<p>The 29 sampled documents are completely different from the first sample (zero overlap):</p>
 <pre class="text"><code>fpn-burton-burton.xml
+fpn-hortonlife-horton.xml
 fpn-lane-lane.xml
 fpn-mason-mason.xml
-neh-adamsh-adamsh.xml
-neh-auntjudy-auntjudy.xml
-neh-baquaqua-baquaqua.xml
-neh-beardj-beard.xml
-neh-black-black.xml
-neh-bluett-bluett.xml
-neh-boen-boen.xml
-neh-brownbox-brownbox.xml
-neh-flipper-flipper.xml
-neh-greena-greena.xml
-neh-grimes55-grimes55.xml
-neh-heard-heard.xml
-neh-hildreth-hildreth.xml
-neh-jbrown-jbrown.xml
-neh-jeajohn-jeajohn.xml
-neh-johnsontl-johnsontl.xml
-neh-latta-latta.xml
+fpn-veney-veney.xml
+neh-barrett-barrett.xml
+neh-branham-branham.xml
+neh-brinch-brinch.xml
+neh-brown55-brown55.xml
+neh-brownww-brown.xml
+neh-clarkes-clarkes.xml
+neh-delaney-delaney.xml
+neh-dsmith-dsmith.xml
+neh-edwardsc-edwards.xml
+neh-hayden-hayden.xml
+neh-henderson-henderson.xml
+neh-jacksonc-jackson.xml
 neh-leehf-leehf.xml
-neh-lewisjw-lewisjw.xml
-neh-marrs-marrs.xml
-neh-sancho2-sancho2.xml
-neh-thompsch-thompsch.xml
-neh-troy-troy.xml
-neh-vale-vale.xml
-neh-venture2-venture2.xml
-neh-whitegeo-whitegeo.xml</code></pre>
+neh-mallory-mallory.xml
+neh-mott-mott.xml
+neh-mott26-mott26.xml
+neh-nell-nell.xml
+neh-parker-parker.xml
+neh-pickard-pickard.xml
+neh-rudd-rudd.xml
+neh-slaveryillus-slaveryillus.xml
+neh-story-story.xml
+neh-webster-webster.xml
+neh-wilkerson-wilkerson.xml</code></pre>
 </section>
 <section id="topic-review-table-top-topics" class="level2">
 <h2 class="anchored" data-anchor-id="topic-review-table-top-topics">Topic Review Table (Top Topics)</h2>
-<p>The table below shows the 15 largest topics by chunk count. Download the full CSV files for all 58 topics.</p>
+<p>The table below shows the 15 largest topics by chunk count. Download the full CSV files for all 60 topics.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -4547,77 +4547,77 @@ neh-whitegeo-whitegeo.xml</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">0</td>
-<td>Racial Exclusion at West Point</td>
-<td style="text-align: right;">131</td>
+<td>Farm, Bond, Scott, Cotton</td>
+<td style="text-align: right;">73</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">1</td>
-<td>Respectable Slaveholding Families</td>
-<td style="text-align: right;">117</td>
+<td>Longing for Family and Freedom</td>
+<td style="text-align: right;">71</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">2</td>
-<td>Faith and Church Leadership</td>
-<td style="text-align: right;">56</td>
+<td>Struggling for Freedom</td>
+<td style="text-align: right;">61</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">3</td>
-<td>Fleeing to Canada for Freedom</td>
-<td style="text-align: right;">48</td>
+<td>Escape by Sea</td>
+<td style="text-align: right;">51</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">4</td>
-<td>Traveling and Navigation</td>
+<td>Expressions of Sympathy and Gratitude</td>
 <td style="text-align: right;">47</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">5</td>
-<td>Letters from Friends and Admirers</td>
-<td style="text-align: right;">45</td>
+<td>Family Relationships and Guidance</td>
+<td style="text-align: right;">46</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">6</td>
-<td>Missionary Influence on Indigenous Peoples</td>
-<td style="text-align: right;">36</td>
+<td>American Identity and Nationalism</td>
+<td style="text-align: right;">37</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">7</td>
-<td>Critique of American Slavery and Racial Hierarchy</td>
+<td>The Struggle for Equal Rights and Representation</td>
 <td style="text-align: right;">36</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">8</td>
-<td>Racial Identity and Hierarchy</td>
-<td style="text-align: right;">33</td>
+<td>Fighting for Freedom and Citizenship</td>
+<td style="text-align: right;">35</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">9</td>
-<td>The Colored Methodist Episcopal Church and its Leadership</td>
+<td>Confrontations with Slave Catchers</td>
 <td style="text-align: right;">33</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">10</td>
-<td>Toussaint Louverture’s Military Campaigns</td>
-<td style="text-align: right;">28</td>
+<td>Ministerial Training and Early Ministry</td>
+<td style="text-align: right;">30</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">11</td>
-<td>Education and Community Support</td>
-<td style="text-align: right;">27</td>
+<td>Whipping and Plantation Punishment</td>
+<td style="text-align: right;">29</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">12</td>
-<td>Critique of Northern Churches and Ministers on Slavery</td>
+<td>Traveling to Work or Deliveries</td>
 <td style="text-align: right;">27</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">13</td>
-<td>Traveling to Freedom</td>
-<td style="text-align: right;">27</td>
+<td>Effective Classroom Management</td>
+<td style="text-align: right;">26</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">16</td>
-<td>Mulattoes’ Ambition and Rebellion</td>
+<td style="text-align: right;">14</td>
+<td>Faith in Salvation and Heaven</td>
 <td style="text-align: right;">26</td>
 </tr>
 </tbody>
@@ -4627,64 +4627,66 @@ neh-whitegeo-whitegeo.xml</code></pre>
 <h2 class="anchored" data-anchor-id="topic-labels-in-this-sample">Topic Labels in This Sample</h2>
 <p>These are the topics found in this sample. Compare them against the <a href="../instructions/01_simple_explanation.html#example-results">first sample</a> and consider: which topics appear in both? Which appear only here?</p>
 <ul>
-<li>Racial Exclusion at West Point</li>
-<li>Respectable Slaveholding Families</li>
-<li>Faith and Church Leadership</li>
-<li>Fleeing to Canada for Freedom</li>
-<li>Traveling and Navigation</li>
-<li>Letters from Friends and Admirers</li>
-<li>Missionary Influence on Indigenous Peoples</li>
-<li>Critique of American Slavery and Racial Hierarchy</li>
-<li>Racial Identity and Hierarchy</li>
-<li>The Colored Methodist Episcopal Church and its Leadership</li>
-<li>Toussaint Louverture’s Military Campaigns</li>
-<li>Education and Community Support</li>
-<li>Critique of Northern Churches and Ministers on Slavery</li>
-<li>Traveling to Freedom</li>
+<li>Farm, Bond, Scott, Cotton</li>
+<li>Longing for Family and Freedom</li>
+<li>Struggling for Freedom</li>
+<li>Escape by Sea</li>
+<li>Expressions of Sympathy and Gratitude</li>
+<li>Family Relationships and Guidance</li>
+<li>American Identity and Nationalism</li>
+<li>The Struggle for Equal Rights and Representation</li>
+<li>Fighting for Freedom and Citizenship</li>
+<li>Confrontations with Slave Catchers</li>
+<li>Ministerial Training and Early Ministry</li>
 <li>Whipping and Plantation Punishment</li>
-<li>Traveling by Boat and Railroad</li>
-<li>Mulattoes’ Ambition and Rebellion</li>
-<li>Critique of Slavery and Racial Supremacy</li>
-<li>Forced Sale and Auction</li>
-<li>Racial Equality and Social Justice</li>
-<li>Life on Board Slave Ships</li>
-<li>Christian Missionary Work for Africa</li>
-<li>Leadership and Military Service</li>
-<li>Whipping and Plantation Punishment</li>
-<li>Whipping and Plantation Punishment</li>
-<li>Faith and Death in Slavery</li>
-<li>Military Life and Marching</li>
-<li>The Treatment and Education of Enslaved Children</li>
-<li>Christian Faith and Slavery</li>
-<li>Black Resistance to French Rule</li>
-<li>Elder Bowles’ Evangelical Campaigns</li>
-<li>Buying and Selling Slaves</li>
-<li>Traveling and Navigation</li>
-<li>Toussaint Louverture’s Leadership in Haiti</li>
-<li>Toussaint L’Ouverture’s Relationship with French Authorities</li>
-<li>Whipping and Plantation Punishment</li>
-<li>Conversion and Spiritual Crisis</li>
-<li>Life in the Field under an Overseer</li>
-<li>Life on Plantations During the Civil War</li>
-<li>Life on a Plantation Under a Mistress</li>
-<li>Hope and Resilience in the Face of Oppression</li>
-<li>Racial Identity and Progress</li>
-<li>Whipping and Plantation Punishment</li>
-<li>Military Service and Education</li>
-<li>Life at Sea and Freedom</li>
-<li>Toussaint L’Ouverture’s Leadership and Conflict with English</li>
-<li>Authorship and Purpose</li>
-<li>Cotton Harvesting and Processing</li>
-<li>The End of Slavery in the Americas</li>
-<li>Forced Sale and Transportation</li>
-<li>Plantation Life in Virginia</li>
-<li>Itinerant Preaching and Church Leadership</li>
-<li>Pursuing Freedom</li>
+<li>Traveling to Work or Deliveries</li>
+<li>Effective Classroom Management</li>
+<li>Faith in Salvation and Heaven</li>
+<li>Theft of Money from Stores</li>
+<li>Faith, Redemption, and the Afterlife</li>
+<li>Reuniting with Family Members</li>
+<li>The Haitian Revolution and its Impact on Slavery</li>
 <li>Church Support and Division</li>
-<li>Becoming a Licensed Preacher</li>
-<li>Plantation Justice and Punishment</li>
-<li>The Transatlantic Slave Trade</li>
-<li>Education and Personal Growth</li>
+<li>Education and Self-Improvement</li>
+<li>The Formation and Organization of the Colored Methodist Episcopal Church</li>
+<li>Education and Self-Improvement</li>
+<li>Surviving in the Wild and Hunting for Food</li>
+<li>Observations on European Culture</li>
+<li>Methodist Episcopal Church’s Role in Education</li>
+<li>Finding Freedom and Community</li>
+<li>Spiritual Resistance and Resilience</li>
+<li>Leadership and Governance in Haiti</li>
+<li>The Influence of Genius and Inspiration</li>
+<li>Traveling for Work or Leisure</li>
+<li>Life on Plantations During the Civil War</li>
+<li>Whipping and Plantation Punishment</li>
+<li>Escape from Slavery</li>
+<li>Plantation Labor Management</li>
+<li>Geography and Travel</li>
+<li>Leaving Home and Family Separation</li>
+<li>Experiences in the American Civil War</li>
+<li>International Peace Conferences and Diplomacy</li>
+<li>The Moral and Human Cost of Slavery</li>
+<li>Fear of Master’s Death and Burial</li>
+<li>Relationships with Mistress/Owner</li>
+<li>Debt-Related Threats and Sales</li>
+<li>Whipping and Plantation Punishment</li>
+<li>Citizenship and Voting Rights</li>
+<li>Education and Training for African Americans</li>
+<li>Religious Life and Slavery</li>
+<li>Refutation of Pro-Slavery Arguments</li>
+<li>Separation from Family and Punishment</li>
+<li>Agriculture and Natural Resources</li>
+<li>Traveling and Isolation</li>
+<li>Christian Missionary Work in Africa</li>
+<li>Astronomical Achievements and Calculations</li>
+<li>Life Stories of Former Slaves</li>
+<li>The Slave Mother’s Emotional Struggle and Separation from Children</li>
+<li>Murder Investigation and Trial</li>
+<li>Abandoned or Ruined Buildings</li>
+<li>The Richmond Theatre Fire</li>
+<li>Escape from Slavery</li>
+<li>Family Separation and Financial Transactions</li>
 </ul>
 <p>Note that similar labels — such as multiple “Whipping and Plantation Punishment” topics — can appear in the same run. These are distinct clusters the model kept separate because the passages within them differ in vocabulary or context, even though they share a broad theme. This is expected behavior, not an error. Inspecting the top words and representative passages in <code>topic_assignments.csv</code> will show what distinguishes them.</p>
 </section>

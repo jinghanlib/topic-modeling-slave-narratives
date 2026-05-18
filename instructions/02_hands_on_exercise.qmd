@@ -313,6 +313,30 @@ random seed = 42
 
 That produces the same 29-document sample each time.
 
+### What the seed number does
+
+A random seed is a starting number that controls how the script picks documents from the collection. The same seed always picks the same documents — so seed 42 will always select the same 29 files, on any computer, every time. This makes runs reproducible and comparable.
+
+A different seed usually picks a mostly different set of documents, but some overlap is possible. Because the script is drawing 29 documents at random from 294, any two draws are likely to share a few documents by chance — the same way two people asked to pick 10% of a card deck often pull some of the same cards. To find out exactly which documents your run used, open `sample_documents.csv` in your output folder.
+
+You can use any whole number as a seed — `--seed 9`, `--seed 100`, `--seed 2024` — and each one produces its own 10% sample with its own topics. The number itself has no special meaning; what matters is that two runs with the same seed will always match.
+
+> **Note:** The [Second 10% Sample](03_sample2_results.qmd) page on this site used seed 9, which happens to have zero overlap with seed 42. That overlap is not guaranteed for every seed — it depends on which documents each draw happens to land on.
+
+To try a different sample, add `--seed` to the command with any number you choose, and use a new output folder so your results are not overwritten:
+
+```bash
+python -u scripts/run_bertopic_sample.py \
+  --seed 9 \
+  --output-dir outputs/my_run_seed9 \
+  --embedding-backend ollama \
+  --ollama-embedding-model nomic-embed-text \
+  --representation-backend ctfidf \
+  --clustering sensitive \
+  --label-backend ollama \
+  --ollama-model llama3.1:latest
+```
+
 The sampled files are:
 
 ```text

@@ -1,18 +1,18 @@
 ---
 title: "Second 10% Sample Results"
-subtitle: "A different random sample — seed 99, 29 documents, 1,795 chunks"
+subtitle: "A different random sample — seed 9, 29 documents, 1,752 chunks"
 ---
 
 ## About This Sample
 
-This page presents results from a second independent 10% sample of the collection, drawn with a different random seed. Comparing it against the [first sample](01_simple_explanation.qmd) shows how topic modeling results can differ across runs — and which themes are stable enough to appear in both.
+This page presents results from a second 10% sample of the collection, drawn with a different random seed. Seed 9 was chosen because it produces a sample with zero overlap with the first sample (seed 42) — all 29 documents are different. This is not guaranteed for every seed: because the script draws 29 documents at random from 294, some overlap between independently drawn samples is possible. Seed 9 happens to avoid it entirely. Comparing the two runs shows how topic modeling results can differ across samples and which themes are stable enough to appear in both.
 
-To reproduce this run yourself, use the same script and the same command from the [Hands-On Exercise](02_hands_on_exercise.qmd), but add `--seed 99` to the command. No changes to the script code are needed — `--seed` is a command-line flag. For example:
+To reproduce this run yourself, use the same script and the same command from the [Hands-On Exercise](02_hands_on_exercise.qmd), but add `--seed 9` to the command. No changes to the script code are needed — `--seed` is a command-line flag. For example:
 
 ```bash
 python -u scripts/run_bertopic_sample.py \
-  --seed 99 \
-  --output-dir outputs/my_run_seed99 \
+  --seed 9 \
+  --output-dir outputs/my_run_seed9 \
   --embedding-backend ollama \
   --ollama-embedding-model nomic-embed-text \
   --representation-backend ctfidf \
@@ -23,11 +23,11 @@ python -u scripts/run_bertopic_sample.py \
 
 ```text
 Sample fraction: 10%
-Random seed:     99
+Random seed:     9
 Documents:       29
-Chunks:          1,795
-Topics found:    58
-Outliers:        ~18%
+Chunks:          1,752
+Topics found:    60
+Outliers:        ~25%
 ```
 
 All CSV files and HTML visualizations for this run are in the repository under:
@@ -43,124 +43,126 @@ outputs/bertopic_sample2_nomic_sensitive_lemmatized/
   metadata_visualizations/ ← 5 metadata charts (open in browser)
 ```
 
-The 29 sampled documents are completely different from the first sample:
+The 29 sampled documents are completely different from the first sample (zero overlap):
 
 ```text
 fpn-burton-burton.xml
+fpn-hortonlife-horton.xml
 fpn-lane-lane.xml
 fpn-mason-mason.xml
-neh-adamsh-adamsh.xml
-neh-auntjudy-auntjudy.xml
-neh-baquaqua-baquaqua.xml
-neh-beardj-beard.xml
-neh-black-black.xml
-neh-bluett-bluett.xml
-neh-boen-boen.xml
-neh-brownbox-brownbox.xml
-neh-flipper-flipper.xml
-neh-greena-greena.xml
-neh-grimes55-grimes55.xml
-neh-heard-heard.xml
-neh-hildreth-hildreth.xml
-neh-jbrown-jbrown.xml
-neh-jeajohn-jeajohn.xml
-neh-johnsontl-johnsontl.xml
-neh-latta-latta.xml
+fpn-veney-veney.xml
+neh-barrett-barrett.xml
+neh-branham-branham.xml
+neh-brinch-brinch.xml
+neh-brown55-brown55.xml
+neh-brownww-brown.xml
+neh-clarkes-clarkes.xml
+neh-delaney-delaney.xml
+neh-dsmith-dsmith.xml
+neh-edwardsc-edwards.xml
+neh-hayden-hayden.xml
+neh-henderson-henderson.xml
+neh-jacksonc-jackson.xml
 neh-leehf-leehf.xml
-neh-lewisjw-lewisjw.xml
-neh-marrs-marrs.xml
-neh-sancho2-sancho2.xml
-neh-thompsch-thompsch.xml
-neh-troy-troy.xml
-neh-vale-vale.xml
-neh-venture2-venture2.xml
-neh-whitegeo-whitegeo.xml
+neh-mallory-mallory.xml
+neh-mott-mott.xml
+neh-mott26-mott26.xml
+neh-nell-nell.xml
+neh-parker-parker.xml
+neh-pickard-pickard.xml
+neh-rudd-rudd.xml
+neh-slaveryillus-slaveryillus.xml
+neh-story-story.xml
+neh-webster-webster.xml
+neh-wilkerson-wilkerson.xml
 ```
 
 ## Topic Review Table (Top Topics)
 
-The table below shows the 15 largest topics by chunk count. Download the full CSV files for all 58 topics.
+The table below shows the 15 largest topics by chunk count. Download the full CSV files for all 60 topics.
 
 | Topic | Label | Chunks |
 |---:|---|---:|
-| 0 | Racial Exclusion at West Point | 131 |
-| 1 | Respectable Slaveholding Families | 117 |
-| 2 | Faith and Church Leadership | 56 |
-| 3 | Fleeing to Canada for Freedom | 48 |
-| 4 | Traveling and Navigation | 47 |
-| 5 | Letters from Friends and Admirers | 45 |
-| 6 | Missionary Influence on Indigenous Peoples | 36 |
-| 7 | Critique of American Slavery and Racial Hierarchy | 36 |
-| 8 | Racial Identity and Hierarchy | 33 |
-| 9 | The Colored Methodist Episcopal Church and its Leadership | 33 |
-| 10 | Toussaint Louverture's Military Campaigns | 28 |
-| 11 | Education and Community Support | 27 |
-| 12 | Critique of Northern Churches and Ministers on Slavery | 27 |
-| 13 | Traveling to Freedom | 27 |
-| 16 | Mulattoes' Ambition and Rebellion | 26 |
+| 0 | Farm, Bond, Scott, Cotton | 73 |
+| 1 | Longing for Family and Freedom | 71 |
+| 2 | Struggling for Freedom | 61 |
+| 3 | Escape by Sea | 51 |
+| 4 | Expressions of Sympathy and Gratitude | 47 |
+| 5 | Family Relationships and Guidance | 46 |
+| 6 | American Identity and Nationalism | 37 |
+| 7 | The Struggle for Equal Rights and Representation | 36 |
+| 8 | Fighting for Freedom and Citizenship | 35 |
+| 9 | Confrontations with Slave Catchers | 33 |
+| 10 | Ministerial Training and Early Ministry | 30 |
+| 11 | Whipping and Plantation Punishment | 29 |
+| 12 | Traveling to Work or Deliveries | 27 |
+| 13 | Effective Classroom Management | 26 |
+| 14 | Faith in Salvation and Heaven | 26 |
 
 ## Topic Labels in This Sample
 
 These are the topics found in this sample. Compare them against the [first sample](01_simple_explanation.qmd#example-results) and consider: which topics appear in both? Which appear only here?
 
-- Racial Exclusion at West Point
-- Respectable Slaveholding Families
-- Faith and Church Leadership
-- Fleeing to Canada for Freedom
-- Traveling and Navigation
-- Letters from Friends and Admirers
-- Missionary Influence on Indigenous Peoples
-- Critique of American Slavery and Racial Hierarchy
-- Racial Identity and Hierarchy
-- The Colored Methodist Episcopal Church and its Leadership
-- Toussaint Louverture's Military Campaigns
-- Education and Community Support
-- Critique of Northern Churches and Ministers on Slavery
-- Traveling to Freedom
+- Farm, Bond, Scott, Cotton
+- Longing for Family and Freedom
+- Struggling for Freedom
+- Escape by Sea
+- Expressions of Sympathy and Gratitude
+- Family Relationships and Guidance
+- American Identity and Nationalism
+- The Struggle for Equal Rights and Representation
+- Fighting for Freedom and Citizenship
+- Confrontations with Slave Catchers
+- Ministerial Training and Early Ministry
 - Whipping and Plantation Punishment
-- Traveling by Boat and Railroad
-- Mulattoes' Ambition and Rebellion
-- Critique of Slavery and Racial Supremacy
-- Forced Sale and Auction
-- Racial Equality and Social Justice
-- Life on Board Slave Ships
-- Christian Missionary Work for Africa
-- Leadership and Military Service
-- Whipping and Plantation Punishment
-- Whipping and Plantation Punishment
-- Faith and Death in Slavery
-- Military Life and Marching
-- The Treatment and Education of Enslaved Children
-- Christian Faith and Slavery
-- Black Resistance to French Rule
-- Elder Bowles' Evangelical Campaigns
-- Buying and Selling Slaves
-- Traveling and Navigation
-- Toussaint Louverture's Leadership in Haiti
-- Toussaint L'Ouverture's Relationship with French Authorities
-- Whipping and Plantation Punishment
-- Conversion and Spiritual Crisis
-- Life in the Field under an Overseer
-- Life on Plantations During the Civil War
-- Life on a Plantation Under a Mistress
-- Hope and Resilience in the Face of Oppression
-- Racial Identity and Progress
-- Whipping and Plantation Punishment
-- Military Service and Education
-- Life at Sea and Freedom
-- Toussaint L'Ouverture's Leadership and Conflict with English
-- Authorship and Purpose
-- Cotton Harvesting and Processing
-- The End of Slavery in the Americas
-- Forced Sale and Transportation
-- Plantation Life in Virginia
-- Itinerant Preaching and Church Leadership
-- Pursuing Freedom
+- Traveling to Work or Deliveries
+- Effective Classroom Management
+- Faith in Salvation and Heaven
+- Theft of Money from Stores
+- Faith, Redemption, and the Afterlife
+- Reuniting with Family Members
+- The Haitian Revolution and its Impact on Slavery
 - Church Support and Division
-- Becoming a Licensed Preacher
-- Plantation Justice and Punishment
-- The Transatlantic Slave Trade
-- Education and Personal Growth
+- Education and Self-Improvement
+- The Formation and Organization of the Colored Methodist Episcopal Church
+- Education and Self-Improvement
+- Surviving in the Wild and Hunting for Food
+- Observations on European Culture
+- Methodist Episcopal Church's Role in Education
+- Finding Freedom and Community
+- Spiritual Resistance and Resilience
+- Leadership and Governance in Haiti
+- The Influence of Genius and Inspiration
+- Traveling for Work or Leisure
+- Life on Plantations During the Civil War
+- Whipping and Plantation Punishment
+- Escape from Slavery
+- Plantation Labor Management
+- Geography and Travel
+- Leaving Home and Family Separation
+- Experiences in the American Civil War
+- International Peace Conferences and Diplomacy
+- The Moral and Human Cost of Slavery
+- Fear of Master's Death and Burial
+- Relationships with Mistress/Owner
+- Debt-Related Threats and Sales
+- Whipping and Plantation Punishment
+- Citizenship and Voting Rights
+- Education and Training for African Americans
+- Religious Life and Slavery
+- Refutation of Pro-Slavery Arguments
+- Separation from Family and Punishment
+- Agriculture and Natural Resources
+- Traveling and Isolation
+- Christian Missionary Work in Africa
+- Astronomical Achievements and Calculations
+- Life Stories of Former Slaves
+- The Slave Mother's Emotional Struggle and Separation from Children
+- Murder Investigation and Trial
+- Abandoned or Ruined Buildings
+- The Richmond Theatre Fire
+- Escape from Slavery
+- Family Separation and Financial Transactions
 
 Note that similar labels — such as multiple "Whipping and Plantation Punishment" topics — can appear in the same run. These are distinct clusters the model kept separate because the passages within them differ in vocabulary or context, even though they share a broad theme. This is expected behavior, not an error. Inspecting the top words and representative passages in `topic_assignments.csv` will show what distinguishes them.
 

@@ -4450,7 +4450,10 @@ overflow-x: hidden;
   <li><a href="#run-the-10-topic-model" id="toc-run-the-10-topic-model" class="nav-link" data-scroll-target="#run-the-10-topic-model">Run the 10% Topic Model</a></li>
   <li><a href="#how-to-know-it-is-working" id="toc-how-to-know-it-is-working" class="nav-link" data-scroll-target="#how-to-know-it-is-working">How To Know It Is Working</a></li>
   <li><a href="#generate-the-review-table" id="toc-generate-the-review-table" class="nav-link" data-scroll-target="#generate-the-review-table">Generate the Review Table</a></li>
-  <li><a href="#which-10-sample-this-uses" id="toc-which-10-sample-this-uses" class="nav-link" data-scroll-target="#which-10-sample-this-uses">Which 10% Sample This Uses</a></li>
+  <li><a href="#which-10-sample-this-uses" id="toc-which-10-sample-this-uses" class="nav-link" data-scroll-target="#which-10-sample-this-uses">Which 10% Sample This Uses</a>
+  <ul class="collapse">
+  <li><a href="#what-the-seed-number-does" id="toc-what-the-seed-number-does" class="nav-link" data-scroll-target="#what-the-seed-number-does">What the seed number does</a></li>
+  </ul></li>
   <li><a href="#open-and-read-the-results" id="toc-open-and-read-the-results" class="nav-link" data-scroll-target="#open-and-read-the-results">Open and Read the Results</a></li>
   <li><a href="#review-and-improve-topic-labels" id="toc-review-and-improve-topic-labels" class="nav-link" data-scroll-target="#review-and-improve-topic-labels">Review and Improve Topic Labels</a></li>
   <li><a href="#where-human-interpretation-comes-in" id="toc-where-human-interpretation-comes-in" class="nav-link" data-scroll-target="#where-human-interpretation-comes-in">Where Human Interpretation Comes In</a></li>
@@ -4755,6 +4758,24 @@ Done. Results written to outputs/my_run</code></pre>
 <pre class="text"><code>sample fraction = 10%
 random seed = 42</code></pre>
 <p>That produces the same 29-document sample each time.</p>
+<section id="what-the-seed-number-does" class="level3">
+<h3 class="anchored" data-anchor-id="what-the-seed-number-does">What the seed number does</h3>
+<p>A random seed is a starting number that controls how the script picks documents from the collection. The same seed always picks the same documents — so seed 42 will always select the same 29 files, on any computer, every time. This makes runs reproducible and comparable.</p>
+<p>A different seed usually picks a mostly different set of documents, but some overlap is possible. Because the script is drawing 29 documents at random from 294, any two draws are likely to share a few documents by chance — the same way two people asked to pick 10% of a card deck often pull some of the same cards. To find out exactly which documents your run used, open <code>sample_documents.csv</code> in your output folder.</p>
+<p>You can use any whole number as a seed — <code>--seed 9</code>, <code>--seed 100</code>, <code>--seed 2024</code> — and each one produces its own 10% sample with its own topics. The number itself has no special meaning; what matters is that two runs with the same seed will always match.</p>
+<blockquote class="blockquote">
+<p><strong>Note:</strong> The <a href="../instructions/03_sample2_results.html">Second 10% Sample</a> page on this site used seed 9, which happens to have zero overlap with seed 42. That overlap is not guaranteed for every seed — it depends on which documents each draw happens to land on.</p>
+</blockquote>
+<p>To try a different sample, add <code>--seed</code> to the command with any number you choose, and use a new output folder so your results are not overwritten:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-u</span> scripts/run_bertopic_sample.py <span class="dt">\</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--seed</span> 9 <span class="dt">\</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output-dir</span> outputs/my_run_seed9 <span class="dt">\</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--embedding-backend</span> ollama <span class="dt">\</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--ollama-embedding-model</span> nomic-embed-text <span class="dt">\</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--representation-backend</span> ctfidf <span class="dt">\</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">--clustering</span> sensitive <span class="dt">\</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">--label-backend</span> ollama <span class="dt">\</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">--ollama-model</span> llama3.1:latest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The sampled files are:</p>
 <pre class="text"><code>fpn-bruce-bruce.xml
 fpn-hughes-hughes.xml
@@ -4785,6 +4806,7 @@ neh-troy-troy.xml
 neh-webb-webb.xml
 neh-weld-weld.xml
 neh-williams-williams.xml</code></pre>
+</section>
 </section>
 <section id="open-and-read-the-results" class="level2">
 <h2 class="anchored" data-anchor-id="open-and-read-the-results">Open and Read the Results</h2>
@@ -4919,15 +4941,15 @@ Topic 1 = second regular topic</code></pre>
 <h2 class="anchored" data-anchor-id="optional-run-the-full-collection">Optional: Run the Full Collection</h2>
 <p>Only do this after the 10% sample works.</p>
 <p><strong>Mac or Linux:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-u</span> scripts/run_bertopic_sample.py <span class="dt">\</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--sample-frac</span> 1.0 <span class="dt">\</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output-dir</span> outputs/my_run_full <span class="dt">\</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--embedding-backend</span> ollama <span class="dt">\</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--ollama-embedding-model</span> nomic-embed-text <span class="dt">\</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--representation-backend</span> ctfidf <span class="dt">\</span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">--clustering</span> sensitive <span class="dt">\</span></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">--label-backend</span> ollama <span class="dt">\</span></span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">--ollama-model</span> llama3.1:latest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-u</span> scripts/run_bertopic_sample.py <span class="dt">\</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--sample-frac</span> 1.0 <span class="dt">\</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output-dir</span> outputs/my_run_full <span class="dt">\</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--embedding-backend</span> ollama <span class="dt">\</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--ollama-embedding-model</span> nomic-embed-text <span class="dt">\</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--representation-backend</span> ctfidf <span class="dt">\</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">--clustering</span> sensitive <span class="dt">\</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">--label-backend</span> ollama <span class="dt">\</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">--ollama-model</span> llama3.1:latest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Windows (Command Prompt):</strong></p>
 <pre><code>python -u scripts/run_bertopic_sample.py ^
   --sample-frac 1.0 ^
@@ -4950,16 +4972,16 @@ Topic 1 = second regular topic</code></pre>
 <h3 class="anchored" data-anchor-id="python-says-packages-are-missing">Python says packages are missing</h3>
 <p>Make sure the virtual environment is active.</p>
 <p>Mac or Linux:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Windows (Command Prompt):</p>
 <pre><code>.venv\Scripts\activate</code></pre>
 <p>Then reinstall packages:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">-r</span> requirements.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">-r</span> requirements.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="ollama-connection-error" class="level3">
 <h3 class="anchored" data-anchor-id="ollama-connection-error">Ollama connection error</h3>
 <p>Open the Ollama app, or run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ollama</span> list</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ollama</span> list</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If Ollama is working, it should show installed models.</p>
 </section>
 <section id="the-run-is-slow" class="level3">

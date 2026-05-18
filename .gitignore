@@ -38,6 +38,7 @@ docs/outputs/bertopic_full_nomic_sensitive_lemmatized/topic_assignments.csv
 
 # Student run outputs
 outputs/my_run/
+outputs/my_run_seed*/
 outputs/my_run_full/
 
 /.quarto/
