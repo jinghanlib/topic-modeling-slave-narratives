@@ -485,7 +485,7 @@ The scripts used to produce these results are in the `scripts/` folder of the [G
 - `run_bertopic_sample.py` — runs the full pipeline for any sample size or the complete collection
 - `visualize_topic_metadata.py` — generates the review table and all metadata visualizations
 
-To reproduce the full collection run, use `--sample-frac 1.0 --output-dir outputs/bertopic_full_nomic_sensitive_lemmatized` with the same embedding and labeling flags shown in the [Hands-On Exercise](02_hands_on_exercise.qmd).
+To reproduce the full collection run, use `--sample-frac 1.0 --output-dir outputs/my_run_full` with the same embedding and labeling flags shown in the [Hands-On Exercise](02_hands_on_exercise.qmd).
 
 ## Visualizations
 
