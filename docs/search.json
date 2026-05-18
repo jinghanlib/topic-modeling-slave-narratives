@@ -403,7 +403,7 @@
     "href": "instructions/02_hands_on_exercise.html#how-to-know-it-is-working",
     "title": "Hands-On Exercise",
     "section": "How To Know It Is Working",
-    "text": "How To Know It Is Working\nStudents should see lines like:\nSampled 29 documents into 1543 chunks\nOllama embedded 25/1543 chunks\nOllama embedded 50/1543 chunks\n...\nLabeled topic 0: Whipping and Plantation Punishment\n...\nDone. Results written to outputs/my_run\nIf they see Done, the run worked."
+    "text": "How To Know It Is Working\nStudents should see lines like:\nSampled 29 documents into 1543 chunks\nOllama embedded 25/1543 chunks\nOllama embedded 50/1543 chunks\n...\nLabeled topic 0: Whipping and Plantation Punishment\n...\nDone. Results written to outputs/my_run\nIf they see Done, the run worked.\nsample_documents.csv is ready as soon as the first line appears — Sampled 29 documents into 1543 chunks means the file has already been written to outputs/my_run/. Students can open it immediately in a spreadsheet to see which 29 documents were selected, without waiting for the rest of the pipeline to finish. There is no need to interrupt the run — the script will keep running in the terminal and continue to the embedding, clustering, and labeling steps on its own.\n\nIf you do interrupt the run (by closing the terminal or pressing Ctrl+C) and then run the command again with the same --output-dir, the script will restart from the beginning. Embeddings take the most time, so an interrupted run may mean waiting through the embedding step again. To avoid losing progress, let the run finish once it starts."
   },
   {
     "objectID": "instructions/02_hands_on_exercise.html#generate-the-review-table",

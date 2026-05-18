@@ -4718,6 +4718,10 @@ Labeled topic 0: Whipping and Plantation Punishment
 ...
 Done. Results written to outputs/my_run</code></pre>
 <p>If they see <code>Done</code>, the run worked.</p>
+<p><strong><code>sample_documents.csv</code> is ready as soon as the first line appears</strong> — <code>Sampled 29 documents into 1543 chunks</code> means the file has already been written to <code>outputs/my_run/</code>. Students can open it immediately in a spreadsheet to see which 29 documents were selected, without waiting for the rest of the pipeline to finish. There is no need to interrupt the run — the script will keep running in the terminal and continue to the embedding, clustering, and labeling steps on its own.</p>
+<blockquote class="blockquote">
+<p><strong>If you do interrupt the run</strong> (by closing the terminal or pressing Ctrl+C) and then run the command again with the same <code>--output-dir</code>, the script will restart from the beginning. Embeddings take the most time, so an interrupted run may mean waiting through the embedding step again. To avoid losing progress, let the run finish once it starts.</p>
+</blockquote>
 </section>
 <section id="generate-the-review-table" class="level2">
 <h2 class="anchored" data-anchor-id="generate-the-review-table">Generate the Review Table</h2>
