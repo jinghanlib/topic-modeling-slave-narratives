@@ -4442,6 +4442,7 @@ overflow-x: hidden;
 <section id="about-this-run" class="level2">
 <h2 class="anchored" data-anchor-id="about-this-run">About This Run</h2>
 <p>This page presents results from running the full BERTopic pipeline on the entire collection. Comparing it against the two 10% samples shows which themes are stable across the full corpus and which emerged only in specific subsets of documents.</p>
+<p>To reproduce this run, use <code>scripts/run_bertopic_sample.py</code> from the <a href="https://github.com/jinghanlib/topic-modeling-slave-narratives">GitHub repository</a> with <code>--sample-frac 1.0</code>. The same setup steps from the <a href="../instructions/02_hands_on_exercise.html">Hands-On Exercise</a> apply — the only difference is the sample fraction flag and a longer run time.</p>
 <pre class="text"><code>Sample fraction: 100%
 Documents:       294
 Chunks:          16,729

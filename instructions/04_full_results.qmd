@@ -7,6 +7,8 @@ subtitle: "All 294 documents — the complete North American Slave Narratives co
 
 This page presents results from running the full BERTopic pipeline on the entire collection. Comparing it against the two 10% samples shows which themes are stable across the full corpus and which emerged only in specific subsets of documents.
 
+To reproduce this run, use `scripts/run_bertopic_sample.py` from the [GitHub repository](https://github.com/jinghanlib/topic-modeling-slave-narratives) with `--sample-frac 1.0`. The same setup steps from the [Hands-On Exercise](02_hands_on_exercise.qmd) apply — the only difference is the sample fraction flag and a longer run time.
+
 ```text
 Sample fraction: 100%
 Documents:       294
