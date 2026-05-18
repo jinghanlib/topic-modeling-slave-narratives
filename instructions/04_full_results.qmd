@@ -1,0 +1,526 @@
+---
+title: "Full Collection Results"
+subtitle: "All 294 documents — the complete North American Slave Narratives collection"
+---
+
+## About This Run
+
+This page presents results from running the full BERTopic pipeline on the entire collection. Comparing it against the two 10% samples shows which themes are stable across the full corpus and which emerged only in specific subsets of documents.
+
+```text
+Sample fraction: 100%
+Documents:       294
+Chunks:          16,729
+Topics found:    439
+```
+
+All CSV files and HTML visualizations for this run are in the repository under:
+
+```text
+outputs/bertopic_full_nomic_sensitive_lemmatized/
+  topic_review_table.csv
+  topic_labels_llm.csv
+  topic_assignments.csv    ← local only, too large to host on the site
+  topic_info.csv
+  visualizations/          ← 4 BERTopic charts (open in browser)
+  metadata_visualizations/  ← 5 metadata charts (open in browser)
+```
+
+With 294 documents, the model finds far more topics than any single 10% sample — including many narrow topics tied to specific documents or authors. Some topics are broad recurring themes; others are very specific to a single narrative. The same note about similar labels applies: multiple topics with similar names (such as several "Whipping and Plantation Punishment" clusters) are distinct groups that the model kept separate based on differences in vocabulary and context.
+
+## Top 20 Topics by Chunk Count
+
+| Topic | Label | Chunks |
+|---:|---|---:|
+| 0 | Spiritual Resilience in the Face of Death | 137 |
+| 1 | Critique of Slaveholder's Use of Religion | 113 |
+| 2 | Racial Identity and Prejudice | 101 |
+| 3 | Faith and Redemption | 95 |
+| 4 | Ministerial Encounters and Book Sales | 93 |
+| 5 | Respectability and Social Standing | 92 |
+| 6 | Authorial Intentions and Historical Context | 92 |
+| 7 | Convict Labor and Punishment in Prisons | 87 |
+| 8 | Whipping and Plantation Punishment | 85 |
+| 9 | Conversion to Ministry | 85 |
+| 10 | African American Preachers in Antebellum Era | 83 |
+| 11 | Encounters with Rebel Soldiers | 77 |
+| 12 | Education and Institutional Development | 76 |
+| 13 | Whipping and Plantation Punishment | 76 |
+| 14 | Sancho Letters and Petitions | 75 |
+| 15 | Limited Rights and Protections for Slaves | 74 |
+| 16 | Plantation Life and Labor | 73 |
+| 17 | Forced Sale of Family Members | 72 |
+| 18 | Encounters with Slave Traders | 70 |
+| 19 | The Incompatibility of Liberty and Slavery | 68 |
+
+## All Topic Labels
+
+All 439 topics found in the full collection — compare against the [first sample](01_simple_explanation.qmd#example-results) and [second sample](03_sample2_results.qmd#topic-labels-in-this-sample) to see which themes appear across multiple runs and which are unique to specific documents.
+
+- Spiritual Resilience in the Face of Death
+- Critique of Slaveholder's Use of Religion
+- Racial Identity and Prejudice
+- Faith and Redemption
+- Ministerial Encounters and Book Sales
+- Respectability and Social Standing
+- Authorial Intentions and Historical Context
+- Convict Labor and Punishment in Prisons
+- Whipping and Plantation Punishment
+- Conversion to Ministry
+- African American Preachers in Antebellum Era
+- Encounters with Rebel Soldiers
+- Education and Institutional Development
+- Whipping and Plantation Punishment
+- Sancho Letters and Petitions
+- Limited Rights and Protections for Slaves
+- Plantation Life and Labor
+- Forced Sale of Family Members
+- Encounters with Slave Traders
+- The Incompatibility of Liberty and Slavery
+- Religious Experience and Salvation
+- Christian Faith and Resilience
+- African Methodist Episcopal Zion Church and African American Leadership
+- Fugitive Slave Rescue and Resistance
+- The Justice System in Slave Narratives
+- Mistress and Master's Behavior
+- The Illusion of Freedom in America
+- The Missouri Compromise and the Expansion of Slavery
+- Traveling to Europe
+- Establishing Settlements in North America
+- Traveling as a Slave
+- Family History and Emancipation
+- Racial Equality and Human Rights
+- The Value of Hardship and Opportunity
+- Traveling and Navigation in the Wilderness
+- Harriet Tubman's Life and Work
+- Slave Auctions and Sales
+- Education and Women's Empowerment
+- Cosmology and Divine Sovereignty
+- Education and Personal Development
+- Life at Sea as a Slave
+- Racial Segregation on Public Transportation
+- Separation from Family
+- Christian Faith and Personal Redemption
+- Leadership and Public Service
+- European Royal Palaces
+- Agricultural Labor and Crop Management
+- Longing for Freedom and Family
+- Relationships with White Women
+- Horseback Pursuits and Battles
+- African American Military Service During the Civil War
+- Racial Tensions and Social Hierarchy in Colonial Haiti
+- Whipping and Plantation Punishment
+- Bishop Leadership and Church Governance
+- Life at Sea
+- African Chiefs and European Recognition
+- Confronting Slavery and Abolitionism
+- Whipping and Plantation Punishment
+- Economic Opportunities and Contributions
+- Abolitionist Speeches and Public Lectures
+- Whipping and Plantation Punishment
+- Escape and Fugitive Slave Experience
+- Struggling with Financial Independence
+- Eloquence and Public Speaking
+- Life as a Runaway Slave
+- Military Service and Racial Integration
+- The American Civil War and Its Aftermath
+- The Role of Faith and Religion in Human Development
+- The Importance of Knowledge and Virtue
+- Separation from Family
+- Violence and Threats from Slave Owners
+- Escape by Water
+- Family Relationships and Kinship
+- Life in Slavery
+- Christianity and Redemption
+- Agricultural Labor and Crop Management
+- Fairness of Treatment in the Pension Office
+- Agricultural Labor and Corn Harvesting
+- Fishing and River Labor
+- Whipping and Plantation Punishment
+- Life on Steamboats
+- Life as a Domestic Slave
+- Celebrity and Autobiographical Accounts
+- Spirituals and African American Music
+- Breaking and Entering
+- Dueling and Vigilantism
+- Mothers' Labor and Childcare in Slavery
+- Separation from Family and Loss of Affection
+- Missionary Work in Africa
+- Whipping and Plantation Punishment
+- The Role of Knowledge and Education in Slave Life
+- Agricultural Education and Economic Empowerment
+- Whipping and Plantation Punishment
+- River Escapes and Travel
+- Food Rations and Plantation Provisions
+- Toussaint Louverture's Leadership in Haiti
+- Religious Instruction and Personal Growth
+- Negotiating Freedom through Purchase or Manumission
+- Toussaint Louverture's Military Campaigns and Alliances
+- Encounters with Sympathetic Whites
+- Baptist Church Practices and Theology
+- Marriage and Family Life
+- Education and Personal Development
+- Whipping and Plantation Punishment
+- Employment and Servitude
+- Religious Experiences and Conversion
+- Cotton Picking and Plantation Labor
+- Escape and Fugitive Life
+- Whipping and Plantation Punishment
+- Correspondence and Separation from Loved Ones
+- Spiritual Awakening and Conversion
+- Separation from Family Members
+- Blindness and Economic Dependence
+- Whipping and Plantation Punishment
+- Traveling through Wilderness and Uncertainty
+- Abolitionist Influences
+- Government Revenue and Tariffs
+- Whipping and Plantation Punishment
+- Racial Barriers to Education
+- Land Ownership and Agricultural Labor
+- Lectures by Sojourner Truth
+- The Fugitive Slave Act and Public Opinion
+- Racial Prejudice at West Point
+- Acknowledging Assistance from Friends
+- Financial Support and Recognition for Slave Leaders
+- Surviving Hunger through Hunting
+- Addressing White Audiences in the South
+- Racial Identity and Relationships
+- The Nature of Temptation and Sin
+- Negro Education and Racial Progress
+- Grief and Mourning
+- Methodist Episcopal Church Organization and Governance
+- Navigating Wilderness Environments
+- Marriage and Family Ties
+- Whipping and Plantation Punishment
+- Christianity and Slaveholders
+- Christian Faith and Preaching
+- Abraham Lincoln's Emancipation and its Aftermath
+- Patriotism and National Identity
+- Deception and Betrayal by Slave Traders
+- Purchasing Freedom through Labor
+- Marriage and Family Separation
+- Military Training and Hazing at West Point
+- Separation from Family
+- Traveling as a Fugitive Slave
+- Christian Faith and Salvation
+- The Role of John Jasper as a Baptist Pastor
+- Grief and Mourning
+- Escaping Slavery through Military Alliances
+- Author's Life and Purpose
+- Frederick Douglass as Anti-Slavery Orator
+- Whipping and Plantation Punishment
+- Prejudice and Social Exclusion at West Point
+- The Power of Positive Thinking and Redemption
+- Christianity and American Politics
+- Escape Attempts and Punishment
+- Abolitionist Movement and American Politics
+- Christianity and the Treatment of Enslaved People
+- Extradition of Fugitive Slaves in North America
+- Horse Racing and Gambling
+- Leadership and Titles in Haitian Insurrection
+- Effective Classroom Management
+- Survival and Evasion in the Wilderness
+- Conversion to Christianity in Africa
+- Abolitionist Influence and Freedom
+- Imprisonment and Interrogation
+- Surviving Enslavement
+- Whipping and Plantation Punishment
+- African Royalty and Ceremonies
+- Toussaint Louverture's Conflict with French Authorities
+- African American Clergy and Intellectuals
+- Whipping and Plantation Punishment
+- Fugitive Slave Act and Resistance
+- Tobacco Sales and Plantation Economy
+- False Accusations and Unfair Trials
+- Pardons and Judicial Review
+- Free Black Men's Economic Success
+- Racial Identity and Biblical Interpretation
+- Christian Faith and Morality
+- Education and Career Advancement
+- Slavery and Christianity
+- Racial Degradation and Loss of Civilization
+- Tzatzoe's Life and Leadership
+- Economic Struggles and Community Development
+- Abolitionist Politics and the Vote
+- Spiritual Seeking and Plantation Punishment
+- French Invasion and Haitian Revolt
+- Life on a Riverboat
+- Critique of Slavery and Social Hierarchy
+- Whipping and Plantation Punishment
+- Missionary Work and African Culture
+- Escape from Slavery and Plantation Punishment
+- Social Stratification and Racial Hierarchy
+- Leaving Home for Education
+- John Jasper's Geocentric Views
+- Escape from Slavery
+- Abolitionist Women's Influence on American Society
+- Whipping and Plantation Punishment
+- Plantation Life and Social Hierarchy
+- Education and Personal Development
+- Education and the Role of Teachers in African American Communities
+- Persecution by Authorities
+- Camp Meetings and Revivalism
+- Escape from Slavery and Seeking Help
+- Relationships between Slaves and Their Owners
+- European Landmarks and Estates
+- Whipping and Plantation Punishment
+- Racial Slurs and Racist Language
+- Forbidden Education and Punishment
+- Church Finances and Membership
+- Escape from Slavery
+- Establishing Sabbath Schools and Literacy
+- Escape from Slavery in North America
+- Plantation Management and Labor Disputes
+- Encounters with Abolitionists and Free Blacks
+- Confrontation with Slave Catchers
+- Christianity and Slavery
+- Encounters with Hunting Dogs
+- Desire for Education
+- Life at Sea and Quarantine
+- Racism and Prejudice in America
+- Theatrical Performances in London
+- Whipping and Plantation Punishment
+- Education and Racial Barriers in Schools
+- Faith and Redemption in Slavery
+- Whipping and Plantation Punishment
+- Illiteracy and Spiritual Ignorance
+- Obtaining Passes and Avoiding Punishment
+- Loss of Family and Caregivers
+- Economic Impact of Slavery and Emancipation
+- Slave Trading and Auctions
+- Strangers and Travelers
+- Traveling and Encounters on the Road
+- Desire for Revenge Against Masters
+- Confronting Public Opinion and Slavery
+- The Nature of Slavery and Its Morality
+- Peanut-Based Food and Products
+- Government Responsibility for Freedmen
+- Treatment of Millie Christine by Railroad Companies
+- Escaping Slavery
+- Mob Violence and Lynching
+- Overcoming Slavery through Education
+- Navigating Racial Prejudice and Securing Support
+- False Accusations and Torture
+- False Accusations and Trials
+- Forced Separation from Family
+- Confrontations with Authority and Betrayal
+- Life on a Slave Vessel
+- Maternal Love and Separation
+- Older Female Slaves and Community
+- Life on Plantation with Master Edmondson
+- Separation from Family and the Emotional Toll of Slavery
+- False Accusations of Forgery and Theft
+- Chasing and Capture by Slave Catchers
+- Racial Progress and White Allies
+- Slaveholder's Obligations to Provide Holiday Time
+- The Importance of Perseverance and Collective Action in Achieving Racial Equality
+- Plantation Punishment and Escape
+- Escape from Slavery
+- Economic Inequality and Limited Opportunities
+- Church Leadership and Conflict
+- The Virtues and Flaws of a Strong-Willed Woman
+- Faith and Spiritual Resilience
+- Whipping and Plantation Punishment
+- Critique of Slavery and Southern Culture
+- Music and Personal Expression
+- Forced Marriage and Plantation Control
+- Faith and Community
+- Life on Plantations and in Cities
+- Lynching and Mob Violence in the South
+- Racism and Segregation in Public Spaces
+- Whipping and Plantation Punishment
+- Dr. George Washington Carver's Work at Tuskegee
+- Official Documentation and Testimony
+- French Colonial Politics and Slavery
+- Participation in Republican and Democratic Conventions
+- Medical Education and Professionalization
+- The Morality of Slavery and Human Rights
+- Gratitude and Support from Friends
+- Church Governance and Membership
+- Resisting Slavery
+- Christianity and Slavery in Plantation Life
+- Faith and Spiritual Resilience
+- Medical Care in Slavery
+- Tributes to Enslaved Individuals
+- African American Education and Intellectual Achievement
+- Traveling at Night through Woodlands and Swamps
+- Whipping and Plantation Punishment
+- Christian Leadership and Community Development
+- Encounters with Sympathetic White Women
+- Restrictions on Free Speech and Assembly
+- Whipping and Plantation Punishment
+- Whipping and Plantation Punishment
+- Encounters with Abolitionists and Influential Figures
+- Christianity and Slaveowner Relationships
+- Religious Meetings and Conversion
+- Life in the Slaveholder's Household
+- Racial Equality and Public Perception
+- Confronting Captors and Seeking Freedom
+- Fundraising Efforts and Donations
+- Authorship and Literary Merit
+- Whipping and Plantation Punishment
+- The Nature of Slavery and Its Effects on Humanity
+- Autobiographical Purpose and Authorial Intent
+- The Discovery of Genius and the Dangers of Excess
+- Navigating Multiple Masters
+- Racial Equality and Citizenship
+- The Cruelty of Slavery
+- Mob Violence Against Slave Owners
+- Encountering Slave-Hunters and Fugitive Life
+- Entrepreneurship and Financial Challenges
+- Escape from Slavery via Waterways
+- Critique of European Superiority and Justification for Slavery
+- Whipping and Plantation Punishment
+- Artistic Talent and Racial Exceptionality
+- Plantation Food and Drink
+- Enslavement and Transportation
+- Mathematical and Astronomical Contributions by Benjamin Banneker
+- Missionary Work and Education
+- Life in Slavery Compared to Freedom
+- Finding Employment and Safety in Northern Cities
+- Chaplain Allensworth's Military and Civic Roles
+- Voting Rights and Republican Politics
+- Traveling as a Slave
+- Life in the North vs. Life in the South
+- Fugitive Slave Experience and Abolitionist Advocacy
+- Economic Value of Slaves in Haiti
+- Family Life in Slavery
+- Whipping and Plantation Punishment
+- Escape and Fugitive Slave Life
+- Writing and Publishing Slave Narratives
+- Escape Planning and Preparations
+- Rivalry Among Slaves
+- Whipping and Plantation Punishment
+- Longing for Family and Freedom
+- Racial Prejudice at West Point
+- Food Preservation Techniques
+- Letters and Personal Correspondence
+- Experiences of Fugitive Slaves in the North
+- Racial Progress and Education in the South
+- Whipping and Plantation Punishment
+- Whipping and Plantation Punishment
+- Whipping and Plantation Punishment
+- Escaping from Slavery
+- Ministry and Education
+- Whipping and Plantation Punishment
+- Life in the North
+- Early Education and Intellectual Development
+- Encountering Indigenous Peoples
+- Life Stories of Former Slaves
+- Faith and Resilience in the Face of Oppression
+- Racial Equality and Voting Rights
+- Respect for Educated and Influential Figures
+- Whipping and Plantation Punishment
+- Rank and Social Status of Officers
+- Voting Rights and Racial Tensions in the Late 19th Century
+- False Accusations and Plantation Punishment
+- Spiritual Conversion and Faith
+- Tracking a Fugitive
+- Abolitionist Politics and Conventions
+- Escape from Slavery
+- Church Life and Community
+- Racial Harmony and Church Relations
+- Jasper's Ministry and Community
+- Conversion and Spiritual Experience
+- American Politics and Leadership
+- Overseer Violence and Farm Management
+- Romantic Relationships Between Slaves
+- Obtaining and Using Free Papers
+- Abraham Lincoln's Presidency
+- Life on Plantations and Hiring Out
+- Toussaint L'Ouverture's Leadership and Politics
+- Grief and Mourning in Slaveholding Families
+- War and Military Encounters
+- Kidnapping and Coercion by Slave Owners
+- Food Rations and Hunger
+- Fugitive Slave Cases
+- Finding Freedom and New Opportunities
+- Exploitation of Poor Whites by Slave System
+- Mob Violence and Lynching
+- Escaping Slavery
+- False Accusations and Unfair Trials (duplicate)
+- Forced Separation from Family
+- Life on a Ship
+- Toussaint L'Ouverture's Leadership in Haitian Independence
+- Racial Profiling and Arrest of Free Black People
+- The Unreliability and Cruelty of Slave Owners
+- Surviving in the Woods
+- Whipping and Plantation Punishment
+- Establishing Free Black Communities in Upper Canada
+- Racial Superiority and Biblical Justification
+- Toussaint L'Ouverture's Life and Legacy
+
+## Download the Results
+
+```{=html}
+<p>
+  <a class="btn btn-primary" href="../outputs/bertopic_full_nomic_sensitive_lemmatized/topic_review_table.csv" download>Download topic review table</a>
+  <a class="btn btn-outline-primary" href="../outputs/bertopic_full_nomic_sensitive_lemmatized/topic_labels_llm.csv" download>Download topic labels</a>
+  <a class="btn btn-outline-primary" href="../outputs/bertopic_full_nomic_sensitive_lemmatized/topic_info.csv" download>Download topic info</a>
+</p>
+```
+
+`topic_assignments.csv` for the full collection is too large to host on the site (over 100 MB). It is available locally after running the pipeline — see the folder path above.
+
+The scripts used to produce these results are in the `scripts/` folder of the [GitHub repository](https://github.com/jinghanlib/topic-modeling-slave-narratives):
+
+- `run_bertopic_sample.py` — runs the full pipeline for any sample size or the complete collection
+- `visualize_topic_metadata.py` — generates the review table and all metadata visualizations
+
+To reproduce the full collection run, use `--sample-frac 1.0 --output-dir outputs/bertopic_full_nomic_sensitive_lemmatized` with the same embedding and labeling flags shown in the [Hands-On Exercise](02_hands_on_exercise.qmd).
+
+## Visualizations
+
+### Topic Shares by Publication Decade
+
+```{=html}
+<iframe data-external="1" class="viz-frame" title="Topic shares by publication decade" src="../outputs/bertopic_full_nomic_sensitive_lemmatized/metadata_visualizations/topic_prevalence_grouped_bars.html" loading="lazy"></iframe>
+```
+
+### Topic Trends by Decade (Faceted)
+
+```{=html}
+<iframe data-external="1" class="viz-frame" title="Topic trends by decade (faceted)" src="../outputs/bertopic_full_nomic_sensitive_lemmatized/metadata_visualizations/topic_prevalence_by_decade.html" loading="lazy"></iframe>
+```
+
+### Topic-by-Decade Heatmap
+
+```{=html}
+<iframe data-external="1" class="viz-frame" title="Topic-by-decade heatmap" src="../outputs/bertopic_full_nomic_sensitive_lemmatized/metadata_visualizations/topic_decade_heatmap.html" loading="lazy"></iframe>
+```
+
+### Document-by-Topic Heatmap
+
+```{=html}
+<iframe data-external="1" class="viz-frame" title="Document-by-topic heatmap" src="../outputs/bertopic_full_nomic_sensitive_lemmatized/metadata_visualizations/document_topic_heatmap.html" loading="lazy"></iframe>
+```
+
+### Sample Documents Timeline
+
+```{=html}
+<iframe data-external="1" class="viz-frame short" title="Documents timeline" src="../outputs/bertopic_full_nomic_sensitive_lemmatized/metadata_visualizations/sample_documents_timeline.html" loading="lazy"></iframe>
+```
+
+### Topic Prevalence Over Time (Area Chart)
+
+```{=html}
+<iframe data-external="1" class="viz-frame" title="Topic prevalence over time" src="../outputs/bertopic_full_nomic_sensitive_lemmatized/visualizations/topics_over_time.html" loading="lazy"></iframe>
+```
+
+### Topic Word Bars
+
+```{=html}
+<iframe data-external="1" class="viz-frame" title="Topic word bars" src="../outputs/bertopic_full_nomic_sensitive_lemmatized/visualizations/topic_barchart.html" loading="lazy"></iframe>
+```
+
+### Topic Hierarchy
+
+```{=html}
+<iframe data-external="1" class="viz-frame" title="Topic hierarchy" src="../outputs/bertopic_full_nomic_sensitive_lemmatized/visualizations/topic_hierarchy.html" loading="lazy"></iframe>
+```
+
+### Topic Cluster Map
+
+```{=html}
+<iframe data-external="1" class="viz-frame" title="Topic cluster map" src="../outputs/bertopic_full_nomic_sensitive_lemmatized/visualizations/topics.html" loading="lazy"></iframe>
+```

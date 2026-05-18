@@ -1,0 +1,219 @@
+---
+title: "Second 10% Sample Results"
+subtitle: "A different random sample — seed 99, 29 documents, 1,795 chunks"
+---
+
+## About This Sample
+
+This page presents results from a second independent 10% sample of the collection, drawn with a different random seed. Comparing it against the [first sample](01_simple_explanation.qmd) shows how topic modeling results can differ across runs — and which themes are stable enough to appear in both.
+
+```text
+Sample fraction: 10%
+Random seed:     99
+Documents:       29
+Chunks:          1,795
+Topics found:    58
+Outliers:        ~18%
+```
+
+All CSV files and HTML visualizations for this run are in the repository under:
+
+```text
+outputs/bertopic_sample2_nomic_sensitive_lemmatized/
+  topic_review_table.csv
+  topic_labels_llm.csv
+  topic_assignments.csv
+  topic_info.csv
+  sample_documents.csv
+  visualizations/         ← 4 BERTopic charts (open in browser)
+  metadata_visualizations/ ← 5 metadata charts (open in browser)
+```
+
+The 29 sampled documents are completely different from the first sample:
+
+```text
+fpn-burton-burton.xml
+fpn-lane-lane.xml
+fpn-mason-mason.xml
+neh-adamsh-adamsh.xml
+neh-auntjudy-auntjudy.xml
+neh-baquaqua-baquaqua.xml
+neh-beardj-beard.xml
+neh-black-black.xml
+neh-bluett-bluett.xml
+neh-boen-boen.xml
+neh-brownbox-brownbox.xml
+neh-flipper-flipper.xml
+neh-greena-greena.xml
+neh-grimes55-grimes55.xml
+neh-heard-heard.xml
+neh-hildreth-hildreth.xml
+neh-jbrown-jbrown.xml
+neh-jeajohn-jeajohn.xml
+neh-johnsontl-johnsontl.xml
+neh-latta-latta.xml
+neh-leehf-leehf.xml
+neh-lewisjw-lewisjw.xml
+neh-marrs-marrs.xml
+neh-sancho2-sancho2.xml
+neh-thompsch-thompsch.xml
+neh-troy-troy.xml
+neh-vale-vale.xml
+neh-venture2-venture2.xml
+neh-whitegeo-whitegeo.xml
+```
+
+## Topic Review Table (Top Topics)
+
+The table below shows the 15 largest topics by chunk count. Download the full CSV files for all 58 topics.
+
+| Topic | Label | Chunks |
+|---:|---|---:|
+| 0 | Racial Exclusion at West Point | 131 |
+| 1 | Respectable Slaveholding Families | 117 |
+| 2 | Faith and Church Leadership | 56 |
+| 3 | Fleeing to Canada for Freedom | 48 |
+| 4 | Traveling and Navigation | 47 |
+| 5 | Letters from Friends and Admirers | 45 |
+| 6 | Missionary Influence on Indigenous Peoples | 36 |
+| 7 | Critique of American Slavery and Racial Hierarchy | 36 |
+| 8 | Racial Identity and Hierarchy | 33 |
+| 9 | The Colored Methodist Episcopal Church and its Leadership | 33 |
+| 10 | Toussaint Louverture's Military Campaigns | 28 |
+| 11 | Education and Community Support | 27 |
+| 12 | Critique of Northern Churches and Ministers on Slavery | 27 |
+| 13 | Traveling to Freedom | 27 |
+| 16 | Mulattoes' Ambition and Rebellion | 26 |
+
+## Topic Labels in This Sample
+
+These are the topics found in this sample. Compare them against the [first sample](01_simple_explanation.qmd#example-results) and consider: which topics appear in both? Which appear only here?
+
+- Racial Exclusion at West Point
+- Respectable Slaveholding Families
+- Faith and Church Leadership
+- Fleeing to Canada for Freedom
+- Traveling and Navigation
+- Letters from Friends and Admirers
+- Missionary Influence on Indigenous Peoples
+- Critique of American Slavery and Racial Hierarchy
+- Racial Identity and Hierarchy
+- The Colored Methodist Episcopal Church and its Leadership
+- Toussaint Louverture's Military Campaigns
+- Education and Community Support
+- Critique of Northern Churches and Ministers on Slavery
+- Traveling to Freedom
+- Whipping and Plantation Punishment
+- Traveling by Boat and Railroad
+- Mulattoes' Ambition and Rebellion
+- Critique of Slavery and Racial Supremacy
+- Forced Sale and Auction
+- Racial Equality and Social Justice
+- Life on Board Slave Ships
+- Christian Missionary Work for Africa
+- Leadership and Military Service
+- Whipping and Plantation Punishment
+- Whipping and Plantation Punishment
+- Faith and Death in Slavery
+- Military Life and Marching
+- The Treatment and Education of Enslaved Children
+- Christian Faith and Slavery
+- Black Resistance to French Rule
+- Elder Bowles' Evangelical Campaigns
+- Buying and Selling Slaves
+- Traveling and Navigation
+- Toussaint Louverture's Leadership in Haiti
+- Toussaint L'Ouverture's Relationship with French Authorities
+- Whipping and Plantation Punishment
+- Conversion and Spiritual Crisis
+- Life in the Field under an Overseer
+- Life on Plantations During the Civil War
+- Life on a Plantation Under a Mistress
+- Hope and Resilience in the Face of Oppression
+- Racial Identity and Progress
+- Whipping and Plantation Punishment
+- Military Service and Education
+- Life at Sea and Freedom
+- Toussaint L'Ouverture's Leadership and Conflict with English
+- Authorship and Purpose
+- Cotton Harvesting and Processing
+- The End of Slavery in the Americas
+- Forced Sale and Transportation
+- Plantation Life in Virginia
+- Itinerant Preaching and Church Leadership
+- Pursuing Freedom
+- Church Support and Division
+- Becoming a Licensed Preacher
+- Plantation Justice and Punishment
+- The Transatlantic Slave Trade
+- Education and Personal Growth
+
+Note that similar labels — such as multiple "Whipping and Plantation Punishment" topics — can appear in the same run. These are distinct clusters the model kept separate because the passages within them differ in vocabulary or context, even though they share a broad theme. This is expected behavior, not an error. Inspecting the top words and representative passages in `topic_assignments.csv` will show what distinguishes them.
+
+## Download the Results
+
+```{=html}
+<p>
+  <a class="btn btn-primary" href="../outputs/bertopic_sample2_nomic_sensitive_lemmatized/topic_review_table.csv" download>Download topic review table</a>
+  <a class="btn btn-outline-primary" href="../outputs/bertopic_sample2_nomic_sensitive_lemmatized/topic_labels_llm.csv" download>Download topic labels</a>
+  <a class="btn btn-outline-primary" href="../outputs/bertopic_sample2_nomic_sensitive_lemmatized/topic_info.csv" download>Download topic info</a>
+  <a class="btn btn-outline-primary" href="../outputs/bertopic_sample2_nomic_sensitive_lemmatized/topic_assignments.csv" download>Download topic assignments</a>
+  <a class="btn btn-outline-primary" href="../outputs/bertopic_sample2_nomic_sensitive_lemmatized/sample_documents.csv" download>Download sample documents</a>
+</p>
+```
+
+## Visualizations
+
+### Topic Shares by Publication Decade
+
+```{=html}
+<iframe data-external="1" class="viz-frame" title="Topic shares by publication decade" src="../outputs/bertopic_sample2_nomic_sensitive_lemmatized/metadata_visualizations/topic_prevalence_grouped_bars.html" loading="lazy"></iframe>
+```
+
+### Topic Trends by Decade (Faceted)
+
+```{=html}
+<iframe data-external="1" class="viz-frame" title="Topic trends by decade (faceted)" src="../outputs/bertopic_sample2_nomic_sensitive_lemmatized/metadata_visualizations/topic_prevalence_by_decade.html" loading="lazy"></iframe>
+```
+
+### Topic-by-Decade Heatmap
+
+```{=html}
+<iframe data-external="1" class="viz-frame" title="Topic-by-decade heatmap" src="../outputs/bertopic_sample2_nomic_sensitive_lemmatized/metadata_visualizations/topic_decade_heatmap.html" loading="lazy"></iframe>
+```
+
+### Document-by-Topic Heatmap
+
+```{=html}
+<iframe data-external="1" class="viz-frame" title="Document-by-topic heatmap" src="../outputs/bertopic_sample2_nomic_sensitive_lemmatized/metadata_visualizations/document_topic_heatmap.html" loading="lazy"></iframe>
+```
+
+### Sample Documents Timeline
+
+```{=html}
+<iframe data-external="1" class="viz-frame short" title="Sample documents timeline" src="../outputs/bertopic_sample2_nomic_sensitive_lemmatized/metadata_visualizations/sample_documents_timeline.html" loading="lazy"></iframe>
+```
+
+### Topic Prevalence Over Time (Area Chart)
+
+```{=html}
+<iframe data-external="1" class="viz-frame" title="Topic prevalence over time" src="../outputs/bertopic_sample2_nomic_sensitive_lemmatized/visualizations/topics_over_time.html" loading="lazy"></iframe>
+```
+
+### Topic Word Bars
+
+```{=html}
+<iframe data-external="1" class="viz-frame" title="Topic word bars" src="../outputs/bertopic_sample2_nomic_sensitive_lemmatized/visualizations/topic_barchart.html" loading="lazy"></iframe>
+```
+
+### Topic Hierarchy
+
+```{=html}
+<iframe data-external="1" class="viz-frame" title="Topic hierarchy" src="../outputs/bertopic_sample2_nomic_sensitive_lemmatized/visualizations/topic_hierarchy.html" loading="lazy"></iframe>
+```
+
+### Topic Cluster Map
+
+```{=html}
+<iframe data-external="1" class="viz-frame" title="Topic cluster map" src="../outputs/bertopic_sample2_nomic_sensitive_lemmatized/visualizations/topics.html" loading="lazy"></iframe>
+```

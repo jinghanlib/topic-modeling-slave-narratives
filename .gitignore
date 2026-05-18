@@ -26,12 +26,15 @@ outputs/bertopic_sample/
 outputs/bertopic_sample_nomic_sensitive/
 
 # Large binary and model files not needed for the site
-outputs/bertopic_sample_nomic_sensitive_lemmatized/embeddings_ollama_nomic-embed-text.npy
-outputs/bertopic_sample_nomic_sensitive_lemmatized/model
-outputs/bertopic_sample_nomic_sensitive_lemmatized/sample_chunks.csv
-# documents.html embeds raw embedding data (~11 MB), exclude it
-outputs/bertopic_sample_nomic_sensitive_lemmatized/visualizations/documents.html
-docs/outputs/bertopic_sample_nomic_sensitive_lemmatized/visualizations/documents.html
+outputs/*/embeddings_ollama_nomic-embed-text.npy
+outputs/*/model
+outputs/*/sample_chunks.csv
+# documents.html embeds raw embedding data, exclude from all runs
+outputs/*/visualizations/documents.html
+docs/outputs/*/visualizations/documents.html
+# topic_assignments.csv is too large for full run
+outputs/bertopic_full_nomic_sensitive_lemmatized/topic_assignments.csv
+docs/outputs/bertopic_full_nomic_sensitive_lemmatized/topic_assignments.csv
 
 # Student run outputs
 outputs/my_run/

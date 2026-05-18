@@ -49,6 +49,21 @@ a {
   color: var(--ucr-gold) !important;
 }
 
+.navbar .dropdown-menu {
+  background: #fff;
+  border: 1px solid var(--line);
+}
+
+.navbar .dropdown-item {
+  color: var(--ink) !important;
+}
+
+.navbar .dropdown-item:hover,
+.navbar .dropdown-item:focus {
+  background: var(--soft);
+  color: var(--ucr-blue) !important;
+}
+
 #title-block-header {
   max-width: 1120px;
   margin: 0 auto 26px;

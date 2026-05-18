@@ -52,27 +52,6 @@ CUSTOM_STOPWORDS = {
     "ye",
 }
 
-CURATED_TOPIC_LABELS = {
-    # These keep closely related violence/control topics distinct in the
-    # teaching sample, where the local labeler otherwise tends to reuse the
-    # same broad label for several different clusters.
-    0: (
-        "Whipping and Plantation Punishment",
-        "Accounts of whipping, flogging, restraint, and plantation punishment described in testimony about slavery.",
-    ),
-    12: (
-        "Violence by Mistresses and Women Enslavers",
-        "Accounts of punishment and abuse associated with mistresses, madams, women, children, and household authority.",
-    ),
-    14: (
-        "Farm Authority and Slaveholder Control",
-        "Passes, farm authority, owners, servants, and local control in plantation and farm settings.",
-    ),
-    41: (
-        "Overseer Violence in Field Labor",
-        "Overseer violence, field labor, blood, flogging, and medical treatment after punishment.",
-    ),
-}
 
 IRREGULAR_LEMMAS = {
     "babies": "baby",
@@ -414,8 +393,6 @@ def label_topics(
             result["label"] = ", ".join(topic_words[:4]).title()
         if not result["description"] or result["description"] == "Unlabeled topic":
             result["description"] = f"Topic characterized by: {', '.join(topic_words[:8])}."
-        if topic_id in CURATED_TOPIC_LABELS:
-            result["label"], result["description"] = CURATED_TOPIC_LABELS[topic_id]
         labels.append({"topic": topic_id, **result, "top_words": ", ".join(topic_words)})
         print(f"Labeled topic {topic_id}: {result['label']}")
     return pd.DataFrame(labels)

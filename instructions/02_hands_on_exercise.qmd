@@ -364,8 +364,8 @@ Here is a small preview of the topic review table:
 |---:|---|---:|---|
 | 0 | Whipping and Plantation Punishment | 76 | whip, flog, overseer, tie, plantation |
 | 1 | Limitations of Liberty in the Post-War Era | 66 | government, constitution, liberty, american, war |
-| 2 | Separation from Family and Emotional Trauma | 55 | dice, aunt dice, aunt, mos, riverside |
-| 3 | Slave-led Christian Services and Meetings | 45 | meeting, preach, prayer, spirit, pray |
+| 2 | Separation and Reunion | 55 | dice, aunt dice, aunt, mos, riverside |
+| 3 | Plantation Christianity and Slave Spirituality | 45 | meeting, preach, prayer, spirit, pray |
 
 Students can download the CSV files from the buttons below. If a CSV opens in the browser instead of downloading, use **File > Save Page As** or right-click the button and choose **Save Link As**.
 

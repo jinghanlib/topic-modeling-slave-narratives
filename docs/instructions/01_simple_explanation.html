@@ -4039,6 +4039,18 @@ color: #fff !important;
 .navbar .navbar-brand:hover {
 color: var(--ucr-gold) !important;
 }
+.navbar .dropdown-menu {
+background: #fff;
+border: 1px solid var(--line);
+}
+.navbar .dropdown-item {
+color: var(--ink) !important;
+}
+.navbar .dropdown-item:hover,
+.navbar .dropdown-item:focus {
+background: var(--soft);
+color: var(--ucr-blue) !important;
+}
 #title-block-header {
 max-width: 1120px;
 margin: 0 auto 26px;
@@ -4350,6 +4362,21 @@ overflow-x: hidden;
     <a class="nav-link" href="../instructions/02_hands_on_exercise.html"> 
 <span class="menu-text">Hands-On Exercise</span></a>
   </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-more-analyses" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">More Analyses</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-more-analyses">    
+        <li>
+    <a class="dropdown-item" href="../instructions/03_sample2_results.html">
+ <span class="dropdown-text">Second 10% Sample</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../instructions/04_full_results.html">
+ <span class="dropdown-text">Full Collection</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="../slides.html"> 
 <span class="menu-text">Slides</span></a>
@@ -4622,6 +4649,7 @@ preached, preaching -&gt; preach</code></pre>
 </ul>
 <p>Then it wrote a clearer label, such as:</p>
 <pre class="text"><code>Whipping and Plantation Punishment</code></pre>
+<p>The label is a draft, not a final answer. A different LLM — or even the same model run again — might write a different label for the same topic. One model might call a cluster “Whipping and Plantation Punishment” while another calls it “Physical Violence Under Slavery” or “Overseer Brutality and Forced Labor.” The top words and the passages do not change, but the phrasing does. This is where human interpretation becomes essential: a researcher who reads the top words and a few representative passages can judge whether the label is accurate, too broad, too narrow, or missing the historical point entirely. The LLM label is a starting point, not a conclusion.</p>
 </section>
 </section>
 <section id="topic-words-labels-and-human-interpretation" class="level2">
@@ -4664,13 +4692,13 @@ preached, preaching -&gt; preach</code></pre>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">2</td>
-<td>Separation from Family and Emotional Trauma</td>
+<td>Separation and Reunion</td>
 <td style="text-align: right;">55</td>
 <td>dice, aunt dice, aunt, mos, riverside</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">3</td>
-<td>Slave-led Christian Services and Meetings</td>
+<td>Plantation Christianity and Slave Spirituality</td>
 <td style="text-align: right;">45</td>
 <td>meeting, preach, prayer, spirit, pray</td>
 </tr>
@@ -4684,7 +4712,6 @@ preached, preaching -&gt; preach</code></pre>
   <a class="btn btn-outline-primary" href="../outputs/bertopic_sample_nomic_sensitive_lemmatized/topic_assignments.csv" download>Download topic assignments</a>
 </p>
 <p>The LLM label is a draft interpretation. It can be replaced or improved by a human reader.</p>
-<p>For teaching purposes, some labels were manually revised after reviewing the topic words and representative passages. That manual revision changed only the topic label. It did not move chunks into different topics.</p>
 <p>This is a normal part of topic modeling: the computer suggests patterns, and people interpret whether the labels are historically and textually accurate.</p>
 </section>
 <section id="outliers" class="level2">
@@ -4701,21 +4728,25 @@ preached, preaching -&gt; preach</code></pre>
 </section>
 <section id="example-results" class="level2">
 <h2 class="anchored" data-anchor-id="example-results">Example Results</h2>
-<p>Some final topic labels were:</p>
+<p>Some topic labels from this sample:</p>
 <ul>
 <li>Whipping and Plantation Punishment</li>
 <li>Limitations of Liberty in the Post-War Era</li>
-<li>Separation from Family and Emotional Trauma</li>
-<li>Slave-led Christian Services and Meetings</li>
-<li>Ranch Life and Conflict with Native Americans</li>
-<li>Treatment by Slaveholders</li>
+<li>Separation and Reunion</li>
+<li>Plantation Christianity and Slave Spirituality</li>
+<li>Life on the Range</li>
+<li>Life in Missouri and Experiences with Plantation Owners</li>
+<li>Divine Providence and Racial Identity</li>
 <li>Racial Identity and Prejudice</li>
-<li>Forced Labor and Overwork in Sugar and Cotton Plantations</li>
+<li>Finding Freedom and Employment in the North</li>
+<li>Whipping and Plantation Punishment by Female Supervisors</li>
 <li>Traveling by Railroad</li>
-<li>Booker T. Washington and Tuskegee Institute</li>
-<li>Slave Markets and Sales</li>
+<li>Booker Washington’s Leadership and National Organization</li>
+<li>Negro Slave Markets and Sales</li>
 <li>Food Rations and Hunger</li>
+<li>Joanna’s Relationship with Captain Stedman</li>
 </ul>
+<p>Note that similar labels — such as multiple “Whipping and Plantation Punishment” topics — can appear in the same run. These are distinct clusters that the model kept separate because the passages within them differ in vocabulary or context, even though they share a broad theme. This is expected behavior, not an error. A human reader can inspect the top words and representative passages to understand what distinguishes them.</p>
 </section>
 <section id="reading-the-charts" class="level2">
 <h2 class="anchored" data-anchor-id="reading-the-charts">Reading the Charts</h2>

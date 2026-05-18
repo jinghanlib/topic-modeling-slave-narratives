@@ -209,6 +209,8 @@ Then it wrote a clearer label, such as:
 Whipping and Plantation Punishment
 ```
 
+The label is a draft, not a final answer. A different LLM — or even the same model run again — might write a different label for the same topic. One model might call a cluster "Whipping and Plantation Punishment" while another calls it "Physical Violence Under Slavery" or "Overseer Brutality and Forced Labor." The top words and the passages do not change, but the phrasing does. This is where human interpretation becomes essential: a researcher who reads the top words and a few representative passages can judge whether the label is accurate, too broad, too narrow, or missing the historical point entirely. The LLM label is a starting point, not a conclusion.
+
 ## Topic Words, Labels, and Human Interpretation
 
 Topic words are important evidence. They are shown in:
@@ -225,8 +227,8 @@ Here is a small preview of the topic review table:
 |---:|---|---:|---|
 | 0 | Whipping and Plantation Punishment | 76 | whip, flog, overseer, tie, plantation |
 | 1 | Limitations of Liberty in the Post-War Era | 66 | government, constitution, liberty, american, war |
-| 2 | Separation from Family and Emotional Trauma | 55 | dice, aunt dice, aunt, mos, riverside |
-| 3 | Slave-led Christian Services and Meetings | 45 | meeting, preach, prayer, spirit, pray |
+| 2 | Separation and Reunion | 55 | dice, aunt dice, aunt, mos, riverside |
+| 3 | Plantation Christianity and Slave Spirituality | 45 | meeting, preach, prayer, spirit, pray |
 
 Students can download the CSV files from the links below. If a file opens in the browser instead of downloading, use **File > Save Page As** or right-click the link and choose **Save Link As**.
 
@@ -240,8 +242,6 @@ Students can download the CSV files from the links below. If a file opens in the
 ```
 
 The LLM label is a draft interpretation. It can be replaced or improved by a human reader.
-
-For teaching purposes, some labels were manually revised after reviewing the topic words and representative passages. That manual revision changed only the topic label. It did not move chunks into different topics.
 
 This is a normal part of topic modeling: the computer suggests patterns, and people interpret whether the labels are historically and textually accurate.
 
@@ -269,20 +269,25 @@ An outlier is not necessarily bad. It can mean the passage is unusual, mixed, sh
 
 ## Example Results
 
-Some final topic labels were:
+Some topic labels from this sample:
 
 - Whipping and Plantation Punishment
 - Limitations of Liberty in the Post-War Era
-- Separation from Family and Emotional Trauma
-- Slave-led Christian Services and Meetings
-- Ranch Life and Conflict with Native Americans
-- Treatment by Slaveholders
+- Separation and Reunion
+- Plantation Christianity and Slave Spirituality
+- Life on the Range
+- Life in Missouri and Experiences with Plantation Owners
+- Divine Providence and Racial Identity
 - Racial Identity and Prejudice
-- Forced Labor and Overwork in Sugar and Cotton Plantations
+- Finding Freedom and Employment in the North
+- Whipping and Plantation Punishment by Female Supervisors
 - Traveling by Railroad
-- Booker T. Washington and Tuskegee Institute
-- Slave Markets and Sales
+- Booker Washington's Leadership and National Organization
+- Negro Slave Markets and Sales
 - Food Rations and Hunger
+- Joanna's Relationship with Captain Stedman
+
+Note that similar labels — such as multiple "Whipping and Plantation Punishment" topics — can appear in the same run. These are distinct clusters that the model kept separate because the passages within them differ in vocabulary or context, even though they share a broad theme. This is expected behavior, not an error. A human reader can inspect the top words and representative passages to understand what distinguishes them.
 
 ## Reading the Charts
 
