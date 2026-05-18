@@ -221,6 +221,8 @@ This may take several minutes.
 
 This command runs the full topic modeling pipeline on a 10% sample of the collection. It cleans and chunks the texts, converts each chunk into embeddings using the local `nomic-embed-text` model, clusters the chunks into topics using BERTopic, and generates readable topic labels using the local `llama3.1` model. Results are saved to `outputs/my_run/`. No paid API key is needed. The run takes roughly 5–15 minutes on a modern laptop.
 
+> **Note:** If you run the script more than once with the same `--output-dir`, the previous results will be overwritten. To keep multiple runs separate, change the folder name each time — for example `outputs/my_run_attempt2` or `outputs/my_run_seed99`. Each folder will contain its own independent set of CSV files and visualizations.
+
 **Mac or Linux:**
 
 ```bash

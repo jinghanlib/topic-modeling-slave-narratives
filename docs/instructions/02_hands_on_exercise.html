@@ -4638,6 +4638,9 @@ full collection: much longer, possibly hours</code></pre>
 <section id="run-the-10-topic-model" class="level2">
 <h2 class="anchored" data-anchor-id="run-the-10-topic-model">Run the 10% Topic Model</h2>
 <p>This command runs the full topic modeling pipeline on a 10% sample of the collection. It cleans and chunks the texts, converts each chunk into embeddings using the local <code>nomic-embed-text</code> model, clusters the chunks into topics using BERTopic, and generates readable topic labels using the local <code>llama3.1</code> model. Results are saved to <code>outputs/my_run/</code>. No paid API key is needed. The run takes roughly 5–15 minutes on a modern laptop.</p>
+<blockquote class="blockquote">
+<p><strong>Note:</strong> If you run the script more than once with the same <code>--output-dir</code>, the previous results will be overwritten. To keep multiple runs separate, change the folder name each time — for example <code>outputs/my_run_attempt2</code> or <code>outputs/my_run_seed99</code>. Each folder will contain its own independent set of CSV files and visualizations.</p>
+</blockquote>
 <p><strong>Mac or Linux:</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-u</span> scripts/run_bertopic_sample.py <span class="dt">\</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output-dir</span> outputs/my_run <span class="dt">\</span></span>
