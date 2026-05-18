@@ -7,7 +7,19 @@ subtitle: "A different random sample — seed 99, 29 documents, 1,795 chunks"
 
 This page presents results from a second independent 10% sample of the collection, drawn with a different random seed. Comparing it against the [first sample](01_simple_explanation.qmd) shows how topic modeling results can differ across runs — and which themes are stable enough to appear in both.
 
-To reproduce this run yourself, use the same script from the [Hands-On Exercise](02_hands_on_exercise.qmd) with `--seed 99` instead of the default seed 42. The script is `scripts/run_bertopic_sample.py` in the [GitHub repository](https://github.com/jinghanlib/topic-modeling-slave-narratives).
+To reproduce this run yourself, use the same script and the same command from the [Hands-On Exercise](02_hands_on_exercise.qmd), but add `--seed 99` to the command. No changes to the script code are needed — `--seed` is a command-line flag. For example:
+
+```bash
+python -u scripts/run_bertopic_sample.py \
+  --seed 99 \
+  --output-dir outputs/my_run_seed99 \
+  --embedding-backend ollama \
+  --ollama-embedding-model nomic-embed-text \
+  --representation-backend ctfidf \
+  --clustering sensitive \
+  --label-backend ollama \
+  --ollama-model llama3.1:latest
+```
 
 ```text
 Sample fraction: 10%

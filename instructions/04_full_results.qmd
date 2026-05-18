@@ -7,7 +7,21 @@ subtitle: "All 294 documents — the complete North American Slave Narratives co
 
 This page presents results from running the full BERTopic pipeline on the entire collection. Comparing it against the two 10% samples shows which themes are stable across the full corpus and which emerged only in specific subsets of documents.
 
-To reproduce this run, use `scripts/run_bertopic_sample.py` from the [GitHub repository](https://github.com/jinghanlib/topic-modeling-slave-narratives) with `--sample-frac 1.0`. The same setup steps from the [Hands-On Exercise](02_hands_on_exercise.qmd) apply — the only difference is the sample fraction flag and a longer run time.
+To reproduce this run, use the same script and setup from the [Hands-On Exercise](02_hands_on_exercise.qmd), but add `--sample-frac 1.0` to the command. No changes to the script code are needed — it is a command-line flag. For example:
+
+```bash
+python -u scripts/run_bertopic_sample.py \
+  --sample-frac 1.0 \
+  --output-dir outputs/my_run_full \
+  --embedding-backend ollama \
+  --ollama-embedding-model nomic-embed-text \
+  --representation-backend ctfidf \
+  --clustering sensitive \
+  --label-backend ollama \
+  --ollama-model llama3.1:latest
+```
+
+This will take significantly longer than the 10% sample — expect several hours on a modern laptop.
 
 ```text
 Sample fraction: 100%
