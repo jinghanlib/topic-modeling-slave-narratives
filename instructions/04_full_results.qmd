@@ -30,6 +30,8 @@ outputs/bertopic_full_nomic_sensitive_lemmatized/
 
 With 294 documents, the model finds far more topics than any single 10% sample — including many narrow topics tied to specific documents or authors. Some topics are broad recurring themes; others are very specific to a single narrative. The same note about similar labels applies: multiple topics with similar names (such as several "Whipping and Plantation Punishment" clusters) are distinct groups that the model kept separate based on differences in vocabulary and context.
 
+Some topic labels in this run appear as a list of raw words rather than a descriptive phrase — for example, `Ship, Sail, Fleet, Captain` or `Camel, Lion, Beast, Tree`. This happens when the local language model fails to generate a valid label for a cluster, usually because the cluster is very small, highly specific to one document, or contains unusual vocabulary. When that happens, the script falls back to listing the top four topic words as the label. About 45 of the 439 topics have this fallback label. These clusters are still valid groupings — the top words and the passages assigned to them can be read in `topic_assignments.csv` to understand what the cluster contains. A human reader can assign a better label after inspecting the passages.
+
 ## Top 20 Topics by Chunk Count
 
 | Topic | Label | Chunks |
