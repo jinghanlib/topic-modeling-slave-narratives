@@ -35,13 +35,15 @@ outputs/bertopic_sample_nomic_sensitive_lemmatized/
 
 **Do not write to that folder.** It contains the reference run used to build the charts and download links on this site. You can use those files to compare against your own results.
 
-When you run the scripts in this exercise, your results will go to a separate folder:
+**When you run the scripts in this exercise, your results will go to a separate folder:**
 
 ```text
 outputs/my_run/
 ```
 
 Keep these two folders separate so you can always compare your results to the reference.
+
+> **Reminder:** All commands in this exercise must be run from inside the project folder (`topic-modeling-slave-narratives/`). Open a terminal there before running anything — see [Open a Terminal](#open-a-terminal) below. Your CSV results and HTML charts will appear in `outputs/my_run/` when the scripts finish.
 
 ## Download the Original Dataset
 
@@ -84,7 +86,7 @@ If you have Git installed, open a terminal and run:
 git clone https://github.com/jinghanlib/topic-modeling-slave-narratives.git
 ```
 
-Then copy or move the downloaded dataset's `data` folder into the repository folder.
+**Then copy or move the downloaded dataset's `data` folder into the repository folder.**
 
 Your project folder should look like this:
 
