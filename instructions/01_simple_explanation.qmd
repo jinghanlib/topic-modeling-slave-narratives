@@ -364,7 +364,11 @@ This chart shows topic prevalence as a stacked area chart across publication dec
 
 ### Topic Word Bars
 
-This chart shows the top words for every topic as horizontal bar charts, one panel per topic. The bar length represents how distinctive each word is to that topic compared with the rest of the collection.
+This chart shows the top words for every topic as horizontal bar charts, one panel per topic.
+
+Top words are not simply the most frequent words in a topic — they are the words that appear much more often in that topic than in the rest of the collection. A word like "slavery" might appear in every topic and therefore rank low; a word like "overseer" that appears heavily in one topic but rarely in others will rank high. This scoring method is called c-TF-IDF.
+
+The bar length shows the c-TF-IDF score — a longer bar means the word is more distinctive to that specific topic. Words with the longest bars are the strongest signals for what that topic is about.
 
 ```{=html}
 <iframe data-external="1" class="viz-frame" title="Topic word bars" src="../outputs/bertopic_sample_nomic_sensitive_lemmatized/visualizations/topic_barchart.html" loading="lazy"></iframe>
