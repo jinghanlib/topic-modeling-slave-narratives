@@ -5,17 +5,17 @@ subtitle: "A classroom-friendly guide to BERTopic, local models, topic labels, a
 
 The North American Slave Narratives collection, hosted by Documenting the American South at the University of North Carolina, preserves over 290 first-person accounts of enslaved life in the United States. Topic modeling gives us a way to search for recurring themes across the collection without reading every document from start to finish — and then to ask whether those themes shift across the decades in which the narratives were published.
 
-This lesson introduces that workflow using a 10% sample of the collection. It is designed for students who may have little or no coding experience.
-
-Use the pages below to learn the main ideas, run the workflow, download the result tables, and interpret the visualizations.
+This site introduces that workflow and is designed for students who may have little or no coding experience.
 
 ## Start Here
+
+The Simple Explanation and Hands-On Exercise both use a **10% sample** of the collection — 29 documents drawn at random from 294. This keeps run times short enough for a classroom setting while producing meaningful results.
 
 ::: {.grid}
 ::: {.g-col-12 .g-col-md-6}
 ### Simple Explanation
 
-Learn the project in plain language: data, chunks, tokens, preprocessing, BERTopic, local LLM steps, topic labels, outliers, and human interpretation.
+Learn the project in plain language: data, chunks, preprocessing, BERTopic, local LLM steps, topic labels, outliers, and human interpretation. Includes all visualizations and result tables for the 10% sample.
 
 [Open the simple explanation](instructions/01_simple_explanation.qmd){.btn .btn-primary}
 :::
@@ -23,44 +23,19 @@ Learn the project in plain language: data, chunks, tokens, preprocessing, BERTop
 ::: {.g-col-12 .g-col-md-6}
 ### Hands-On Exercise
 
-Download the original dataset, install the tools, run the scripts, and interpret the outputs.
+Download the original dataset, install the tools, run the scripts on your own computer, and interpret the outputs. Includes optional runs for a different 10% sample and the full collection.
 
 [Open the hands-on exercise](instructions/02_hands_on_exercise.qmd){.btn .btn-primary}
 :::
 :::
 
-## Featured Visualization
+## More Analyses
 
-This chart shows the largest topics across publication decades. The dates are publication dates, not necessarily the dates when narrated events happened.
+The **More Analyses** tab in the navigation bar contains two additional runs for comparison:
 
-```{=html}
-<iframe class="viz-frame" title="Topic shares by publication decade" src="outputs/bertopic_sample_nomic_sensitive_lemmatized/metadata_visualizations/topic_prevalence_grouped_bars.html" loading="lazy"></iframe>
-```
+- **Second 10% Sample** — a different 29-document sample drawn with a different random seed, with zero overlap with the first sample. Compare topics across the two runs to see which themes are stable and which differ.
+- **Full Collection** — the complete pipeline run on all 294 documents, producing 439 topics. Shows which themes appear only in specific documents and which recur across the entire collection.
 
-In this sample, the 1830s are strongly shaped by abolitionist testimony, especially physical punishment and treatment by slaveholders. The 1900s and 1910s include more topics connected to Booker T. Washington, Tuskegee, education, churches, and public life.
+## Slides
 
-## Result Tables
-
-The result tables are CSV files. CSV means comma-separated values, a common spreadsheet format that can be opened in Excel, Google Sheets, Numbers, or a text editor.
-
-- `topic_review_table.csv`: best starting point for reviewing topic labels, top words, years, and contributing documents.
-- `topic_labels_llm.csv`: topic labels and top words.
-- `topic_assignments.csv`: which chunk was assigned to which topic.
-- `sample_documents.csv`: which 29 documents were used in the 10% sample.
-
-## Download CSV Files
-
-Click these links to download the reference CSV files. If a file opens in the browser instead of downloading, use **File > Save Page As** or right-click the link and choose **Save Link As**.
-
-```{=html}
-<p>
-  <a class="btn btn-primary" href="outputs/bertopic_sample_nomic_sensitive_lemmatized/topic_review_table.csv" download>Download topic review table</a>
-  <a class="btn btn-outline-primary" href="outputs/bertopic_sample_nomic_sensitive_lemmatized/topic_labels_llm.csv" download>Download topic labels</a>
-  <a class="btn btn-outline-primary" href="outputs/bertopic_sample_nomic_sensitive_lemmatized/topic_assignments.csv" download>Download topic assignments</a>
-  <a class="btn btn-outline-primary" href="outputs/bertopic_sample_nomic_sensitive_lemmatized/sample_documents.csv" download>Download sample documents</a>
-</p>
-```
-
-## Reuse Note
-
-The original dataset should be downloaded from the source collection and cited according to that collection's reuse guidance.
+The **Slides** tab contains presentation slides covering the same content as the Simple Explanation — suitable for introducing the project in class before students run the exercise.
