@@ -21,7 +21,6 @@ python -u scripts/run_bertopic_sample.py \
   --ollama-model llama3.1:latest
 ```
 
-This will take significantly longer than the 10% sample — expect several hours on a modern laptop.
 
 ```text
 Sample fraction: 100%
@@ -107,13 +106,6 @@ Some topic labels from the full collection — compare against the [first sample
 ```
 
 `topic_assignments.csv` for the full collection is too large to host on the site (over 100 MB). It is available locally after running the pipeline — see the folder path above.
-
-The scripts used to produce these results are in the `scripts/` folder of the [GitHub repository](https://github.com/jinghanlib/topic-modeling-slave-narratives):
-
-- `run_bertopic_sample.py` — runs the full pipeline for any sample size or the complete collection
-- `visualize_topic_metadata.py` — generates the review table and all metadata visualizations
-
-To reproduce the full collection run, use `--sample-frac 1.0 --output-dir outputs/my_run_full` with the same embedding and labeling flags shown in the [Hands-On Exercise](02_hands_on_exercise.qmd).
 
 ## Visualizations
 

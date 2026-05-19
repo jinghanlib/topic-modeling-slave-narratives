@@ -4487,7 +4487,6 @@ overflow-x: hidden;
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">--clustering</span> sensitive <span class="dt">\</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">--label-backend</span> ollama <span class="dt">\</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">--ollama-model</span> llama3.1:latest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>This will take significantly longer than the 10% sample — expect several hours on a modern laptop.</p>
 <pre class="text"><code>Sample fraction: 100%
 Documents:       294
 Chunks:          16,729
@@ -4651,12 +4650,6 @@ Topics found:    439</code></pre>
   <a class="btn btn-outline-primary" href="../outputs/bertopic_full_nomic_sensitive_lemmatized/topic_info.csv" download>Download topic info</a>
 </p>
 <p><code>topic_assignments.csv</code> for the full collection is too large to host on the site (over 100 MB). It is available locally after running the pipeline — see the folder path above.</p>
-<p>The scripts used to produce these results are in the <code>scripts/</code> folder of the <a href="https://github.com/jinghanlib/topic-modeling-slave-narratives">GitHub repository</a>:</p>
-<ul>
-<li><code>run_bertopic_sample.py</code> — runs the full pipeline for any sample size or the complete collection</li>
-<li><code>visualize_topic_metadata.py</code> — generates the review table and all metadata visualizations</li>
-</ul>
-<p>To reproduce the full collection run, use <code>--sample-frac 1.0 --output-dir outputs/my_run_full</code> with the same embedding and labeling flags shown in the <a href="../instructions/02_hands_on_exercise.html">Hands-On Exercise</a>.</p>
 </section>
 <section id="visualizations" class="level2">
 <h2 class="anchored" data-anchor-id="visualizations">Visualizations</h2>
