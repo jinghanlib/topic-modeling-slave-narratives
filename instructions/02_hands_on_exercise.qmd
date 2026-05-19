@@ -405,7 +405,6 @@ Students can download the CSV files from the buttons below. If a CSV opens in th
   <a class="btn btn-outline-primary" href="../outputs/bertopic_sample_nomic_sensitive_lemmatized/topic_labels_llm.csv" download>Download topic labels</a>
   <a class="btn btn-outline-primary" href="../outputs/bertopic_sample_nomic_sensitive_lemmatized/topic_info.csv" download>Download topic info</a>
   <a class="btn btn-outline-primary" href="../outputs/bertopic_sample_nomic_sensitive_lemmatized/topic_assignments.csv" download>Download topic assignments</a>
-  <a class="btn btn-outline-primary" href="../outputs/bertopic_sample_nomic_sensitive_lemmatized/sample_documents.csv" download>Download sample documents</a>
 </p>
 ```
 

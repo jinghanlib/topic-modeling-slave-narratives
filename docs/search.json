@@ -193,7 +193,7 @@
     "href": "instructions/03_sample2_results.html#download-the-results",
     "title": "Second 10% Sample Results",
     "section": "Download the Results",
-    "text": "Download the Results\n\n  Download topic review table\n  Download topic labels\n  Download topic info\n  Download topic assignments\n  Download sample documents"
+    "text": "Download the Results\n\n  Download topic review table\n  Download topic labels\n  Download topic info\n  Download topic assignments"
   },
   {
     "objectID": "instructions/03_sample2_results.html#visualizations",
@@ -424,7 +424,7 @@
     "href": "instructions/02_hands_on_exercise.html#open-and-read-the-results",
     "title": "Hands-On Exercise",
     "section": "Open and Read the Results",
-    "text": "Open and Read the Results\nStart with:\n\ntopic_review_table.csv\ntopic_labels_llm.csv\ntopic_info.csv\ntopic_assignments.csv\n\nThe easiest file for students is topic_review_table.csv. It shows the topic number, current label, number of chunks, topic words, publication-year range, and the documents that contribute most strongly to the topic.\ntopic_assignments.csv shows which topic each chunk was assigned to. Use it when a topic label needs to be checked against actual passages.\nHere is a small preview of the topic review table:\n\n\n\n\n\n\n\n\n\nTopic\nLabel\nChunks\nTop Words\n\n\n\n\n0\nWhipping and Plantation Punishment\n76\nwhip, flog, overseer, tie, plantation\n\n\n1\nLimitations of Liberty in the Post-War Era\n66\ngovernment, constitution, liberty, american, war\n\n\n2\nSeparation and Reunion\n55\ndice, aunt dice, aunt, mos, riverside\n\n\n3\nPlantation Christianity and Slave Spirituality\n45\nmeeting, preach, prayer, spirit, pray\n\n\n\nStudents can download the CSV files from the buttons below. If a CSV opens in the browser instead of downloading, use File &gt; Save Page As or right-click the button and choose Save Link As.\n\n  Download topic review table\n  Download topic labels\n  Download topic info\n  Download topic assignments\n  Download sample documents"
+    "text": "Open and Read the Results\nStart with:\n\ntopic_review_table.csv\ntopic_labels_llm.csv\ntopic_info.csv\ntopic_assignments.csv\n\nThe easiest file for students is topic_review_table.csv. It shows the topic number, current label, number of chunks, topic words, publication-year range, and the documents that contribute most strongly to the topic.\ntopic_assignments.csv shows which topic each chunk was assigned to. Use it when a topic label needs to be checked against actual passages.\nHere is a small preview of the topic review table:\n\n\n\n\n\n\n\n\n\nTopic\nLabel\nChunks\nTop Words\n\n\n\n\n0\nWhipping and Plantation Punishment\n76\nwhip, flog, overseer, tie, plantation\n\n\n1\nLimitations of Liberty in the Post-War Era\n66\ngovernment, constitution, liberty, american, war\n\n\n2\nSeparation and Reunion\n55\ndice, aunt dice, aunt, mos, riverside\n\n\n3\nPlantation Christianity and Slave Spirituality\n45\nmeeting, preach, prayer, spirit, pray\n\n\n\nStudents can download the CSV files from the buttons below. If a CSV opens in the browser instead of downloading, use File &gt; Save Page As or right-click the button and choose Save Link As.\n\n  Download topic review table\n  Download topic labels\n  Download topic info\n  Download topic assignments"
   },
   {
     "objectID": "instructions/02_hands_on_exercise.html#review-and-improve-topic-labels",
