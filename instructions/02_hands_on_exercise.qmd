@@ -53,7 +53,7 @@ Go to the Documenting the American South North American Slave Narratives collect
 https://docsouth.unc.edu/neh/
 ```
 
-Download the North American Slave Narratives data package if available from the collection page or course instructions.
+Download the North American Slave Narratives data package from the collection page.
 
 After downloading, unzip the data. The dataset should include:
 
@@ -341,39 +341,6 @@ python -u scripts/run_bertopic_sample.py \
   --ollama-model llama3.1:latest
 ```
 
-The sampled files are:
-
-```text
-fpn-bruce-bruce.xml
-fpn-hughes-hughes.xml
-fpn-jackson-jackson.xml
-nc-jones85-jones85.xml
-neh-aaron-aaron.xml
-neh-arter-arter.xml
-neh-boxbrown-boxbrown.xml
-neh-bragg-bragg.xml
-neh-brownj-brownj.xml
-neh-bruner-bruner.xml
-neh-charlton-charlton.xml
-neh-detroit-detroit.xml
-neh-hammon-hammon.xml
-neh-hammond-hammond.xml
-neh-henson58-henson58.xml
-neh-hopper-hopper.xml
-neh-iwilliams-iwilliams.xml
-neh-jeter-jeter.xml
-neh-mars-mars.xml
-neh-natlove-natlove.xml
-neh-nicholson-nicholson.xml
-neh-oneal-oneal.xml
-neh-robinsonn-robinson.xml
-neh-scott-scott.xml
-neh-stedman-stedman.xml
-neh-troy-troy.xml
-neh-webb-webb.xml
-neh-weld-weld.xml
-neh-williams-williams.xml
-```
 
 ## Open and Read the Results
 
