@@ -298,7 +298,7 @@
     "href": "index.html#start-here",
     "title": "Topic Modeling Slave Narratives",
     "section": "Start Here",
-    "text": "Start Here\nThe Simple Explanation and Hands-On Exercise both use a 10% sample of the collection — 29 documents drawn at random from 294. This keeps run times short enough for a classroom setting while producing meaningful results.\n\n\nSimple Explanation\nLearn the project in plain language: data, chunks, preprocessing, BERTopic, local LLM steps, topic labels, outliers, and human interpretation. Includes all visualizations and result tables for the 10% sample.\nOpen the simple explanation\n\n\nHands-On Exercise\nDownload the original dataset, install the tools, run the scripts on your own computer, and interpret the outputs. Includes optional runs for a different 10% sample and the full collection.\nOpen the hands-on exercise"
+    "text": "Start Here\nThe Simple Explanation and Hands-On Exercise both use a 10% sample of the collection — 29 documents drawn at random from 294.\n\n\nSimple Explanation\nLearn the project in plain language: data, chunks, preprocessing, BERTopic, local LLM steps, topic labels, outliers, and human interpretation. Includes all visualizations and result tables for the 10% sample.\nOpen the simple explanation\n\n\nHands-On Exercise\nDownload the original dataset, install the tools, run the scripts on your own computer, and interpret the outputs.\nOpen the hands-on exercise"
   },
   {
     "objectID": "index.html#more-analyses",
@@ -312,7 +312,7 @@
     "href": "index.html#slides",
     "title": "Topic Modeling Slave Narratives",
     "section": "Slides",
-    "text": "Slides\nThe Slides tab contains presentation slides covering the same content as the Simple Explanation — suitable for introducing the project in class before students run the exercise."
+    "text": "Slides\nThe Slides tab contains presentation slides covering the same content as the Simple Explanation."
   },
   {
     "objectID": "instructions/02_hands_on_exercise.html",

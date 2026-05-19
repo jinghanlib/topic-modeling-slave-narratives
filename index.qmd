@@ -9,7 +9,7 @@ This site introduces that workflow and is designed for students who may have lit
 
 ## Start Here
 
-The Simple Explanation and Hands-On Exercise both use a **10% sample** of the collection — 29 documents drawn at random from 294. This keeps run times short enough for a classroom setting while producing meaningful results.
+The Simple Explanation and Hands-On Exercise both use a **10% sample** of the collection — 29 documents drawn at random from 294.
 
 ::: {.grid}
 ::: {.g-col-12 .g-col-md-6}
@@ -23,7 +23,7 @@ Learn the project in plain language: data, chunks, preprocessing, BERTopic, loca
 ::: {.g-col-12 .g-col-md-6}
 ### Hands-On Exercise
 
-Download the original dataset, install the tools, run the scripts on your own computer, and interpret the outputs. Includes optional runs for a different 10% sample and the full collection.
+Download the original dataset, install the tools, run the scripts on your own computer, and interpret the outputs.
 
 [Open the hands-on exercise](instructions/02_hands_on_exercise.qmd){.btn .btn-primary}
 :::
@@ -31,11 +31,11 @@ Download the original dataset, install the tools, run the scripts on your own co
 
 ## More Analyses
 
-The **More Analyses** tab in the navigation bar contains two additional runs for comparison:
+The [More Analyses](instructions/03_sample2_results.qmd) tab in the navigation bar contains two additional runs for comparison:
 
 - **Second 10% Sample** — a different 29-document sample drawn with a different random seed, with zero overlap with the first sample. Compare topics across the two runs to see which themes are stable and which differ.
 - **Full Collection** — the complete pipeline run on all 294 documents, producing 439 topics. Shows which themes appear only in specific documents and which recur across the entire collection.
 
 ## Slides
 
-The **Slides** tab contains presentation slides covering the same content as the Simple Explanation — suitable for introducing the project in class before students run the exercise.
+The [Slides](slides.qmd) tab contains presentation slides covering the same content as the Simple Explanation.
